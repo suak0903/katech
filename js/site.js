@@ -13,6 +13,7 @@
      9. Consent-Banner und consent-gated Karte
     10. Sprachumschalter (Stub mit Hinweis)
     11. Anfrageformular (Attrappe, kein Backend)
+    12. Highlights-Band: Auto-Lauf, Ziehen mit Maus/Finger, Lightbox
    ===================================================================== */
 (function () {
   'use strict';
@@ -250,6 +251,102 @@
     window.alert('This design preview is built in English only. The live site keeps all three '
       + 'languages (EN / DE / PL) via the existing translation structure.');
   });
+
+  /* 12. Highlights-Band ---------------------------------------------- */
+  // Laeuft von allein und laesst sich mit Maus oder Finger schieben.
+  // Der Klick oeffnet den vollstaendigen Text; ein Zug soll dabei nicht
+  // als Klick gewertet werden.
+  var rail = document.getElementById('hlRail');
+  var track = document.getElementById('hlTrack');
+  if (rail && track) {
+    var breite = 0, pos = 0, tempo = 0.35, zieht = false, gezogen = 0, startX = 0, startPos = 0;
+    var frei = true;
+
+    var messen = function () {
+      // Die zweite Haelfte des Bandes ist der Klon, deshalb halbe Breite.
+      breite = track.scrollWidth / 2;
+    };
+    messen();
+    window.addEventListener('resize', messen);
+
+    var setzen = function () {
+      if (breite > 0) {
+        while (pos <= -breite) pos += breite;
+        while (pos > 0) pos -= breite;
+      }
+      track.style.transform = 'translate3d(' + pos + 'px,0,0)';
+    };
+
+    var schritt = function () {
+      if (frei && !zieht && !reduce) { pos -= tempo; setzen(); }
+      window.requestAnimationFrame(schritt);
+    };
+    if (!reduce) window.requestAnimationFrame(schritt);
+
+    // Unter dem Zeiger bleibt das Band stehen, sonst laeuft der Text weg,
+    // waehrend man ihn liest.
+    rail.addEventListener('mouseenter', function () { frei = false; });
+    rail.addEventListener('mouseleave', function () { frei = true; });
+    rail.addEventListener('focusin', function () { frei = false; });
+    rail.addEventListener('focusout', function () { frei = true; });
+
+    rail.addEventListener('pointerdown', function (e) {
+      zieht = true; gezogen = 0; startX = e.clientX; startPos = pos; frei = false;
+      rail.classList.add('greift');
+    });
+    rail.addEventListener('pointermove', function (e) {
+      if (!zieht) return;
+      var d = e.clientX - startX;
+      gezogen = Math.abs(d);
+      // Den Zeiger erst einfangen, wenn wirklich gezogen wird. Wird er schon
+      // beim Aufsetzen eingefangen, landet das spaetere Klickereignis auf der
+      // Schiene statt auf der Karte, und die Lightbox oeffnet nie.
+      if (gezogen > 4 && !rail.hasPointerCapture(e.pointerId)) {
+        try { rail.setPointerCapture(e.pointerId); } catch (err) { /* egal */ }
+      }
+      pos = startPos + d;
+      setzen();
+    });
+    var loslassen = function (e) {
+      if (!zieht) return;
+      zieht = false;
+      rail.classList.remove('greift');
+      try { rail.releasePointerCapture(e.pointerId); } catch (err) { /* egal */ }
+    };
+    rail.addEventListener('pointerup', loslassen);
+    rail.addEventListener('pointercancel', loslassen);
+
+    // Lightbox
+    var box = document.getElementById('hlBox');
+    var stage = document.getElementById('hlStage');
+    var oeffnenHl = function (i) {
+      var vorlage = document.querySelector('[data-hl-inhalt="' + i + '"]');
+      if (!vorlage || !box || !stage) return;
+      stage.innerHTML = '';
+      stage.appendChild(vorlage.content.cloneNode(true));
+      box.hidden = false;
+      document.body.style.overflow = 'hidden';
+      var c = box.querySelector('.hlbox__close'); if (c) c.focus();
+    };
+    var schliessenHl = function () {
+      if (!box) return;
+      box.hidden = true; stage.innerHTML = '';
+      document.body.style.overflow = '';
+    };
+    rail.addEventListener('click', function (e) {
+      var karte = e.target.closest('.hl__card');
+      if (!karte) return;
+      if (gezogen > 6) return;   // war ein Zug, kein Klick
+      oeffnenHl(karte.dataset.hl);
+    });
+    if (box) {
+      box.querySelector('.hlbox__close').addEventListener('click', schliessenHl);
+      box.addEventListener('click', function (e) { if (e.target === box) schliessenHl(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !box.hidden) schliessenHl();
+      });
+    }
+  }
 
   /* 11. Anfrageformular (Attrappe) ----------------------------------- */
   var form = document.getElementById('enquiry');

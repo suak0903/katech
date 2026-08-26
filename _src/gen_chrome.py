@@ -47,6 +47,29 @@ FOOT_SPALTEN = [
 ]
 
 
+
+# Landesflaggen und das LinkedIn-Zeichen als Inline-SVG (Kit: keine Icon-Fonts).
+# Die Flaggen stehen fuer die drei Maerkte, die die Bestandsseite bedient.
+FLAGGE_GB = ('<svg viewBox="0 0 60 30" width="22" height="11" aria-hidden="true">'
+             '<clipPath id="ukc"><path d="M0 0h60v30H0z"/></clipPath>'
+             '<g clip-path="url(#ukc)">'
+             '<path d="M0 0h60v30H0z" fill="#012169"/>'
+             '<path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/>'
+             '<path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/>'
+             '<path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/>'
+             '</g></svg>')
+FLAGGE_DE = ('<svg viewBox="0 0 5 3" width="22" height="13" aria-hidden="true">'
+             '<path d="M0 0h5v3H0z"/><path d="M0 1h5v2H0z" fill="#D00"/>'
+             '<path d="M0 2h5v1H0z" fill="#FFCE00"/></svg>')
+FLAGGE_PL = ('<svg viewBox="0 0 8 5" width="22" height="13" aria-hidden="true">'
+             '<path d="M0 0h8v5H0z" fill="#fff"/><path d="M0 2.5h8V5H0z" fill="#DC143C"/></svg>')
+ZEICHEN_LI = ('<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
+              '<path d="M20.4 20.4h-3.6v-5.6c0-1.3 0-3-1.9-3-1.9 0-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1c.5-.9 '
+              '1.6-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zm1.8 '
+              '13H3.5V9h3.6v11.4zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 '
+              '1.8-1.7V1.7c0-.9-.8-1.7-1.8-1.7z"/></svg>')
+
+
 def pfad(root, ziel):
     """Relativer Pfad vom aktuellen Seitenverzeichnis aus."""
     if ziel.startswith(("http://", "https://", "mailto:", "tel:", "#")):
@@ -81,9 +104,9 @@ def kopf(root, aktiv="", solid=False):
 <nav class="mmenu" id="mmenu" aria-label="Mobile navigation" hidden>
   <div class="mmenu__body">
     <div class="mmenu__lang" role="group" aria-label="Language">
-      <button type="button" data-lang="en" aria-current="true">EN</button>
-      <button type="button" data-lang="de">DE</button>
-      <button type="button" data-lang="pl">PL</button>
+      <button type="button" data-lang="en" aria-current="true">{FLAGGE_GB}<span>EN</span></button>
+      <button type="button" data-lang="de">{FLAGGE_DE}<span>DE</span></button>
+      <button type="button" data-lang="pl">{FLAGGE_PL}<span>PL</span></button>
     </div>
     <ul class="mmenu__list">
 {mobil_links(root)}
@@ -94,7 +117,7 @@ def kopf(root, aktiv="", solid=False):
         <a class="mmenu__pill" href="tel:+4945140702000">Call Lübeck</a>
         <a class="mmenu__pill" href="mailto:hello@katech-solutions.com">E-mail</a>
       </div>
-      <a class="mmenu__pill" href="{LINKEDIN}" target="_blank" rel="noopener">KaTech on LinkedIn</a>
+      <a class="mmenu__pill mmenu__pill--li" href="{LINKEDIN}" target="_blank" rel="noopener">{ZEICHEN_LI}<span>KaTech on LinkedIn</span></a>
     </div>
   </div>
 </nav>'''
@@ -121,14 +144,6 @@ def fuss(root):
       </nav>''')
     return f'''<footer class="foot">
   <div class="wrap">
-    <div class="foot__demo">
-      <b>Design preview.</b> This is an independent redesign concept for {ORT}, built by
-      Dr.-Ing. Suat Akyol. It is not the official KaTech website and has no connection to it.
-      All content and images are taken from the publicly available existing site.
-      <a href="{pfad(root, "about-this-preview/")}">About this preview</a>
-      <span class="demobar__sep">·</span>
-      <a href="{ORIGINAL}" target="_blank" rel="noopener">Original site</a>
-    </div>
     <div class="foot__grid">
       <div class="foot__brand">
         <img src="{root}media/logo-light.png" alt="{ORT}" width="420" height="120">

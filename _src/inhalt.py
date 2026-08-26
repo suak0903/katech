@@ -214,6 +214,111 @@ def datum_lang(iso):
 
 
 # --------------------------------------------------------------------------
+# Highlights: die sieben Aussagen des Bestands-Karussells
+# Wortlaut aus der Bestandsseite uebernommen, Motive ebenfalls.
+# --------------------------------------------------------------------------
+HIGHLIGHTS = [
+    ("hl-pilot-plant", "Investment in pilot plant",
+     "KaTech strengthens its focus on meat and fish alternative products with the extension "
+     "of their pilot machinery.",
+     "The centre of excellence for meat and fish alternatives in Lübeck opened in February 2022. "
+     "The new high-tech machinery lets our technical team build and test the texture of "
+     "plant-based products on equipment that behaves like production equipment.",
+     "katech-invests-in-pilot-plant-and-strengthens-its-focus-on-plant-based-product-development"),
+    ("hl-ingredion", "KaTech is now part of Ingredion",
+     "Ingredion Incorporated, a leading global provider of ingredient solutions to the food and "
+     "beverage industry, has acquired KaTech.",
+     "Since 2021 KaTech has been part of Ingredion Incorporated. The combination brings together "
+     "KaTech's formulation expertise with Ingredion's texture business in Europe, giving customers "
+     "access to a wider range of nature-based ingredients alongside the bespoke work they know.",
+     "ingredion-expands-specialty-ingredient-portfolio-with-acquisition-of-katech"),
+    ("hl-development", "Focus on key areas in product development",
+     "KaTech's highly experienced development team create bespoke stabilising and emulsifying "
+     "solutions for plant-based, dairy and dairy alternative, meat and fish, savoury and bakery "
+     "products.",
+     "Every solution is built for one recipe, one process and one set of raw materials. Our "
+     "technical sales and technical staff are hands-on, with years of experience in real "
+     "production environments, and they support development from the first idea to the factory "
+     "trial.", "solutions"),
+    ("hl-plant-based", "KaTech strong in developing plant-based products",
+     "KaTech use their expertise around functional plant-based food ingredients and technology "
+     "to develop high quality food products.",
+     "Plant-based products only succeed if they taste and feel like what they replace, and "
+     "texture is where most of them fail. Our range covers meat and fish alternatives as well as "
+     "plant-based dairy: yogurt, cream, drinks, desserts and cheese alternatives.", "vegan"),
+    ("hl-video", "New product development support",
+     "At our pilot plant facilities, our technologists support food manufacturers and brands "
+     "with trials, to facilitate development of their latest products.",
+     "Development happens in our pilot plants in Lübeck and Cheshire. Iterations take days rather "
+     "than quarters, and the technologists who designed the formulation stand next to your line "
+     "when it runs for the first time.", "how-we-work"),
+    ("hl-allergen", "Allergen-free production",
+     "KaTech's state of the art facilities provide for tailored functional ingredient blending.",
+     "Production runs in a purpose-built, allergen-controlled blending site in northern Germany. "
+     "The facilities are fully certified to meet the needs of food manufacturers, and the "
+     "warehouse is humidity and temperature controlled.", "our-facilities"),
+    ("hl-quality", "Highest quality standards",
+     "We put strong emphasis on delivering the best possible ingredient quality by being "
+     "certified at the highest level.",
+     "Food safety has been the focus since the company started. KaTech holds the rare BRC Food "
+     "AA rating and is audited against IFS, RSPO, Sedex, non-GMO, organic, kosher and halal "
+     "standards.", "certifications"),
+]
+
+
+def highlights_band(root):
+    """Endlos laufendes Band der sieben Aussagen, per Maus oder Finger
+    verschiebbar. Der Klick oeffnet den vollstaendigen Text."""
+    def karte(i, h, klon=False):
+        bild, titel, kurztext, _voll, _ziel = h
+        return f'''<button class="hl__card" type="button" data-hl="{i}"{' tabindex="-1" aria-hidden="true"' if klon else ''}>
+        <span class="hl__media"><picture>
+          <source srcset="{root}media/{bild}.webp" type="image/webp">
+          <img src="{root}media/{bild}.jpg" alt="" loading="lazy" decoding="async" width="560" height="360"></picture></span>
+        <span class="hl__body">
+          <span class="hl__title">{L.esc(titel)}</span>
+          <span class="hl__text">{L.esc(kurztext)}</span>
+          <span class="hl__more">Read more</span>
+        </span>
+      </button>'''
+
+    karten = "".join(karte(i, h) for i, h in enumerate(HIGHLIGHTS))
+    klone = "".join(karte(i, h, klon=True) for i, h in enumerate(HIGHLIGHTS))
+    # Logos und Illustrationen duerfen nicht beschnitten werden, Fotos schon.
+    marken = {"hl-ingredion", "hl-plant-based", "hl-quality"}
+    inhalte = "".join(
+        f'''<template data-hl-inhalt="{i}"><div class="hlbox__inner{" hlbox__inner--marke" if h[0] in marken else ""}">
+      <picture><source srcset="{root}media/{h[0]}.webp" type="image/webp">
+      <img src="{root}media/{h[0]}-gross.jpg" alt="{L.esc(h[1])}" loading="lazy"></picture>
+      <div class="hlbox__text">
+        <h3>{L.esc(h[1])}</h3>
+        <p>{L.esc(h[2])}</p>
+        <p>{L.esc(h[3])}</p>
+        <a class="btn btn--outline" href="{root}{h[4]}/">Open the page</a>
+      </div></div></template>''' for i, h in enumerate(HIGHLIGHTS))
+
+    return f'''<section class="sec sec--ink hl" aria-label="Highlights">
+  <div class="wrap">
+    {sec_kopf_hl()}
+  </div>
+  <div class="hl__rail" id="hlRail">
+    <div class="hl__track" id="hlTrack">{karten}{klone}</div>
+  </div>
+  {inhalte}
+  <div class="hlbox" id="hlBox" hidden role="dialog" aria-modal="true" aria-label="Highlight">
+    <button class="hlbox__close" type="button" aria-label="Close">&times;</button>
+    <div class="hlbox__stage" id="hlStage"></div>
+  </div>
+</section>'''
+
+
+def sec_kopf_hl():
+    return L.sec_kopf(eyebrow="Highlights", h2="What has been happening.",
+                      lead="Seven things worth knowing about the company. Drag the row or "
+                           "click an item to read it in full.")
+
+
+# --------------------------------------------------------------------------
 # JSON-LD
 # --------------------------------------------------------------------------
 LD_ORG = {
@@ -1176,10 +1281,13 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
 </section>
 <button class="toc-top" id="tocTop" type="button" aria-label="Back to the contents">&uarr;</button>'''
 
+    # Die Hinweisseite traegt keine Demo-Leiste (Kit-Standard). Ohne diese
+    # Klasse bliebe der Freiraum fuer sie stehen und erschiene als weisser
+    # Streifen unter der Fusszeile.
     html = L.seite("about-this-preview/index.html", "About this preview",
                    "What this redesign concept for KaTech contains, how it was built and what "
                    "it would take to put it live.",
-                   inhalt, og="og-preview.jpg")
+                   inhalt, og="og-preview.jpg", body_klasse="ohne-demobar")
     # Demo-Leiste auf der Hinweisseite selbst entfernen (Standard des Kits)
     html = re.sub(r'<div class="demobar" id="demobar">.*?</div>\s*(?=<div class="consent")',
                   "", html, flags=re.S)

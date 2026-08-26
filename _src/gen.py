@@ -196,6 +196,9 @@ def start():
         bild="blending-tower",
         alt="Blending tower at the KaTech production site"))
 
+    # Highlights: die sieben Aussagen des Bestands-Karussells als laufendes Band
+    teile.append(I.highlights_band(root))
+
     # News
     aktuell = [n for n in NEWS if n["slug"] != "news"][:3]
     eintraege = "".join(f'''<article class="newsitem">

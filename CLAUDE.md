@@ -110,6 +110,33 @@ Konzerns), Open Sans für Fließtext (dieselbe Familie wie beim Konzern). Beide 
   Der Bestandstext ist dort Lexikonprosa („cheese is a nutritious food made mostly from the milk
   of cows") und taugt nicht als Einstieg.
 
+## 5a. Das Karussell der Bestandsseite und das Video
+
+Die Startseite des Originals fuehrt einen **RoyalSlider mit sieben Folien**
+(Ueberschrift, ein bis zwei Saetze, Bild 385x248). Ein Karussell zeigt eine
+Aussage und versteckt sechs. Hier laufen dieselben sieben Aussagen als
+**Highlights-Band** ueber der Nachrichtenliste: alle gleichzeitig sichtbar,
+per Maus oder Finger schiebbar, Klick oeffnet den vollen Text in einer
+Lightbox. Wortlaut und Motive stammen aus dem Bestand (`HIGHLIGHTS` in
+`inhalt.py`, Bildaufbereitung `highlights.py`).
+
+**Das Video der Bestandsseite fehlt bewusst.** Die Folie "New product
+development support" traegt ein Standbild mit Abspielsymbol; ein Skript
+(`eclipse-custom.js`) oeffnet dahinter eine von zwei Vimeo-Nummern,
+**509794560** und **512503894**. Beide sind von aussen nicht abspielbar:
+`player.vimeo.com/video/<nr>` antwortet mit 404, auch mit dem Referer der
+Originaldomain; die Vimeo-Seiten selbst antworten mit 200, geben aber keinen
+Titel preis. Das Muster passt zu privat gestellten oder domainbeschraenkten
+Videos. **Ohne Freigabe durch KaTech laesst sich das Video nicht einbinden.**
+Fuer die Demo ist das ein Gespraechsanlass: das einzige Bewegtbild der Firma
+ist auf ihrer eigenen Startseite moeglicherweise tot.
+
+**Kein content-visibility auf den Sektionen.** Es bringt messbar Ladezeit
+(Blockierzeit von rund 300 auf 120 Millisekunden), aber die geschaetzten
+Hoehen werden beim Rendern korrigiert und die Scrollposition wandert dabei um
+bis zu 200 Pixel. Beim Vorfuehren waere das sichtbar. Dreimal geprueft und
+verworfen am 26.08.
+
 ## 6. Stolperfallen aus diesem Projekt
 
 - **Der Server drosselt.** Ab etwa 70 schnellen Abrufen liefert `katech-solutions.com` HTTP 503.

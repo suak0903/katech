@@ -71,9 +71,14 @@ p:last-child{margin-bottom:0}
 /* ---------- Layout ---------- */
 .wrap{width:min(100% - var(--pad)*2,var(--wrap));margin-inline:auto}
 .wrap--narrow{width:min(100% - var(--pad)*2,var(--wrap-narrow))}
-.sec{padding-block:var(--sec-y);content-visibility:auto;contain-intrinsic-size:auto 900px}
-/* Der Hero und die erste Sektion bleiben ungebremst, sie sind sofort sichtbar */
-.hero,.hero__ribbon,.subhero{content-visibility:visible}
+/* Bewusst KEIN content-visibility auf den Sektionen. Es bringt zwar Ladezeit,
+   aber die geschaetzten Hoehen werden beim Rendern korrigiert, wodurch die
+   Scrollposition wandert. Beim Vorfuehren waere das sichtbar. Nachgemessen
+   am 26.08.: Sprungziele und Scrollpositionen wanderten um bis zu 200 Pixel. */
+.sec{padding-block:var(--sec-y)}
+/* Sprungziele muessen unter der klebenden Kopfleiste stehenbleiben,
+   sonst verschwindet die Ueberschrift dahinter. */
+[id]{scroll-margin-top:calc(var(--nav-h) + 12px)}
 .sec--sand{background:var(--sand)}
 .sec--ink{background:var(--ink);color:#fff}
 .sec--teal{background:var(--teal);color:#fff}
@@ -304,8 +309,7 @@ p:last-child{margin-bottom:0}
 .crumbs span{opacity:.5}
 
 /* ---------- Split-Block (Ingredion-Signaturmuster) ---------- */
-.split{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;
-  content-visibility:auto;contain-intrinsic-size:auto 620px}
+.split{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
 .split--flip .split__pane{order:2}
 .split__pane{
   display:flex;flex-direction:column;justify-content:center;
@@ -723,3 +727,74 @@ body.demobar-zu{padding-bottom:0}
 .stub p{color:var(--ink-soft);max-width:64ch}
 .stub__links{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
 .stub__links .btn{font-size:15px;padding:12px 22px}
+
+/* ---------- Highlights: laufendes Band statt Karussell ----------
+   Ein Karussell zeigt eine Folie und versteckt sechs. Das Band zeigt alle
+   und ueberlaesst dem Leser das Tempo: es laeuft von allein, laesst sich
+   aber mit Maus oder Finger schieben. */
+.hl{padding-bottom:clamp(44px,6vw,72px);overflow:hidden}
+.hl .sec__head{margin-bottom:clamp(26px,3vw,38px)}
+.hl__rail{
+  overflow:hidden;cursor:grab;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+}
+.hl__rail.greift{cursor:grabbing}
+.hl__track{display:flex;gap:20px;width:max-content;will-change:transform}
+.hl__card{
+  flex:none;width:clamp(260px,25vw,320px);display:flex;flex-direction:column;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
+  padding:0;text-align:left;color:#fff;font:inherit;cursor:pointer;
+  transition:border-color .28s var(--ease),background .28s var(--ease);
+}
+.hl__card:hover{border-color:var(--accent);background:rgba(255,255,255,.11)}
+.hl__media{display:block;aspect-ratio:385/248;overflow:hidden;background:rgba(255,255,255,.05)}
+.hl__media img{width:100%;height:100%;object-fit:cover;display:block}
+.hl__body{display:flex;flex-direction:column;gap:9px;padding:20px 22px 22px;flex:1}
+.hl__title{font-family:var(--font-display);font-size:18px;font-weight:700;line-height:1.25}
+.hl__text{font-size:14.5px;line-height:1.55;color:rgba(255,255,255,.76)}
+.hl__more{
+  margin-top:auto;padding-top:6px;font-family:var(--font-display);font-size:14px;
+  font-weight:600;color:var(--accent);
+}
+.hl__card:hover .hl__more{text-decoration:underline;text-underline-offset:3px}
+@media(prefers-reduced-motion:reduce){
+  .hl__rail{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+}
+
+/* Lightbox der Highlights */
+.hlbox{position:fixed;inset:0;z-index:310;background:rgba(30,30,31,.95);
+  display:flex;align-items:center;justify-content:center;padding:clamp(16px,4vw,48px)}
+.hlbox[hidden]{display:none}
+.hlbox__close{position:absolute;top:18px;right:18px;width:50px;height:50px;
+  background:rgba(255,255,255,.12);border:0;color:#fff;font-size:26px;cursor:pointer}
+.hlbox__close:hover{background:rgba(255,255,255,.22)}
+.hlbox__stage{width:min(100%,940px);max-height:88vh;overflow-y:auto;background:var(--paper)}
+.hlbox__inner{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+.hlbox__inner picture{display:block;height:100%}
+.hlbox__inner img{width:100%;height:100%;object-fit:cover;display:block}
+/* Logos und Illustrationen vollstaendig zeigen statt anschneiden */
+.hlbox__inner--marke picture{background:var(--sand);display:flex;align-items:center;justify-content:center}
+.hlbox__inner--marke img{object-fit:contain;padding:clamp(24px,4vw,52px)}
+.hlbox__text{padding:clamp(26px,3vw,40px)}
+/* Die Lightbox liegt innerhalb der dunklen Sektion und wuerde deren
+   Textfarben erben: Ueberschrift und Buttontext waeren weiss auf weiss. */
+.sec--ink .hlbox__text h3{font-size:clamp(21px,2.4vw,28px);margin-bottom:.6em;color:var(--ink)}
+.sec--ink .hlbox__text p{font-size:15.5px;color:var(--ink-soft)}
+.sec--ink .hlbox__text .btn{margin-top:14px;font-size:15px;padding:12px 24px;
+  color:var(--brand-deep);border-color:var(--brand-deep)}
+.sec--ink .hlbox__text .btn:hover{background:var(--brand-deep);color:#fff}
+@media(max-width:760px){
+  .hlbox__inner{grid-template-columns:1fr}
+  .hlbox__inner picture{height:auto;aspect-ratio:385/248}
+}
+
+/* ---------- Flaggen und Zeichen im mobilen Menue ---------- */
+.mmenu__lang button{display:inline-flex;align-items:center;gap:8px}
+.mmenu__lang svg{flex:none;display:block;border:1px solid rgba(255,255,255,.35)}
+.mmenu__lang button[aria-current="true"] svg{border-color:rgba(55,55,56,.35)}
+.mmenu__pill--li{display:flex;align-items:center;justify-content:center;gap:10px}
+.mmenu__pill--li svg{flex:none}
+
+/* Seiten ohne Demo-Leiste brauchen keinen Freiraum fuer sie */
+body.ohne-demobar{padding-bottom:0}
