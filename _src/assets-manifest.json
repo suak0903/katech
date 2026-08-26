@@ -1,0 +1,837 @@
+[
+ {
+  "url": "https://katech-solutions.com/wp-content/themes/nucima/images/ESC.jpg",
+  "datei": "th_ESC.jpg",
+  "bytes": 12547
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/themes/nucima/images/KaTech-logo-405x104.png",
+  "datei": "th_KaTech-logo-405x104.png",
+  "bytes": 6551
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/themes/nucima/images/brcgs-cert-food-logo.png",
+  "datei": "th_brcgs-cert-food-logo.png",
+  "bytes": 10593
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/themes/nucima/images/ifs-57x81-2021.png",
+  "datei": "th_ifs-57x81-2021.png",
+  "bytes": 2682
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/themes/nucima/images/linked-in-39x39.png",
+  "datei": "th_linked-in-39x39.png",
+  "bytes": 1848
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/themes/nucima/images/product-tab-left.png",
+  "datei": "th_product-tab-left.png",
+  "bytes": 2821
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/themes/nucima/images/product-tab-right.png",
+  "datei": "th_product-tab-right.png",
+  "bytes": 2835
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/themes/nucima/images/rspo-1106196-logo-2021.png",
+  "datei": "th_rspo-1106196-logo-2021.png",
+  "bytes": 7966
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/themes/nucima/images/sedex.jpg",
+  "datei": "th_sedex.jpg",
+  "bytes": 25298
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/themes/nucima/images/sign-bg.png",
+  "datei": "th_sign-bg.png",
+  "bytes": 18884
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/themes/nucima/images/twitter-39x39.png",
+  "datei": "th_twitter-39x39.png",
+  "bytes": 2067
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/themes/nucima/images/xing-icon.png",
+  "datei": "th_xing-icon.png",
+  "bytes": 1048
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-1509.jpg",
+  "datei": "up_1st-food-1509.jpg",
+  "bytes": 54337
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-1528.jpg",
+  "datei": "up_1st-food-1528.jpg",
+  "bytes": 44312
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-1530.jpg",
+  "datei": "up_1st-food-1530.jpg",
+  "bytes": 45255
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-1533.jpg",
+  "datei": "up_1st-food-1533.jpg",
+  "bytes": 49526
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-1539.jpg",
+  "datei": "up_1st-food-1539.jpg",
+  "bytes": 50736
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-1544.jpg",
+  "datei": "up_1st-food-1544.jpg",
+  "bytes": 50108
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-15511.jpg",
+  "datei": "up_1st-food-15511.jpg",
+  "bytes": 45652
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-15551.jpg",
+  "datei": "up_1st-food-15551.jpg",
+  "bytes": 50368
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-1576.jpg",
+  "datei": "up_1st-food-1576.jpg",
+  "bytes": 59896
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-1594.jpg",
+  "datei": "up_1st-food-1594.jpg",
+  "bytes": 50712
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-1608.jpg",
+  "datei": "up_1st-food-1608.jpg",
+  "bytes": 60812
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-16231.jpg",
+  "datei": "up_1st-food-16231.jpg",
+  "bytes": 55432
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-16241.jpg",
+  "datei": "up_1st-food-16241.jpg",
+  "bytes": 60892
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-1632.jpg",
+  "datei": "up_1st-food-1632.jpg",
+  "bytes": 60590
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/1st-food-1634.jpg",
+  "datei": "up_1st-food-1634.jpg",
+  "bytes": 58993
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1639.jpg",
+  "datei": "up_2nd-food-1639.jpg",
+  "bytes": 46414
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1640.jpg",
+  "datei": "up_2nd-food-1640.jpg",
+  "bytes": 46088
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1661.jpg",
+  "datei": "up_2nd-food-1661.jpg",
+  "bytes": 39820
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1662.jpg",
+  "datei": "up_2nd-food-1662.jpg",
+  "bytes": 40430
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1671.jpg",
+  "datei": "up_2nd-food-1671.jpg",
+  "bytes": 46468
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1678.jpg",
+  "datei": "up_2nd-food-1678.jpg",
+  "bytes": 88854
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1684.jpg",
+  "datei": "up_2nd-food-1684.jpg",
+  "bytes": 51790
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1690.jpg",
+  "datei": "up_2nd-food-1690.jpg",
+  "bytes": 50216
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1692.jpg",
+  "datei": "up_2nd-food-1692.jpg",
+  "bytes": 57018
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1702.jpg",
+  "datei": "up_2nd-food-1702.jpg",
+  "bytes": 51294
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1703.jpg",
+  "datei": "up_2nd-food-1703.jpg",
+  "bytes": 51787
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1708.jpg",
+  "datei": "up_2nd-food-1708.jpg",
+  "bytes": 51006
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1713.jpg",
+  "datei": "up_2nd-food-1713.jpg",
+  "bytes": 58112
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1719.jpg",
+  "datei": "up_2nd-food-1719.jpg",
+  "bytes": 49306
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1731.jpg",
+  "datei": "up_2nd-food-1731.jpg",
+  "bytes": 59193
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/2nd-food-1732.jpg",
+  "datei": "up_2nd-food-1732.jpg",
+  "bytes": 58233
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/IMG_0069.jpg",
+  "datei": "up_IMG_0069.jpg",
+  "bytes": 70881
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/IMG_0309.jpg",
+  "datei": "up_IMG_0309.jpg",
+  "bytes": 44989
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/IMG_0403.jpg",
+  "datei": "up_IMG_0403.jpg",
+  "bytes": 55049
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/IMG_0578.jpg",
+  "datei": "up_IMG_0578.jpg",
+  "bytes": 55706
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/IMG_4554.jpg",
+  "datei": "up_IMG_4554.jpg",
+  "bytes": 42644
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/IMG_4586.jpg",
+  "datei": "up_IMG_4586.jpg",
+  "bytes": 43876
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/IMG_4943.jpg",
+  "datei": "up_IMG_4943.jpg",
+  "bytes": 51599
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/butter-milk.png",
+  "datei": "up_butter-milk.png",
+  "bytes": 6555
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/cake.png",
+  "datei": "up_cake.png",
+  "bytes": 16326
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/choc-shake-2057.jpg",
+  "datei": "up_choc-shake-2057.jpg",
+  "bytes": 118881
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/clear-dressing.jpg",
+  "datei": "up_clear-dressing.jpg",
+  "bytes": 106408
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/creme-caramel.jpg",
+  "datei": "up_creme-caramel.jpg",
+  "bytes": 55181
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/dairy-based.png",
+  "datei": "up_dairy-based.png",
+  "bytes": 9937
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/fromage-frais.png",
+  "datei": "up_fromage-frais.png",
+  "bytes": 8137
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/fruit-confectionery.png",
+  "datei": "up_fruit-confectionery.png",
+  "bytes": 11536
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/layered-yogurt.png",
+  "datei": "up_layered-yogurt.png",
+  "bytes": 23255
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/lemon-meringue.png",
+  "datei": "up_lemon-meringue.png",
+  "bytes": 14838
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/mayonnaise-dips.jpg",
+  "datei": "up_mayonnaise-dips.jpg",
+  "bytes": 137029
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/muffin.png",
+  "datei": "up_muffin.png",
+  "bytes": 16416
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/our-people-main-shot.jpg",
+  "datei": "up_our-people-main-shot.jpg",
+  "bytes": 28189
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/petit-filous.jpg",
+  "datei": "up_petit-filous.jpg",
+  "bytes": 101220
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/salad-cream.jpg",
+  "datei": "up_salad-cream.jpg",
+  "bytes": 93123
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/set-yogurt.jpg",
+  "datei": "up_set-yogurt.jpg",
+  "bytes": 88877
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/sour-cream.jpg",
+  "datei": "up_sour-cream.jpg",
+  "bytes": 96907
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/sponge.png",
+  "datei": "up_sponge.png",
+  "bytes": 14916
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/spreadable-cheese.png",
+  "datei": "up_spreadable-cheese.png",
+  "bytes": 15379
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/vinaigrette.jpg",
+  "datei": "up_vinaigrette.jpg",
+  "bytes": 91846
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/05/yogurt-based.png",
+  "datei": "up_yogurt-based.png",
+  "bytes": 13438
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2012/09/steve-williams.jpg",
+  "datei": "up_steve-williams.jpg",
+  "bytes": 21423
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2013/05/KATECH_0151.jpg",
+  "datei": "up_KATECH_0151.jpg",
+  "bytes": 101274
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2013/05/KATECH_0870.jpg",
+  "datei": "up_KATECH_0870.jpg",
+  "bytes": 113366
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2013/05/KATECH_0982.jpg",
+  "datei": "up_KATECH_0982.jpg",
+  "bytes": 89441
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2013/05/KATECH_2048.jpg",
+  "datei": "up_KATECH_2048.jpg",
+  "bytes": 150079
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2013/05/cyril-pilot.jpg",
+  "datei": "up_cyril-pilot.jpg",
+  "bytes": 93009
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2013/05/production-facilities-germany2.jpg",
+  "datei": "up_production-facilities-germany2.jpg",
+  "bytes": 135011
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2013/05/production-facilities-germany3.jpg",
+  "datei": "up_production-facilities-germany3.jpg",
+  "bytes": 91256
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2013/05/production-facilities-germany4.jpg",
+  "datei": "up_production-facilities-germany4.jpg",
+  "bytes": 95420
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2013/06/production-facilities-germany6.jpg",
+  "datei": "up_production-facilities-germany6.jpg",
+  "bytes": 185308
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2013/10/glaze.jpg",
+  "datei": "up_glaze.jpg",
+  "bytes": 93003
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2017/07/vegan-bechamel-1.jpg",
+  "datei": "up_vegan-bechamel-1.jpg",
+  "bytes": 40643
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2017/07/vegan-burger.jpg",
+  "datei": "up_vegan-burger.jpg",
+  "bytes": 60939
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2017/07/vegan-cheese-substitute.jpg",
+  "datei": "up_vegan-cheese-substitute.jpg",
+  "bytes": 42353
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2017/07/vegan-cream.jpg",
+  "datei": "up_vegan-cream.jpg",
+  "bytes": 46109
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2017/07/vegan-desserts.jpg",
+  "datei": "up_vegan-desserts.jpg",
+  "bytes": 75096
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2017/07/vegan-mayonnaise.jpg",
+  "datei": "up_vegan-mayonnaise.jpg",
+  "bytes": 40151
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2017/07/vegan-milkshake.jpg",
+  "datei": "up_vegan-milkshake.jpg",
+  "bytes": 64119
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2017/07/vegan-spreads.jpg",
+  "datei": "up_vegan-spreads.jpg",
+  "bytes": 50644
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2017/07/vegan-yogurt.jpg",
+  "datei": "up_vegan-yogurt.jpg",
+  "bytes": 57712
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2019/02/horzFOODCHAIN_certification_logo_130.jpg",
+  "datei": "up_horzFOODCHAIN_certification_logo_130.jpg",
+  "bytes": 4979
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2020/05/brownies-bakery-432x288-1.jpg",
+  "datei": "up_brownies-bakery-432x288-1.jpg",
+  "bytes": 51715
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2020/05/cakes-bakery-432x288-1.jpg",
+  "datei": "up_cakes-bakery-432x288-1.jpg",
+  "bytes": 64590
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2020/05/fillings-bakery-432x288-1.jpg",
+  "datei": "up_fillings-bakery-432x288-1.jpg",
+  "bytes": 35641
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2020/05/muffins-bakery-432x288-1.jpg",
+  "datei": "up_muffins-bakery-432x288-1.jpg",
+  "bytes": 55424
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2020/05/toppings-bakery-432x288-1.jpg",
+  "datei": "up_toppings-bakery-432x288-1.jpg",
+  "bytes": 36749
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2020/06/choux-pastry-header.jpg",
+  "datei": "up_choux-pastry-header.jpg",
+  "bytes": 58578
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2021/01/gb-organic-logo-181x229-1.png",
+  "datei": "up_gb-organic-logo-181x229-1.png",
+  "bytes": 15148
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2021/01/gb-organic-logo-footer88x90.png",
+  "datei": "up_gb-organic-logo-footer88x90.png",
+  "bytes": 3216
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2021/03/cropped-katech-fav-icon-32x32.png",
+  "datei": "up_cropped-katech-fav-icon-32x32.png",
+  "bytes": 1203
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2021/03/plant-based-block-385x248-1.png",
+  "datei": "up_plant-based-block-385x248-1.png",
+  "bytes": 20921
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2021/03/video-banner-edited-pilot-plant-385x248-1.png",
+  "datei": "up_video-banner-edited-pilot-plant-385x248-1.png",
+  "bytes": 40569
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2021/04/ingredion-logo-385x248-1.png",
+  "datei": "up_ingredion-logo-385x248-1.png",
+  "bytes": 4996
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2021/09/plant-based-cold-cuts-1.jpeg",
+  "datei": "up_plant-based-cold-cuts-1.jpeg",
+  "bytes": 74008
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2021/09/plant-based-fish_burger-1.jpeg",
+  "datei": "up_plant-based-fish_burger-1.jpeg",
+  "bytes": 88541
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2021/09/plant-based-fish_fingers-1.jpeg",
+  "datei": "up_plant-based-fish_fingers-1.jpeg",
+  "bytes": 16916
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2021/09/plant-based-nuggets_1-1.jpeg",
+  "datei": "up_plant-based-nuggets_1-1.jpeg",
+  "bytes": 86416
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2021/09/plant-based-pat-1.jpeg",
+  "datei": "up_plant-based-pat-1.jpeg",
+  "bytes": 95558
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2021/09/plant-based-sausages-1.jpeg",
+  "datei": "up_plant-based-sausages-1.jpeg",
+  "bytes": 19154
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2021/09/vegan_Burger-Patty-1.jpeg",
+  "datei": "up_vegan_Burger-Patty-1.jpeg",
+  "bytes": 94020
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2021/11/plant-based-meat-balls-2.jpg",
+  "datei": "up_plant-based-meat-balls-2.jpg",
+  "bytes": 32572
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2022/02/plant-based-pilot-plant-385x248-1.png",
+  "datei": "up_plant-based-pilot-plant-385x248-1.png",
+  "bytes": 188775
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2026/01/kosher-certification-197x229-1.jpg",
+  "datei": "up_kosher-certification-197x229-1.jpg",
+  "bytes": 7474
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2026/04/happy-little-faces-160x160-1.jpg",
+  "datei": "up_happy-little-faces-160x160-1.jpg",
+  "bytes": 3959
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2026/04/happy-little-faces-exandal-certificate-of-donation-katech.jpg",
+  "datei": "up_happy-little-faces-exandal-certificate-of-donation-katech.jpg",
+  "bytes": 139007
+ },
+ {
+  "url": "https://katech-solutions.com/wp-content/uploads/2026/06/halal-Logo-blk-web-june-2026-197-229.png",
+  "datei": "up_halal-Logo-blk-web-june-2026-197-229.png",
+  "bytes": 10310
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/themes/nucima/images/brcgs-cert-food-logo.png",
+  "datei": "kh_brcgs-cert-food-logo.png",
+  "bytes": 10593
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/themes/nucima/images/home/dips-283x327.png",
+  "datei": "kh_dips-283x327.png",
+  "bytes": 46844
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/themes/nucima/images/home/items/dips-with-dairy-products-75x75.png",
+  "datei": "kh_dips-with-dairy-products-75x75.png",
+  "bytes": 4968
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/themes/nucima/images/home/items/mayonnaise-dip-75x75.png",
+  "datei": "kh_mayonnaise-dip-75x75.png",
+  "bytes": 4718
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2012/05/130815_Raetzke_KATECH_0021-300x199.jpg",
+  "datei": "kh_130815_Raetzke_KATECH_0021-300x199.jpg",
+  "bytes": 18181
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2012/05/130815_Raetzke_KATECH_2035_383x265.jpg",
+  "datei": "kh_130815_Raetzke_KATECH_2035_383x265.jpg",
+  "bytes": 26775
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2012/05/Production_germany380x218.jpg",
+  "datei": "kh_Production_germany380x218.jpg",
+  "bytes": 27202
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2012/05/Sedex-logo-small.png",
+  "datei": "kh_Sedex-logo-small.png",
+  "bytes": 12879
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2012/05/UK-Dev.jpg",
+  "datei": "kh_UK-Dev.jpg",
+  "bytes": 21981
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2012/05/cost-optimisation-254x252.png",
+  "datei": "kh_cost-optimisation-254x252.png",
+  "bytes": 25664
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2012/05/find-us-placeholder-286x176.png",
+  "datei": "kh_find-us-placeholder-286x176.png",
+  "bytes": 80924
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2012/05/new-product-249x250.png",
+  "datei": "kh_new-product-249x250.png",
+  "bytes": 30415
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2012/05/troubleshooting-252x252.png",
+  "datei": "kh_troubleshooting-252x252.png",
+  "bytes": 24369
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2012/07/Funnel_resize1.jpg",
+  "datei": "kh_Funnel_resize1.jpg",
+  "bytes": 14581
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2013/05/UK-Dev1_383x216.jpg",
+  "datei": "kh_UK-Dev1_383x216.jpg",
+  "bytes": 10199
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2013/05/UK-Dev3_383x216.jpg",
+  "datei": "kh_UK-Dev3_383x216.jpg",
+  "bytes": 53182
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2013/05/cyril-pilot.jpg",
+  "datei": "kh_cyril-pilot.jpg",
+  "bytes": 93009
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2013/05/venturepoint_380x257.jpg",
+  "datei": "kh_venturepoint_380x257.jpg",
+  "bytes": 22739
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2013/06/venturepoint1-388x197.png",
+  "datei": "kh_venturepoint1-388x197.png",
+  "bytes": 2687
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2013/06/venturepoint2-388x197.png",
+  "datei": "kh_venturepoint2-388x197.png",
+  "bytes": 3052
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2013/06/venturepoint3-388x197.png",
+  "datei": "kh_venturepoint3-388x197.png",
+  "bytes": 2070
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2013/06/venturepoint4-388x197.png",
+  "datei": "kh_venturepoint4-388x197.png",
+  "bytes": 2672
+ },
+ {
+  "url": "https://www.khpartner.com/site/wp-content/uploads/2013/11/Ingredients.jpg",
+  "datei": "kh_Ingredients.jpg",
+  "bytes": 157474
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2012/05/1st-food-1539.jpg",
+  "datei": "kh_1st-food-1539.jpg",
+  "bytes": 50736
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2012/05/Adobe_PDF_icon.png",
+  "datei": "kh_Adobe_PDF_icon.png",
+  "bytes": 18971
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2012/05/bechamel.jpg",
+  "datei": "kh_bechamel.jpg",
+  "bytes": 25731
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2012/05/cheese-heading.jpg",
+  "datei": "kh_cheese-heading.jpg",
+  "bytes": 49315
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2012/05/clear-dressing.jpg",
+  "datei": "kh_clear-dressing.jpg",
+  "bytes": 106408
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2012/05/cream.jpg",
+  "datei": "kh_cream.jpg",
+  "bytes": 24460
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2012/05/creme-brulee.jpg",
+  "datei": "kh_creme-brulee.jpg",
+  "bytes": 29548
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2012/05/mayonnaise.jpg",
+  "datei": "kh_mayonnaise.jpg",
+  "bytes": 25537
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2012/05/milk-drinks.jpg",
+  "datei": "kh_milk-drinks.jpg",
+  "bytes": 33122
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2012/05/yogurt.jpg",
+  "datei": "kh_yogurt.jpg",
+  "bytes": 21107
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2012/07/ESC-min1.jpg",
+  "datei": "kh_ESC-min1.jpg",
+  "bytes": 12159
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2014/07/katech-food-technology-banner-2.png",
+  "datei": "kh_katech-food-technology-banner-2.png",
+  "bytes": 154290
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2014/11/Polish-sales-office-exterior.jpg",
+  "datei": "kh_Polish-sales-office-exterior.jpg",
+  "bytes": 25714
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2016/03/IFS_Food_Box_RGB.png",
+  "datei": "kh_IFS_Food_Box_RGB.png",
+  "bytes": 3455
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2017/03/vegan-logo.png",
+  "datei": "kh_vegan-logo.png",
+  "bytes": 7286
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2019/02/horzFOODCHAIN_certification_logo.jpg",
+  "datei": "kh_horzFOODCHAIN_certification_logo.jpg",
+  "bytes": 609124
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2020/05/bakery-1820-745.jpg",
+  "datei": "kh_bakery-1820-745.jpg",
+  "bytes": 296975
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2020/06/scratch-plus-allergen-free-120.jpg",
+  "datei": "kh_scratch-plus-allergen-free-120.jpg",
+  "bytes": 5082
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2020/06/scratch-plus-classic-product-120.jpg",
+  "datei": "kh_scratch-plus-classic-product-120.jpg",
+  "bytes": 4567
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2020/06/scratch-plus-clean-label-120.jpg",
+  "datei": "kh_scratch-plus-clean-label-120.jpg",
+  "bytes": 4507
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2020/06/scratch-plus-gluten-free-120.jpg",
+  "datei": "kh_scratch-plus-gluten-free-120.jpg",
+  "bytes": 4844
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2020/06/scratch-plus-header.jpg",
+  "datei": "kh_scratch-plus-header.jpg",
+  "bytes": 247975
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2020/06/scratch-plus-low-sugar-120.jpg",
+  "datei": "kh_scratch-plus-low-sugar-120.jpg",
+  "bytes": 4240
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2020/06/scratch-plus-vegan-120.jpg",
+  "datei": "kh_scratch-plus-vegan-120.jpg",
+  "bytes": 4129
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2021/03/brcgs-banner-green.png",
+  "datei": "kh_brcgs-banner-green.png",
+  "bytes": 15060
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2021/03/marcus-banner-385x248-1.png",
+  "datei": "kh_marcus-banner-385x248-1.png",
+  "bytes": 60623
+ },
+ {
+  "url": "https://www.khpartner.com/wp-content/uploads/2021/11/rspo-1106196-logo-2021.png",
+  "datei": "kh_rspo-1106196-logo-2021.png",
+  "bytes": 7966
+ }
+]

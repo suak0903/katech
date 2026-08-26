@@ -1,0 +1,6 @@
+# Design preview / redesign concept - deliberately excluded from all indexing.
+# This is not the official website of KaTech Ingredient Solutions GmbH.
+# The official site is https://katech-solutions.com/
+
+User-agent: *
+Disallow: /

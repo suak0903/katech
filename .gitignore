@@ -1,0 +1,20 @@
+# Arbeitsmaterial des Generators. Der ausgelieferte Demonstrator besteht
+# ausschliesslich aus den statischen Dateien im Wurzelverzeichnis.
+# Der Generator-Quellcode in _src/ bleibt versioniert, sein Rohmaterial nicht.
+_src/node_modules/
+_src/raw/
+_src/raw-news/
+_src/assets/
+_src/_shots/
+_src/_abnahme/
+_src/_ud*/
+_src/_*.png
+_src/_*.jpg
+_src/_lh*.json
+_src/package-lock.json
+_src/*.html
+_src/ingredion-home.png
+Thumbs.db
+desktop.ini
+_src/__pycache__/
+_src/.keep
