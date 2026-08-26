@@ -159,14 +159,21 @@ p:last-child{margin-bottom:0}
 
 .lang{display:flex;gap:2px;align-items:center;margin-left:14px}
 .lang button{
-  font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:.06em;
-  background:none;border:0;color:rgba(255,255,255,.62);padding:6px 7px;cursor:pointer;
-  text-transform:uppercase;transition:color .2s var(--ease);
+  font-family:var(--font-display);font-size:12.5px;font-weight:600;letter-spacing:.06em;
+  background:none;border:1px solid transparent;color:rgba(255,255,255,.68);
+  padding:5px 8px;cursor:pointer;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:6px;
+  transition:color .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease);
 }
-.lang button[aria-current="true"]{color:#fff}
-.lang button[aria-current="true"]::after{content:'';display:block;height:2px;background:var(--accent);margin-top:3px}
+.lang button svg{flex:none;display:block;border:1px solid rgba(255,255,255,.4)}
+.lang button:hover{color:#fff;border-color:rgba(255,255,255,.35)}
+.lang button[aria-current="true"]{color:var(--ink);background:var(--accent);border-color:var(--accent)}
+.lang button[aria-current="true"] svg{border-color:rgba(55,55,56,.35)}
 .nav.scrolled .lang button,.nav.solid .lang button{color:var(--ink-soft)}
-.nav.scrolled .lang button[aria-current="true"],.nav.solid .lang button[aria-current="true"]{color:var(--ink)}
+.nav.scrolled .lang button svg,.nav.solid .lang button svg{border-color:var(--line)}
+.nav.scrolled .lang button:hover,.nav.solid .lang button:hover{color:var(--ink);border-color:var(--line)}
+.nav.scrolled .lang button[aria-current="true"],.nav.solid .lang button[aria-current="true"]{
+  color:var(--ink);background:var(--accent);border-color:var(--accent)}
 
 .burger{
   display:none;margin-left:auto;width:46px;height:46px;background:none;border:0;cursor:pointer;
@@ -736,9 +743,14 @@ body.demobar-zu{padding-bottom:0}
 .hl .sec__head{margin-bottom:clamp(26px,3vw,38px)}
 .hl__rail{
   overflow:hidden;cursor:grab;
+  /* Waagerecht gehoert die Geste dem Band, senkrecht bleibt das Scrollen
+     beim Browser. Ohne das brach die Beruehrung auf dem Telefon sofort ab. */
+  touch-action:pan-y;
+  -webkit-user-select:none;user-select:none;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
 }
+.hl__rail img{-webkit-user-drag:none;user-drag:none;pointer-events:none}
 .hl__rail.greift{cursor:grabbing}
 .hl__track{display:flex;gap:20px;width:max-content;will-change:transform}
 .hl__card{
@@ -766,9 +778,31 @@ body.demobar-zu{padding-bottom:0}
 .hlbox{position:fixed;inset:0;z-index:310;background:rgba(30,30,31,.95);
   display:flex;align-items:center;justify-content:center;padding:clamp(16px,4vw,48px)}
 .hlbox[hidden]{display:none}
-.hlbox__close{position:absolute;top:18px;right:18px;width:50px;height:50px;
-  background:rgba(255,255,255,.12);border:0;color:#fff;font-size:26px;cursor:pointer}
-.hlbox__close:hover{background:rgba(255,255,255,.22)}
+.hlbox__close,.hlbox__prev,.hlbox__next{
+  position:absolute;background:var(--ink);border:2px solid rgba(255,255,255,.55);
+  color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .22s var(--ease),border-color .22s var(--ease);
+}
+.hlbox__close:hover,.hlbox__prev:hover,.hlbox__next:hover{
+  background:var(--brand-deep);border-color:#fff}
+.hlbox__close{top:16px;right:16px;width:52px;height:52px;font-size:28px;line-height:1;z-index:3}
+.hlbox__prev,.hlbox__next{top:50%;transform:translateY(-50%);width:52px;height:52px;font-size:30px;line-height:1}
+.hlbox__prev{left:14px}
+.hlbox__next{right:14px}
+.hlbox__count{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,.85);font-size:14px;font-variant-numeric:tabular-nums;
+  background:var(--ink);padding:6px 14px;border:1px solid rgba(255,255,255,.25)}
+@media(max-width:760px){
+  /* Auf dem Telefon fuellt die Lightbox fast den Schirm: die Bedienknoepfe
+     muessen sich vom Inhalt abheben, nicht darauf verschwimmen. */
+  .hlbox{padding:14px}
+  .hlbox__close{top:8px;right:8px;width:46px;height:46px}
+  .hlbox__prev,.hlbox__next{top:auto;bottom:12px;transform:none;width:52px;height:46px}
+  .hlbox__prev{left:12px}
+  .hlbox__next{right:12px}
+  .hlbox__count{bottom:22px}
+  .hlbox__stage{max-height:82vh}
+}
 .hlbox__stage{width:min(100%,940px);max-height:88vh;overflow-y:auto;background:var(--paper)}
 .hlbox__inner{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
 .hlbox__inner picture{display:block;height:100%}

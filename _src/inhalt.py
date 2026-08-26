@@ -274,7 +274,7 @@ def highlights_band(root):
         return f'''<button class="hl__card" type="button" data-hl="{i}"{' tabindex="-1" aria-hidden="true"' if klon else ''}>
         <span class="hl__media"><picture>
           <source srcset="{root}media/{bild}.webp" type="image/webp">
-          <img src="{root}media/{bild}.jpg" alt="" loading="lazy" decoding="async" width="560" height="360"></picture></span>
+          <img src="{root}media/{bild}.jpg" alt="" loading="lazy" decoding="async" width="560" height="360" draggable="false"></picture></span>
         <span class="hl__body">
           <span class="hl__title">{L.esc(titel)}</span>
           <span class="hl__text">{L.esc(kurztext)}</span>
@@ -307,7 +307,10 @@ def highlights_band(root):
   {inhalte}
   <div class="hlbox" id="hlBox" hidden role="dialog" aria-modal="true" aria-label="Highlight">
     <button class="hlbox__close" type="button" aria-label="Close">&times;</button>
+    <button class="hlbox__prev" type="button" aria-label="Previous">&#8249;</button>
     <div class="hlbox__stage" id="hlStage"></div>
+    <button class="hlbox__next" type="button" aria-label="Next">&#8250;</button>
+    <span class="hlbox__count" id="hlCount"></span>
   </div>
 </section>'''
 

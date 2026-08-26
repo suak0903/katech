@@ -51,13 +51,11 @@ FOOT_SPALTEN = [
 # Landesflaggen und das LinkedIn-Zeichen als Inline-SVG (Kit: keine Icon-Fonts).
 # Die Flaggen stehen fuer die drei Maerkte, die die Bestandsseite bedient.
 FLAGGE_GB = ('<svg viewBox="0 0 60 30" width="22" height="11" aria-hidden="true">'
-             '<clipPath id="ukc"><path d="M0 0h60v30H0z"/></clipPath>'
-             '<g clip-path="url(#ukc)">'
              '<path d="M0 0h60v30H0z" fill="#012169"/>'
              '<path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/>'
              '<path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/>'
              '<path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/>'
-             '</g></svg>')
+             '</svg>')
 FLAGGE_DE = ('<svg viewBox="0 0 5 3" width="22" height="13" aria-hidden="true">'
              '<path d="M0 0h5v3H0z"/><path d="M0 1h5v2H0z" fill="#D00"/>'
              '<path d="M0 2h5v1H0z" fill="#FFCE00"/></svg>')
@@ -94,9 +92,9 @@ def kopf(root, aktiv="", solid=False):
       {chr(10).join("      " + l for l in links).strip()}
     </nav>
     <div class="lang" role="group" aria-label="Language">
-      <button type="button" data-lang="en" aria-current="true">EN</button>
-      <button type="button" data-lang="de">DE</button>
-      <button type="button" data-lang="pl">PL</button>
+      <button type="button" data-lang="en" aria-current="true">{FLAGGE_GB}<span>EN</span></button>
+      <button type="button" data-lang="de">{FLAGGE_DE}<span>DE</span></button>
+      <button type="button" data-lang="pl">{FLAGGE_PL}<span>PL</span></button>
     </div>
     <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><span></span></button>
   </div>

@@ -293,6 +293,9 @@
     rail.addEventListener('pointerdown', function (e) {
       zieht = true; gezogen = 0; startX = e.clientX; startPos = pos; frei = false;
       rail.classList.add('greift');
+      // Sonst startet der Browser ueber Bildern sein eigenes Ziehen und
+      // unser Schieben kommt nie an.
+      e.preventDefault();
     });
     rail.addEventListener('pointermove', function (e) {
       if (!zieht) return;
@@ -312,6 +315,15 @@
       zieht = false;
       rail.classList.remove('greift');
       try { rail.releasePointerCapture(e.pointerId); } catch (err) { /* egal */ }
+      // Auf Beruehrung gibt es kein Verlassen mit dem Zeiger: das Band bliebe
+      // sonst nach einem Tipp fuer immer stehen. Es soll nur so lange
+      // anhalten, wie der Finger aufliegt.
+      if (e.pointerType !== 'mouse') frei = true;
+      // Der Klick folgt unmittelbar auf das Loslassen und muss den Zugwert
+      // noch sehen; danach zuruecksetzen, sonst blockiert ein alter Zug den
+      // naechsten Klick. Nach einem echten Zug erzeugt der Browser ohnehin
+      // kein Klickereignis.
+      window.setTimeout(function () { gezogen = 0; }, 0);
     };
     rail.addEventListener('pointerup', loslassen);
     rail.addEventListener('pointercancel', loslassen);
@@ -319,11 +331,17 @@
     // Lightbox
     var box = document.getElementById('hlBox');
     var stage = document.getElementById('hlStage');
+    var zaehler = document.getElementById('hlCount');
+    var anzahl = document.querySelectorAll('[data-hl-inhalt]').length;
+    var aktuell = 0;
     var oeffnenHl = function (i) {
+      i = ((parseInt(i, 10) % anzahl) + anzahl) % anzahl;
       var vorlage = document.querySelector('[data-hl-inhalt="' + i + '"]');
       if (!vorlage || !box || !stage) return;
+      aktuell = i;
       stage.innerHTML = '';
       stage.appendChild(vorlage.content.cloneNode(true));
+      if (zaehler) zaehler.textContent = (i + 1) + ' / ' + anzahl;
       box.hidden = false;
       document.body.style.overflow = 'hidden';
       var c = box.querySelector('.hlbox__close'); if (c) c.focus();
@@ -341,10 +359,22 @@
     });
     if (box) {
       box.querySelector('.hlbox__close').addEventListener('click', schliessenHl);
+      box.querySelector('.hlbox__prev').addEventListener('click', function () { oeffnenHl(aktuell - 1); });
+      box.querySelector('.hlbox__next').addEventListener('click', function () { oeffnenHl(aktuell + 1); });
       box.addEventListener('click', function (e) { if (e.target === box) schliessenHl(); });
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && !box.hidden) schliessenHl();
+        if (box.hidden) return;
+        if (e.key === 'Escape') schliessenHl();
+        if (e.key === 'ArrowLeft') oeffnenHl(aktuell - 1);
+        if (e.key === 'ArrowRight') oeffnenHl(aktuell + 1);
       });
+      // Wischen blaettert weiter, wie in der Bildergalerie
+      var bx = 0;
+      box.addEventListener('touchstart', function (e) { bx = e.touches[0].clientX; }, { passive: true });
+      box.addEventListener('touchend', function (e) {
+        var d = e.changedTouches[0].clientX - bx;
+        if (Math.abs(d) > 50) oeffnenHl(aktuell + (d < 0 ? 1 : -1));
+      }, { passive: true });
     }
   }
 

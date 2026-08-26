@@ -137,6 +137,24 @@ Hoehen werden beim Rendern korrigiert und die Scrollposition wandert dabei um
 bis zu 200 Pixel. Beim Vorfuehren waere das sichtbar. Dreimal geprueft und
 verworfen am 26.08.
 
+## 5b. Bedienung des Highlights-Bandes
+
+Vier Fallen, die alle erst am echten Geraet auffielen:
+
+- **Ueber Bildern startet der Browser sein eigenes Ziehen.** Ohne
+  `draggable="false"`, `user-drag:none` und `preventDefault()` im
+  `pointerdown` liess sich das Band nur ueber dem Textbereich schieben.
+- **Auf Beruehrung braucht es `touch-action:pan-y`.** Sonst deutet der
+  Browser die Geste als Scrollen und bricht den Zeiger nach wenigen
+  Millimetern ab.
+- **Der Stopp unter dem Zeiger wird auf Beruehrung nie aufgehoben**, weil es
+  dort kein Verlassen gibt. Beim Loslassen muss `frei` wieder gesetzt werden,
+  sonst steht das Band nach einem Tipp fuer immer.
+- **Der Zugwert muss nach dem Loslassen zurueckgesetzt werden**, sonst
+  blockiert ein frueherer Zug den naechsten Klick. Zuruecksetzen im
+  `setTimeout(..., 0)`, damit das unmittelbar folgende Klickereignis den
+  Wert noch sieht.
+
 ## 6. Stolperfallen aus diesem Projekt
 
 - **Der Server drosselt.** Ab etwa 70 schnellen Abrufen liefert `katech-solutions.com` HTTP 503.
