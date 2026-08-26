@@ -70,7 +70,9 @@ p:last-child{margin-bottom:0}
 /* ---------- Layout ---------- */
 .wrap{width:min(100% - var(--pad)*2,var(--wrap));margin-inline:auto}
 .wrap--narrow{width:min(100% - var(--pad)*2,var(--wrap-narrow))}
-.sec{padding-block:var(--sec-y)}
+.sec{padding-block:var(--sec-y);content-visibility:auto;contain-intrinsic-size:auto 900px}
+/* Der Hero und die erste Sektion bleiben ungebremst, sie sind sofort sichtbar */
+.hero,.hero__ribbon,.subhero{content-visibility:visible}
 .sec--sand{background:var(--sand)}
 .sec--ink{background:var(--ink);color:#fff}
 .sec--teal{background:var(--teal);color:#fff}
@@ -116,7 +118,7 @@ p:last-child{margin-bottom:0}
   transition:background .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
   border-bottom:1px solid transparent;
 }
-.nav.scrolled{background:rgba(255,255,255,.97);border-bottom-color:var(--line);backdrop-filter:blur(10px)}
+.nav.scrolled{background:rgba(255,255,255,.98);border-bottom-color:var(--line)}
 .nav.solid{background:var(--paper);border-bottom-color:var(--line);position:sticky}
 .nav__inner{width:min(100% - var(--pad)*2,var(--wrap));margin-inline:auto;display:flex;align-items:center;gap:24px}
 .brand{display:flex;align-items:center;gap:12px;height:44px;text-decoration:none;flex:none}
@@ -292,7 +294,8 @@ p:last-child{margin-bottom:0}
 .crumbs span{opacity:.5}
 
 /* ---------- Split-Block (Ingredion-Signaturmuster) ---------- */
-.split{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+.split{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;
+  content-visibility:auto;contain-intrinsic-size:auto 620px}
 .split--flip .split__pane{order:2}
 .split__pane{
   display:flex;flex-direction:column;justify-content:center;
