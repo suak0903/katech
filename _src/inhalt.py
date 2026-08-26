@@ -180,6 +180,30 @@ KURZTITEL = {
     "our-ingredients/ingredients-list": "Ingredients list",
 }
 
+# Motive fuer News-Beitraege. Die Bestandsseite haengt an ihre Beitraege keine
+# Bilder; ohne Motiv wirkt eine Nachrichtenliste in diesem Layout aber wie ein
+# Fehler. Zugeordnet wird nur, wo der Bezug aus dem Text eindeutig ist.
+NEWS_BILD = {
+    "katech-receives-highest-brc-food-aa-rating-for-food-safety": "lab-measurement",
+    "katech-invests-in-pilot-plant-and-strengthens-its-focus-on-plant-based-product-development":
+        "pilot-plant",
+    "ingredion-to-showcase-plant-based-expertise-at-pbwe2022": "p-vegan-plant-based-mince",
+    "ingredion-expands-specialty-ingredient-portfolio-with-acquisition-of-katech": "hq-luebeck",
+    "katech-successful-in-vegan-bakery-product-development": "p-bakery",
+    "katech-strong-vegan-product-development": "p-vegan-vegan-yogurt",
+    "katech-vlog-certified-food-without-genetic-engineering": "raw-materials",
+    "katech-prize-outstanding-food-research-awarded-first-time": "sensory-panel",
+    "katech-presents-first-company-video": "reception",
+    "katech-food-industrys-secret-weapon": "development-meeting",
+    "milky-grins": "p-milk-drinks",
+    "keeping-the-market-sweet": "p-cheese-cream-cheese",
+    "future-consumer-demands-traceability-sustainability": "warehouse",
+    "food-navigator-article-on-healthy-origin-of-stabilisers": "raw-materials",
+    "study-backs-whey-protein-fat-starch-replacement": "p-yogurt",
+    "could-fracking-increase-guar-gum-demand": "raw-materials",
+    "current-eu-approved-additives": "blending-tower",
+}
+
 MONATE = ["January", "February", "March", "April", "May", "June",
           "July", "August", "September", "October", "November", "December"]
 
@@ -273,7 +297,7 @@ def baue_hubs(hub):
            ("our-ingredients/ingredients-list", "Ingredients list", ""),
            ("our-people", "Our people", ""),
            ("case-studies", "Case studies", "")])],
-        og="og-company.jpg", bild="sensory-panel")
+        og="og-expertise.jpg", bild="lab-measurement")
 
     hub("company", "Company", "Who we are",
         "A food technology company that stayed hands-on.",
@@ -358,9 +382,12 @@ def baue_textseiten(textseite):
                        ("plant-reinfeld", "Production site in northern Germany")])}
   </div>
 </section>'''
+        # "Our facilities" steht als eigener Punkt in der Hauptnavigation und
+        # muss dort markiert werden, nicht unter "Company".
+        aktiv = "our-facilities/" if slug == "our-facilities" else "company/"
         textseite(slug, eyebrow="Company",
                   crumbs_extra=[("Company", "../" * (slug.count("/") + 1) + "company/")],
-                  bild=bild, extra_html=extra, aktiv="company/")
+                  bild=bild, extra_html=extra, aktiv=aktiv)
 
     for slug, bild in EXPERTISE_SEITEN:
         textseite(slug, eyebrow="Expertise",
@@ -451,8 +478,18 @@ def _news(schreibe, NEWS, kurz):
     root = "../"
     posts = [n for n in NEWS if n["slug"] != "news" and n["absaetze"]]
     # Uebersicht
-    eintraege = "".join(f'''<article class="newsitem">
+    def news_medien(n):
+        b = NEWS_BILD.get(n["slug"])
+        if not b:
+            return ""
+        return (f'''<a class="newsitem__media" href="{root}{n['slug']}/" tabindex="-1" aria-hidden="true">
+        <picture><source srcset="{root}media/{b}.webp" type="image/webp">
+        <img src="{root}media/{b}.jpg" alt="" loading="lazy" decoding="async" width="800" height="533"></picture>
+      </a>''')
+
+    eintraege = "".join(f'''<article class="newsitem newsitem--bild">
       <time datetime="{n['datum']}">{datum_lang(n['datum'])}</time>
+      {news_medien(n)}
       <div>
         <a href="{root}{n['slug']}/"><h3>{L.esc(n['titel'])}</h3></a>
         <p>{L.esc(kurz(n['absaetze'][0], 210))}</p>
@@ -483,9 +520,11 @@ def _news(schreibe, NEWS, kurz):
       <h3>{L.esc(w['titel'])}</h3>
     </a>''' for w in weiter)
         koerper = "".join(f"<p>{L.esc(a)}</p>" for a in n["absaetze"])
+        motiv = NEWS_BILD.get(n["slug"])
         inhalt = L.subhero(r, crumbs=[("Start", r + "index.html"), ("News", r + "news/"),
                                       (kurz(n["titel"], 46), None)],
-                           eyebrow=datum_lang(n["datum"]), h1=L.esc(n["titel"]))
+                           eyebrow=datum_lang(n["datum"]), h1=L.esc(n["titel"]),
+                           bild=motiv, alt="")
         inhalt += f'''
 <section class="sec">
   <div class="wrap wrap--narrow">

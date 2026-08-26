@@ -6,6 +6,9 @@ eingesetzt, damit alle Seiten byte-identisches Chrome tragen."""
 
 ORT = "KaTech Ingredient Solutions"
 ORIGINAL = "https://katech-solutions.com/"
+# Aus der Bestandsseite uebernommen. Der dortige Xing-Eintrag liefert 404
+# und wird deshalb nicht mitgefuehrt.
+LINKEDIN = "https://www.linkedin.com/company/katech-katharina-hahn-&amp;-partner/"
 
 # Hauptnavigation: Reihenfolge gilt in Kopfleiste UND mobilem Menue
 NAV = [
@@ -77,20 +80,21 @@ def kopf(root, aktiv="", solid=False):
 </header>
 <nav class="mmenu" id="mmenu" aria-label="Mobile navigation" hidden>
   <div class="mmenu__body">
+    <div class="mmenu__lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-current="true">EN</button>
+      <button type="button" data-lang="de">DE</button>
+      <button type="button" data-lang="pl">PL</button>
+    </div>
     <ul class="mmenu__list">
 {mobil_links(root)}
     </ul>
     <div class="mmenu__foot">
-      <a class="mmenu__pill" href="{pfad(root, "contact-us/")}" style="grid-column:1/-1;background:rgba(108,179,62,.22);border-color:rgba(108,179,62,.6)">Make an enquiry</a>
+      <a class="mmenu__pill mmenu__pill--cta" href="{pfad(root, "contact-us/")}">Make an enquiry</a>
       <div class="mmenu__pills">
         <a class="mmenu__pill" href="tel:+4945140702000">Call Lübeck</a>
         <a class="mmenu__pill" href="mailto:hello@katech-solutions.com">E-mail</a>
       </div>
-      <div class="mmenu__lang" role="group" aria-label="Language">
-        <button type="button" data-lang="en" aria-current="true">EN</button>
-        <button type="button" data-lang="de">DE</button>
-        <button type="button" data-lang="pl">PL</button>
-      </div>
+      <a class="mmenu__pill" href="{LINKEDIN}" target="_blank" rel="noopener">KaTech on LinkedIn</a>
     </div>
   </div>
 </nav>'''
@@ -130,6 +134,12 @@ def fuss(root):
         <img src="{root}media/logo-light.png" alt="{ORT}" width="420" height="120">
         <p>Bespoke stabilising and texturising solutions for the food industry.
         Developed in Lübeck, produced in Germany, the UK and Poland. Part of Ingredion.</p>
+        <a class="foot__social" href="{LINKEDIN}" target="_blank" rel="noopener">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.4 20.4h-3.6v-5.6c0-1.3 0-3-1.9-3-1.9 0-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1c.5-.9 1.6-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zm1.8 13H3.5V9h3.6v11.4zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7c0-.9-.8-1.7-1.8-1.7z"/>
+          </svg>
+          <span>KaTech on LinkedIn</span>
+        </a>
       </div>
 {chr(10).join(spalten)}
     </div>
