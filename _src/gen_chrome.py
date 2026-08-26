@@ -76,9 +76,6 @@ def kopf(root, aktiv="", solid=False):
   </div>
 </header>
 <nav class="mmenu" id="mmenu" aria-label="Mobile navigation" hidden>
-  <div class="mmenu__top">
-    <span class="mmenu__logo"><img src="{root}media/logo-light.png" alt="{ORT}" width="420" height="120"></span>
-  </div>
   <div class="mmenu__body">
     <ul class="mmenu__list">
 {mobil_links(root)}

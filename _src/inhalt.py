@@ -46,6 +46,34 @@ PLATZHALTER = ("This page exists in the current website structure and is carried
                "placeholder: the live version carries the full text, images and downloads of "
                "the existing page.")
 
+# Marke im Seitenkopf und Kasten im Inhalt, wenn eine Seite bewusst noch
+# nicht ausgebaut ist. Ohne diese Kennzeichnung wirkt eine solche Seite wie
+# ein Fehler statt wie eine gezogene Grenze.
+STUB_MARKE = ('<span class="stubtag">Not built out in this preview</span>')
+
+
+def stub_kasten(root, slug):
+    original = "https://katech-solutions.com/" + (slug + "/" if slug else "")
+    return f'''<div class="stub rv">
+      <div class="stub__head">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="10" r="8.6" stroke="currentColor" stroke-width="1.7"/>
+          <path d="M10 5.4V10l3.2 2.2" stroke="currentColor" stroke-width="1.7"/></svg>
+        <h2>This page is not built out yet.</h2>
+      </div>
+      <p>It exists in your current site structure and is carried over here at its original
+        address, so that nothing is lost and no link runs into a dead end. What is missing is
+        the content itself: the existing page carries text, images and downloads that were not
+        part of this preview.</p>
+      <p>In the real project this page is filled like every other one. It is shown this way on
+        purpose rather than quietly left out, so you can see exactly where the boundary of this
+        preview runs.</p>
+      <div class="stub__links">
+        <a class="btn btn--outline" href="{original}" target="_blank" rel="noopener">See the current page</a>
+        <a class="btn btn--outline" href="{root}about-this-preview/#scope">What is and is not included</a>
+      </div>
+    </div>'''
+
 ZERTIFIKATE = [
     ("cert-brcgs-cert-food-logo.png", "BRCGS Food Safety certification, AA rating"),
     ("cert-ifs-food-box-rgb.png", "IFS Food certification"),
@@ -553,9 +581,8 @@ def _kontakt(schreibe):
     {L.sec_kopf(eyebrow="Head office", h2="Aegidienstraße 22, Lübeck.",
                 lead="The map loads from Google only after you allow it.")}
     <div class="mapwrap rv" style="position:relative;aspect-ratio:16/7;border:1px solid var(--line)">
-      <div class="mapph" style="position:absolute;inset:0;background:var(--ink);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px">
-        <p style="max-width:44ch;color:rgba(255,255,255,.82)">This map is loaded from Google Maps.
-          Loading it transfers data to Google.</p>
+      <div class="mapph">
+        <p>This map is loaded from Google Maps. Loading it transfers data to Google.</p>
         <button class="btn btn--ghost" type="button" data-map-load>Load map</button>
       </div>
       <iframe title="Map of the KaTech head office in Lübeck" data-src="{STANDORTE[0]['karte']}"
@@ -618,8 +645,8 @@ def _find_us(schreibe):
       </dl>
     </div>
     <div class="mapwrap rv" style="position:relative;aspect-ratio:16/8;border:1px solid var(--line);margin-top:26px">
-      <div class="mapph" style="position:absolute;inset:0;background:var(--ink);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:22px">
-        <p style="max-width:42ch;color:rgba(255,255,255,.82)">This map is loaded from Google Maps.</p>
+      <div class="mapph">
+        <p>This map is loaded from Google Maps.</p>
         <button class="btn btn--ghost" type="button" data-map-load>Load map</button>
       </div>
       <iframe title="Map of {L.esc(s['ort'])}" data-src="{s['karte']}"
@@ -832,6 +859,8 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
         "and its yellow kept as the mark of identity",
         "All 13 product areas and every product type below them, navigable and with their own "
         "text and image from the existing site",
+        "173 of the 200 pages carry real content; the remaining 27 are marked as not built out "
+        "rather than quietly left blank, so the boundary of this preview is visible",
         "Every existing page kept at its original address, so bookmarks and external links "
         "continue to work",
         "Company, expertise, facilities, certifications and locations, restructured into four "
@@ -848,8 +877,8 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
         "Static delivery without WordPress, plugins or a database",
     ]
     offen = [
-        "Migrating the remaining detail content and the full news archive, not only the English "
-        "part shown here",
+        "Filling the 27 pages that are marked as not built out, plus the detail content and the "
+        "full news archive beyond the English part shown here",
         "The German and Polish versions, and the habit of making every future change three times",
         "Connecting the enquiry route to your mailboxes, including who receives which product area",
         "A publishing workflow and the training that goes with it, so your team changes content "

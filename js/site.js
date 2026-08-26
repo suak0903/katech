@@ -4,7 +4,8 @@
      1. has-js / no-js
      2. Kopfleiste: scrolled-Zustand
      3. Mobiles Menue: oeffnen, schliessen, ESC, Aussen-Tap, Swipe, Linkklick
-     4. Hero-Parallaxe 50 Prozent (rAF, GPU)
+        (kein eigenes Logo, die Kopfleiste bleibt sichtbar)
+     4. Hero-Parallaxe 50 Prozent auf Start- und Unterseiten (rAF, GPU)
      5. Reveal beim Scrollen (IntersectionObserver)
      6. Galerie-Lightbox (ESC, Pfeile, Swipe, Zaehler)
      7. Demo-Leiste schliessen (nur fuer die aktuelle Ansicht)
@@ -83,11 +84,12 @@
   }
 
   /* 4. Hero-Parallaxe ------------------------------------------------ */
-  var heroBg = document.getElementById('heroBg');
-  if (heroBg && !reduce) {
+  // Gilt fuer den Hero der Startseite und die Hero-Bilder der Unterseiten.
+  var parallaxe = document.getElementById('heroBg') || document.getElementById('subheroBg');
+  if (parallaxe && !reduce) {
     var laeuft = false;
     var zeichnen = function () {
-      heroBg.style.transform = 'translate3d(0,' + (window.scrollY * 0.5) + 'px,0)';
+      parallaxe.style.transform = 'translate3d(0,' + (window.scrollY * 0.5) + 'px,0)';
       laeuft = false;
     };
     window.addEventListener('scroll', function () {

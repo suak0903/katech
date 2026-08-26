@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="../../media/apple-touch-icon.png">
 <link rel="preload" href="../../font/Barlow-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../font/OpenSans-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../css/site.css?v=9">
+<link rel="stylesheet" href="../../css/site.css?v=12">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -53,9 +53,6 @@
   </div>
 </header>
 <nav class="mmenu" id="mmenu" aria-label="Mobile navigation" hidden>
-  <div class="mmenu__top">
-    <span class="mmenu__logo"><img src="../../media/logo-light.png" alt="KaTech Ingredient Solutions" width="420" height="120"></span>
-  </div>
   <div class="mmenu__body">
     <ul class="mmenu__list">
       <li><a href="../../solutions/"><span class="mmenu__num">01</span>Solutions</a></li>
@@ -81,7 +78,7 @@
 </nav>
 <main id="main">
 <section class="subhero">
-  <div class="subhero__bg"><picture><source srcset="../../media/blending-tower.webp" type="image/webp"><img src="../../media/blending-tower.jpg" alt="Wesenberg, Germany" loading="lazy" decoding="async"></picture></div>
+  <div class="subhero__bg" id="subheroBg"><picture><source srcset="../../media/blending-tower.webp" type="image/webp"><img src="../../media/blending-tower.jpg" alt="Wesenberg, Germany" loading="lazy" decoding="async"></picture></div>
   <div class="subhero__inner">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../../index.html">Start</a><span aria-hidden="true">/</span><a href="../../company/">Company</a><span aria-hidden="true">/</span><a href="../../find-us/">Find us</a><span aria-hidden="true">/</span>Wesenberg, Germany</nav>
     <p class="eyebrow">Production and warehouse</p>
@@ -102,8 +99,8 @@
       </dl>
     </div>
     <div class="mapwrap rv" style="position:relative;aspect-ratio:16/8;border:1px solid var(--line);margin-top:26px">
-      <div class="mapph" style="position:absolute;inset:0;background:var(--ink);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:22px">
-        <p style="max-width:42ch;color:rgba(255,255,255,.82)">This map is loaded from Google Maps.</p>
+      <div class="mapph">
+        <p>This map is loaded from Google Maps.</p>
         <button class="btn btn--ghost" type="button" data-map-load>Load map</button>
       </div>
       <iframe title="Map of Wesenberg, Germany" data-src="https://www.google.com/maps?q=Buurdieksweg+4,+23858+Wesenberg&output=embed"
@@ -193,6 +190,6 @@
     </div>
   </div>
 </div>
-<script src="../../js/site.js?v=9" defer></script>
+<script src="../../js/site.js?v=12" defer></script>
 </body>
 </html>

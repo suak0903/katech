@@ -52,6 +52,7 @@ body{
 img{max-width:100%;height:auto;display:block}
 a{color:var(--brand-deep);text-underline-offset:3px}
 /* Links im Fliesstext duerfen sich nicht allein ueber die Farbe abheben */
+.prose .btn,.notice .btn,.stub .btn{text-decoration:none}
 .prose a,.lead a,.factbox a,.notice a,.form__note a,.check a,.loc a,
 .demobar a,.subhero__sub a,.card__body p a{text-decoration:underline}
 a:hover{color:var(--brand-dark)}
@@ -172,7 +173,7 @@ p:last-child{margin-bottom:0}
 .burger span::after{top:8px}
 .nav.scrolled .burger span,.nav.scrolled .burger span::before,.nav.scrolled .burger span::after,
 .nav.solid .burger span,.nav.solid .burger span::before,.nav.solid .burger span::after{background:var(--ink)}
-.nav.menu-open{position:fixed;top:0;left:0;right:0;margin-bottom:0;background:transparent;border-bottom-color:transparent;backdrop-filter:none}
+.nav.menu-open{position:fixed;top:0;left:0;right:0;margin-bottom:0;background:rgba(55,55,56,.94);border-bottom-color:transparent;backdrop-filter:blur(20px) saturate(140%)}
 .nav.menu-open .burger span{background:transparent!important}
 .nav.menu-open .burger span::before{top:0;transform:rotate(45deg);background:#fff!important}
 .nav.menu-open .burger span::after{top:0;transform:rotate(-45deg);background:#fff!important}
@@ -193,13 +194,10 @@ p:last-child{margin-bottom:0}
 }
 .mmenu.open{transform:none}
 .mmenu[hidden]{display:none}
-.mmenu__top{
-  height:var(--nav-h);flex:none;display:flex;align-items:center;
-  width:min(100% - var(--pad)*2,var(--wrap));margin-inline:auto;
-}
-.mmenu__logo{display:flex;align-items:center;gap:12px;height:44px}
-.mmenu__logo img{height:44px;width:auto}
-.mmenu__body{width:min(100% - var(--pad)*2,var(--wrap));margin-inline:auto;padding-bottom:36px;flex:1}
+/* Das Menue traegt kein eigenes Logo: die Kopfleiste bleibt sichtbar und ist
+   die einzige Quelle. Zwei Logos wanderten beim Scrollen auseinander. */
+.mmenu__body{width:min(100% - var(--pad)*2,var(--wrap));margin-inline:auto;
+  padding-top:calc(var(--nav-h) + 8px);padding-bottom:36px;flex:1}
 .mmenu__list{list-style:none;margin:0 0 28px;padding:0}
 .mmenu__list li{border-bottom:1px solid rgba(255,255,255,.14)}
 .mmenu__list li:last-child{border-bottom:0}
@@ -282,8 +280,10 @@ p:last-child{margin-bottom:0}
 
 /* Subhero fuer Unterseiten */
 .subhero{position:relative;background:var(--ink);color:#fff;overflow:hidden}
-.subhero__bg{position:absolute;inset:0;z-index:0;opacity:.32}
+.subhero__bg{position:absolute;left:0;right:0;top:-16%;height:132%;z-index:0;opacity:.32;
+  will-change:transform;backface-visibility:hidden}
 .subhero__bg img{width:100%;height:100%;object-fit:cover}
+@media(prefers-reduced-motion:reduce){.subhero__bg{transform:none!important}}
 .subhero__inner{position:relative;z-index:2;width:min(100% - var(--pad)*2,var(--wrap));margin-inline:auto;
   padding-top:calc(var(--nav-h) + clamp(44px,6vw,76px));padding-bottom:clamp(40px,5vw,64px)}
 .subhero h1{max-width:900px;margin-bottom:.3em}
@@ -446,6 +446,17 @@ p:last-child{margin-bottom:0}
 .gallery img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
 .gallery button:hover img{transform:scale(1.04)}
 @media(max-width:820px){.gallery{grid-template-columns:repeat(2,1fr)}}
+/* Karten-Platzhalter: als Klasse, nicht inline. Ein inline gesetztes
+   display:flex haette das hidden-Attribut ausgehebelt und den Platzhalter
+   nach der Einwilligung ueber der Karte stehen lassen. */
+.mapwrap{position:relative;border:1px solid var(--line)}
+.mapwrap iframe{width:100%;height:100%;border:0;display:block}
+.mapph{position:absolute;inset:0;background:var(--ink);color:#fff;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;gap:15px;
+  text-align:center;padding:24px;z-index:2}
+.mapph[hidden]{display:none}
+.mapph p{max-width:44ch;color:rgba(255,255,255,.82);margin:0;font-size:15.5px}
+
 .lb{position:fixed;inset:0;z-index:300;background:rgba(30,30,31,.94);display:flex;align-items:center;justify-content:center}
 .lb[hidden]{display:none}
 .lb img{max-width:92vw;max-height:82vh;object-fit:contain}
@@ -663,3 +674,22 @@ body.demobar-zu{padding-bottom:0}
 .quote blockquote::before{content:'\201C'}
 .quote blockquote::after{content:'\201D'}
 .quote figcaption{margin-top:12px;font-size:14px;color:var(--ink-soft)}
+
+/* ---------- Kennzeichnung noch nicht ausgebauter Seiten ---------- */
+.stubtag{
+  display:inline-block;vertical-align:middle;margin-left:14px;
+  font-family:var(--font-body);font-size:13px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink);background:var(--accent);
+  padding:6px 12px;line-height:1.2;white-space:nowrap;
+}
+@media(max-width:700px){
+  .stubtag{display:block;margin:16px 0 0;width:fit-content;font-size:11.5px;white-space:normal}
+}
+.stub{border:1px solid var(--line);border-top:4px solid var(--accent);background:var(--sand);
+  padding:clamp(26px,4vw,40px)}
+.stub__head{display:flex;align-items:center;gap:13px;margin-bottom:18px;color:var(--brand-deep)}
+.stub__head h2{margin:0;font-size:clamp(21px,2.4vw,27px);color:var(--ink)}
+.stub__head svg{flex:none}
+.stub p{color:var(--ink-soft);max-width:64ch}
+.stub__links{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.stub__links .btn{font-size:15px;padding:12px 22px}

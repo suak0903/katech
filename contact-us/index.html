@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="../media/apple-touch-icon.png">
 <link rel="preload" href="../font/Barlow-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../font/OpenSans-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../css/site.css?v=9">
+<link rel="stylesheet" href="../css/site.css?v=12">
 <script type="application/ld+json">{
  "@context": "https://schema.org",
  "@graph": [
@@ -133,9 +133,6 @@
   </div>
 </header>
 <nav class="mmenu" id="mmenu" aria-label="Mobile navigation" hidden>
-  <div class="mmenu__top">
-    <span class="mmenu__logo"><img src="../media/logo-light.png" alt="KaTech Ingredient Solutions" width="420" height="120"></span>
-  </div>
   <div class="mmenu__body">
     <ul class="mmenu__list">
       <li><a href="../solutions/"><span class="mmenu__num">01</span>Solutions</a></li>
@@ -161,7 +158,7 @@
 </nav>
 <main id="main">
 <section class="subhero">
-  <div class="subhero__bg"><picture><source srcset="../media/sensory-panel.webp" type="image/webp"><img src="../media/sensory-panel.jpg" alt="Product samples on the sensory panel table" loading="lazy" decoding="async"></picture></div>
+  <div class="subhero__bg" id="subheroBg"><picture><source srcset="../media/sensory-panel.webp" type="image/webp"><img src="../media/sensory-panel.jpg" alt="Product samples on the sensory panel table" loading="lazy" decoding="async"></picture></div>
   <div class="subhero__inner">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Start</a><span aria-hidden="true">/</span>Contact</nav>
     <p class="eyebrow">Contact</p>
@@ -255,9 +252,8 @@
   <div class="wrap">
     <div class="sec__head"><p class="eyebrow">Head office</p><h2>Aegidienstraße 22, Lübeck.</h2><p class="lead">The map loads from Google only after you allow it.</p></div>
     <div class="mapwrap rv" style="position:relative;aspect-ratio:16/7;border:1px solid var(--line)">
-      <div class="mapph" style="position:absolute;inset:0;background:var(--ink);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px">
-        <p style="max-width:44ch;color:rgba(255,255,255,.82)">This map is loaded from Google Maps.
-          Loading it transfers data to Google.</p>
+      <div class="mapph">
+        <p>This map is loaded from Google Maps. Loading it transfers data to Google.</p>
         <button class="btn btn--ghost" type="button" data-map-load>Load map</button>
       </div>
       <iframe title="Map of the KaTech head office in Lübeck" data-src="https://www.google.com/maps?q=Aegidienstra%C3%9Fe+22,+23552+L%C3%BCbeck&output=embed"
@@ -347,6 +343,6 @@
     </div>
   </div>
 </div>
-<script src="../js/site.js?v=9" defer></script>
+<script src="../js/site.js?v=12" defer></script>
 </body>
 </html>

@@ -7,7 +7,7 @@ import html, json, os, re
 
 import gen_chrome as chrome
 
-VERSION = 9  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
+VERSION = 12  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
 PAGES_URL = "https://suak0903.github.io/katech/"
 ORIGINAL = "https://katech-solutions.com/"
 ORT = "KaTech Ingredient Solutions"
@@ -164,7 +164,7 @@ def subhero(root, *, crumbs, h1, sub="", eyebrow="", bild=None, alt=""):
     pfad_html = '<span aria-hidden="true">/</span>'.join(weg)
     hg = ""
     if bild:
-        hg = (f'<div class="subhero__bg"><picture>'
+        hg = (f'<div class="subhero__bg" id="subheroBg"><picture>'
               f'<source srcset="{root}media/{bild}.webp" type="image/webp">'
               f'<img src="{root}media/{bild}.jpg" alt="{esc(alt)}" loading="lazy" decoding="async">'
               f'</picture></div>')

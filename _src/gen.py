@@ -360,11 +360,9 @@ def produktseite(slug):
     geschwister = [g for g in BAUM.get(bereich, []) if g != slug]
 
     bloecke = [L.absatz(t) for t in absaetze[:8]]
-    if not bloecke:
-        bloecke = [L.absatz(
-            "This product type is part of the KaTech portfolio. The existing site lists it "
-            "without a description; in the live version this page carries the technical brief, "
-            "the typical formulation challenge and the relevant reference products.")]
+    ist_stub = not bloecke
+    if ist_stub:
+        bloecke = [I.stub_kasten(root, slug)]
     if s.get("listen"):
         bloecke.append(L.faktenkasten("Covered in this application",
                                       s["listen"][:8]))
@@ -394,7 +392,8 @@ def produktseite(slug):
     inhalt = L.subhero(
         root, crumbs=[("Start", root + "index.html"), ("Solutions", root + "solutions/"),
                       (kurztitel(bereich), root + bereich + "/"), (kurztitel(slug), None)],
-        eyebrow=kurztitel(bereich), h1=L.esc(titel_von(slug)),
+        eyebrow=kurztitel(bereich),
+        h1=L.esc(titel_von(slug)) + (" " + I.STUB_MARKE if ist_stub else ""),
         sub=kurz(absaetze[0], 190) if absaetze else "")
     inhalt += f'''
 <section class="sec">
@@ -436,15 +435,19 @@ def textseite(slug, *, eyebrow, crumbs_extra=None, bild=None, extra_html="", akt
     bloecke = [L.absatz(t) for t in absaetze]
     if s.get("listen"):
         bloecke.append(L.faktenkasten("At a glance", s["listen"][:10]))
-    if not bloecke:
-        bloecke = [L.absatz(I.PLATZHALTER)]
+    # Seiten ohne Bestandsinhalt werden sichtbar als solche gekennzeichnet,
+    # sonst wirken sie wie ein Fehler statt wie eine gezogene Grenze.
+    ist_stub = not bloecke
+    if ist_stub:
+        bloecke = [I.stub_kasten(root, slug)]
 
     crumbs = [("Start", root + "index.html")]
     if crumbs_extra:
         crumbs += crumbs_extra
     crumbs.append((kurztitel(slug), None))
 
-    inhalt = L.subhero(root, crumbs=crumbs, eyebrow=eyebrow, h1=L.esc(titel_von(slug)),
+    inhalt = L.subhero(root, crumbs=crumbs, eyebrow=eyebrow,
+                       h1=L.esc(titel_von(slug)) + (" " + I.STUB_MARKE if ist_stub else ""),
                        sub=kurz(absaetze[0], 200) if absaetze else "",
                        bild=bild, alt=kurztitel(slug))
     inhalt += f'''

@@ -98,6 +98,23 @@ const browser = await chromium.launch();
   page.once('dialog', d => d.dismiss());
   await page.locator('.lang button[data-lang="de"]').click();
 
+  // Parallaxe der Unterseiten-Heroes
+  for (const pfad of ['/vegan/', '/our-facilities/', '/news/']) {
+    await page.goto(BASIS + pfad, { waitUntil: 'networkidle' });
+    const start = await page.locator('#subheroBg').evaluate(el => el.style.transform);
+    await page.evaluate(() => window.scrollBy(0, 500));
+    await page.waitForTimeout(300);
+    const nach = await page.locator('#subheroBg').evaluate(el => el.style.transform);
+    if (!nach || nach === 'none' || nach === start) notiz('Parallaxe', `fehlt auf ${pfad}`);
+  }
+
+  // Noch nicht ausgebaute Seiten sind sichtbar gekennzeichnet
+  await page.goto(BASIS + '/customer-area/', { waitUntil: 'networkidle' });
+  if (!(await page.locator('.stubtag').isVisible()))
+    notiz('Platzhalterseite', 'Marke im Seitenkopf fehlt');
+  if (!(await page.locator('.stub').isVisible()))
+    notiz('Platzhalterseite', 'Hinweiskasten fehlt');
+
   // 404
   const antwort = await page.goto(BASIS + '/404.html', { waitUntil: 'networkidle' });
   if (!antwort.ok()) notiz('404', 'Fehlerseite nicht erreichbar');
@@ -117,18 +134,27 @@ const browser = await chromium.launch();
   await page.goto(BASIS + '/', { waitUntil: 'networkidle' });
   await page.locator('#consent button[data-consent="nein"]').click();
 
-  // Menue oeffnen, Logo-Deckung pruefen
-  const kopfLogo = await page.locator('.brand img.logo-light').boundingBox();
+  // Menue oeffnen. Es darf genau ein Logo sichtbar sein, und es muss an
+  // seinem Platz bleiben, auch wenn im offenen Menue gescrollt wird.
+  const vorher = await page.locator('.brand img.logo-light').boundingBox();
   await page.locator('#burger').click();
   await page.waitForTimeout(600);
   if (!(await page.locator('#mmenu').isVisible())) notiz('Mobiles Menue', 'oeffnet nicht');
-  const menueLogo = await page.locator('.mmenu__logo img').boundingBox();
-  if (kopfLogo && menueLogo) {
-    const dx = Math.abs(kopfLogo.x - menueLogo.x);
-    const dy = Math.abs(kopfLogo.y - menueLogo.y);
-    const dh = Math.abs(kopfLogo.height - menueLogo.height);
-    if (dx > 1.5 || dy > 1.5 || dh > 1.5)
-      notiz('Mobiles Menue', `Logo nicht deckungsgleich (dx ${dx.toFixed(1)}, dy ${dy.toFixed(1)}, dh ${dh.toFixed(1)})`);
+
+  const logosOffen = await page.locator('.nav img:visible, .mmenu img:visible').count();
+  if (logosOffen !== 1) notiz('Mobiles Menue', `${logosOffen} sichtbare Logos im Kopfbereich statt genau einem`);
+
+  await page.evaluate(() => window.scrollBy(0, 400));
+  await page.locator('#mmenu').evaluate(el => el.scrollBy(0, 300));
+  await page.waitForTimeout(400);
+  const logosGescrollt = await page.locator('.nav img:visible, .mmenu img:visible').count();
+  if (logosGescrollt !== 1) notiz('Mobiles Menue', `nach dem Scrollen ${logosGescrollt} sichtbare Logos statt genau einem`);
+  const nachher = await page.locator('.brand img.logo-light').boundingBox();
+  if (vorher && nachher) {
+    const dx = Math.abs(vorher.x - nachher.x);
+    const dy = Math.abs(vorher.y - nachher.y);
+    if (dx > 1 || dy > 1)
+      notiz('Mobiles Menue', `Logo wandert beim Scrollen (dx ${dx.toFixed(1)}, dy ${dy.toFixed(1)})`);
   } else {
     notiz('Mobiles Menue', 'Logo-Position nicht messbar');
   }
