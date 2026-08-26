@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="../media/apple-touch-icon.png">
 <link rel="preload" href="../font/Barlow-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../font/OpenSans-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../css/site.css?v=27">
+<link rel="stylesheet" href="../css/site.css?v=28">
 <script type="application/ld+json">{
  "@context": "https://schema.org",
  "@type": "ProfilePage",
@@ -102,9 +102,19 @@
 </section>
 <section class="sec">
   <div class="wrap wrap--narrow">
-    <div class="factbox rv">
-      <h3>Sales Savoury</h3>
-      <ul><li>Team: Sales, Germany</li><li>Based in Lübeck</li></ul>
+    <div class="profil rv">
+      <picture>
+        <source srcset="../media/team-ulrich-schoo.webp" type="image/webp">
+        <img src="../media/team-ulrich-schoo.jpg" alt="Ulrich Schoo"
+             width="440" height="440" loading="eager" decoding="async">
+      </picture>
+      <div class="profil__daten">
+        <h2>Sales Savoury</h2>
+        <dl>
+          <dt>Team</dt><dd>Sales, Germany</dd>
+          <dt>Based in</dt><dd>Lübeck</dd>
+        </dl>
+      </div>
     </div>
     <div class="prose rv"><p>Ulrich Schoo has been a food technologist since 1983 and for ten years as a manager he has been responsible for product development within the frozen food industry at Schneefrost GmbH. In 1993 he started at G. C. Hahn &amp; Co., later Tate &amp; Lyle Food Systems as a sales manager for convenience food with a focus on delicatessen, convenience food, meat processing and deep frozen food. Ulrich has been a key part of many successful new product developments and launches.</p></div>
   </div>
@@ -112,15 +122,36 @@
 <section class="sec sec--sand">
   <div class="wrap">
     <div class="sec__head"><p class="eyebrow">Sales, Germany</p><h2>Colleagues in this team.</h2></div>
-    <div class="grid grid--3 rv"><a class="tile" href="../bernd-brandes/">
-      <span class="tile__num">Lübeck</span>
-      <h3>Bernd Brandes</h3><p>Sales Dairy</p>
-    </a><a class="tile" href="../siegfried-blab/">
-      <span class="tile__num">Lübeck</span>
-      <h3>Siegfried Blab</h3><p>Sales Dairy</p>
-    </a><a class="tile" href="../claus-schierholz/">
-      <span class="tile__num">Lübeck</span>
-      <h3>Claus Schierholz</h3><p>Sales Dairy / Senior Technologist Dairy</p>
+    <div class="grid grid--3 rv"><a class="person" href="../bernd-brandes/">
+      <span class="person__foto"><picture>
+        <source srcset="../media/team-bernd-brandes.webp" type="image/webp">
+        <img src="../media/team-bernd-brandes.jpg" alt="Bernd Brandes"
+             width="440" height="440" loading="lazy" decoding="async"></picture></span>
+      <span class="person__text">
+        <span class="person__ort">Lübeck</span>
+        <span class="person__name">Bernd Brandes</span>
+        <span class="person__rolle">Sales Dairy</span>
+      </span>
+    </a><a class="person" href="../siegfried-blab/">
+      <span class="person__foto"><picture>
+        <source srcset="../media/team-siegfried-blab.webp" type="image/webp">
+        <img src="../media/team-siegfried-blab.jpg" alt="Siegfried Blab"
+             width="440" height="440" loading="lazy" decoding="async"></picture></span>
+      <span class="person__text">
+        <span class="person__ort">Lübeck</span>
+        <span class="person__name">Siegfried Blab</span>
+        <span class="person__rolle">Sales Dairy</span>
+      </span>
+    </a><a class="person" href="../claus-schierholz/">
+      <span class="person__foto"><picture>
+        <source srcset="../media/team-claus-schierholz.webp" type="image/webp">
+        <img src="../media/team-claus-schierholz.jpg" alt="Claus Schierholz"
+             width="440" height="440" loading="lazy" decoding="async"></picture></span>
+      <span class="person__text">
+        <span class="person__ort">Lübeck</span>
+        <span class="person__name">Claus Schierholz</span>
+        <span class="person__rolle">Sales Dairy / Senior Technologist Dairy</span>
+      </span>
     </a></div>
     <div class="btn-row btn-row--single rv" style="margin-top:30px">
       <a class="btn btn--outline" href="../our-people/">The whole team</a>
@@ -206,6 +237,6 @@
     </div>
   </div>
 </div>
-<script src="../js/site.js?v=27" defer></script>
+<script src="../js/site.js?v=28" defer></script>
 </body>
 </html>

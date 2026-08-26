@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="../media/apple-touch-icon.png">
 <link rel="preload" href="../font/Barlow-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../font/OpenSans-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../css/site.css?v=27">
+<link rel="stylesheet" href="../css/site.css?v=28">
 <script type="application/ld+json">{
  "@context": "https://schema.org",
  "@type": "ProfilePage",
@@ -102,9 +102,19 @@
 </section>
 <section class="sec">
   <div class="wrap wrap--narrow">
-    <div class="factbox rv">
-      <h3>Sales Savoury</h3>
-      <ul><li>Team: Sales, Germany</li><li>Based in Lübeck</li></ul>
+    <div class="profil rv">
+      <picture>
+        <source srcset="../media/team-stephan-kahlert.webp" type="image/webp">
+        <img src="../media/team-stephan-kahlert.jpg" alt="Stephan Kahlert"
+             width="440" height="440" loading="eager" decoding="async">
+      </picture>
+      <div class="profil__daten">
+        <h2>Sales Savoury</h2>
+        <dl>
+          <dt>Team</dt><dd>Sales, Germany</dd>
+          <dt>Based in</dt><dd>Lübeck</dd>
+        </dl>
+      </div>
     </div>
     <div class="prose rv"><p>Stephan Kahlert finished an education as specialist for food technology in 1981, with Carl Kühne KG. From 1989 he took over the duties as a production manager and Quality representative. In 1996-2001 he changed to G. C. Hahn &amp; Co. (later Tate &amp; Lyle Food Systems) in the development department, then changed to sales in 2001, at last responsible for the region UK/Scandinavia and Key-accounts North Germany. Stephan is mainly working in the savoury area.</p></div>
   </div>
@@ -112,15 +122,36 @@
 <section class="sec sec--sand">
   <div class="wrap">
     <div class="sec__head"><p class="eyebrow">Sales, Germany</p><h2>Colleagues in this team.</h2></div>
-    <div class="grid grid--3 rv"><a class="tile" href="../bernd-brandes/">
-      <span class="tile__num">Lübeck</span>
-      <h3>Bernd Brandes</h3><p>Sales Dairy</p>
-    </a><a class="tile" href="../ulrich-schoo/">
-      <span class="tile__num">Lübeck</span>
-      <h3>Ulrich Schoo</h3><p>Sales Savoury</p>
-    </a><a class="tile" href="../siegfried-blab/">
-      <span class="tile__num">Lübeck</span>
-      <h3>Siegfried Blab</h3><p>Sales Dairy</p>
+    <div class="grid grid--3 rv"><a class="person" href="../bernd-brandes/">
+      <span class="person__foto"><picture>
+        <source srcset="../media/team-bernd-brandes.webp" type="image/webp">
+        <img src="../media/team-bernd-brandes.jpg" alt="Bernd Brandes"
+             width="440" height="440" loading="lazy" decoding="async"></picture></span>
+      <span class="person__text">
+        <span class="person__ort">Lübeck</span>
+        <span class="person__name">Bernd Brandes</span>
+        <span class="person__rolle">Sales Dairy</span>
+      </span>
+    </a><a class="person" href="../ulrich-schoo/">
+      <span class="person__foto"><picture>
+        <source srcset="../media/team-ulrich-schoo.webp" type="image/webp">
+        <img src="../media/team-ulrich-schoo.jpg" alt="Ulrich Schoo"
+             width="440" height="440" loading="lazy" decoding="async"></picture></span>
+      <span class="person__text">
+        <span class="person__ort">Lübeck</span>
+        <span class="person__name">Ulrich Schoo</span>
+        <span class="person__rolle">Sales Savoury</span>
+      </span>
+    </a><a class="person" href="../siegfried-blab/">
+      <span class="person__foto"><picture>
+        <source srcset="../media/team-siegfried-blab.webp" type="image/webp">
+        <img src="../media/team-siegfried-blab.jpg" alt="Siegfried Blab"
+             width="440" height="440" loading="lazy" decoding="async"></picture></span>
+      <span class="person__text">
+        <span class="person__ort">Lübeck</span>
+        <span class="person__name">Siegfried Blab</span>
+        <span class="person__rolle">Sales Dairy</span>
+      </span>
     </a></div>
     <div class="btn-row btn-row--single rv" style="margin-top:30px">
       <a class="btn btn--outline" href="../our-people/">The whole team</a>
@@ -206,6 +237,6 @@
     </div>
   </div>
 </div>
-<script src="../js/site.js?v=27" defer></script>
+<script src="../js/site.js?v=28" defer></script>
 </body>
 </html>

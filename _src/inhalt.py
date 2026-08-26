@@ -1328,10 +1328,16 @@ def _team(schreibe, SEITEN, kurz):
         mitglieder = [p for p in leute if p["gruppe"] == gruppe]
         if not mitglieder:
             continue
-        karten = "".join(f'''<a class="tile" href="{root}{p['slug']}/">
-      <span class="tile__num">{L.esc(p['ort'])}</span>
-      <h3>{L.esc(p['name'])}</h3>
-      <p>{L.esc(rolle_von(p))}</p>
+        karten = "".join(f'''<a class="person" href="{root}{p['slug']}/">
+      <span class="person__foto"><picture>
+        <source srcset="{root}media/team-{p['slug']}.webp" type="image/webp">
+        <img src="{root}media/team-{p['slug']}.jpg" alt="{L.esc(p['name'])}"
+             width="440" height="440" loading="lazy" decoding="async"></picture></span>
+      <span class="person__text">
+        <span class="person__ort">{L.esc(p['ort'])}</span>
+        <span class="person__name">{L.esc(p['name'])}</span>
+        <span class="person__rolle">{L.esc(rolle_von(p))}</span>
+      </span>
     </a>''' for p in mitglieder)
         bloecke.append(f'''<section class="sec{' sec--sand' if len(bloecke) % 2 else ''}">
   <div class="wrap">
@@ -1376,9 +1382,16 @@ def _team(schreibe, SEITEN, kurz):
     for p in leute:
         r = "../"
         kollegen = [k for k in leute if k["gruppe"] == p["gruppe"] and k["slug"] != p["slug"]][:3]
-        weitere = "".join(f'''<a class="tile" href="{r}{k['slug']}/">
-      <span class="tile__num">{L.esc(k['ort'])}</span>
-      <h3>{L.esc(k['name'])}</h3><p>{L.esc(rolle_von(k))}</p>
+        weitere = "".join(f'''<a class="person" href="{r}{k['slug']}/">
+      <span class="person__foto"><picture>
+        <source srcset="{r}media/team-{k['slug']}.webp" type="image/webp">
+        <img src="{r}media/team-{k['slug']}.jpg" alt="{L.esc(k['name'])}"
+             width="440" height="440" loading="lazy" decoding="async"></picture></span>
+      <span class="person__text">
+        <span class="person__ort">{L.esc(k['ort'])}</span>
+        <span class="person__name">{L.esc(k['name'])}</span>
+        <span class="person__rolle">{L.esc(rolle_von(k))}</span>
+      </span>
     </a>''' for k in kollegen)
         vita = "".join(f"<p>{L.esc(a)}</p>" for a in p["vita"]) or f"<p>{L.esc(PLATZHALTER)}</p>"
         inhalt = L.subhero(r, crumbs=[("Start", r + "index.html"), ("Company", r + "company/"),
@@ -1388,9 +1401,19 @@ def _team(schreibe, SEITEN, kurz):
         inhalt += f'''
 <section class="sec">
   <div class="wrap wrap--narrow">
-    <div class="factbox rv">
-      <h3>{L.esc(rolle_von(p))}</h3>
-      <ul><li>Team: {L.esc(p['gruppe'])}</li><li>Based in {L.esc(p['ort'])}</li></ul>
+    <div class="profil rv">
+      <picture>
+        <source srcset="{r}media/team-{p['slug']}.webp" type="image/webp">
+        <img src="{r}media/team-{p['slug']}.jpg" alt="{L.esc(p['name'])}"
+             width="440" height="440" loading="eager" decoding="async">
+      </picture>
+      <div class="profil__daten">
+        <h2>{L.esc(rolle_von(p))}</h2>
+        <dl>
+          <dt>Team</dt><dd>{L.esc(p['gruppe'])}</dd>
+          <dt>Based in</dt><dd>{L.esc(p['ort'])}</dd>
+        </dl>
+      </div>
     </div>
     <div class="prose rv">{vita}</div>
   </div>

@@ -832,3 +832,34 @@ body.demobar-zu{padding-bottom:0}
 
 /* Seiten ohne Demo-Leiste brauchen keinen Freiraum fuer sie */
 body.ohne-demobar{padding-bottom:0}
+
+/* ---------- Teamkacheln mit Portraet ---------- */
+.person{
+  display:flex;flex-direction:column;border:1px solid var(--line);background:var(--paper);
+  text-decoration:none;color:inherit;min-width:0;
+  transition:border-color .28s var(--ease),background .28s var(--ease);
+}
+.person:hover{border-color:var(--brand);background:#fbfdf9;color:inherit}
+.person__foto{display:block;aspect-ratio:1;overflow:hidden;background:var(--sand)}
+.person__foto img{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .5s var(--ease)}
+.person:hover .person__foto img{transform:scale(1.03)}
+.person__text{display:flex;flex-direction:column;gap:5px;padding:18px 20px 20px}
+.person__ort{font-family:var(--font-display);font-size:12px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--brand)}
+.person__name{font-family:var(--font-display);font-size:19px;font-weight:700;line-height:1.2}
+.person:hover .person__name{color:var(--brand-deep)}
+.person__rolle{font-size:14.5px;color:var(--ink-soft);line-height:1.45}
+
+/* Kopfbereich einer Personenseite */
+.profil{display:grid;grid-template-columns:200px 1fr;gap:clamp(22px,3vw,36px);
+  align-items:start;margin-bottom:clamp(28px,4vw,44px);
+  padding-bottom:clamp(24px,3vw,36px);border-bottom:1px solid var(--line)}
+.profil img{width:100%;height:auto;display:block;border:1px solid var(--line)}
+.profil__daten h2{font-size:clamp(20px,2.2vw,26px);margin-bottom:.7em}
+.profil__daten dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:15.5px}
+.profil__daten dt{color:var(--ink-soft)}
+.profil__daten dd{margin:0}
+@media(max-width:640px){
+  .profil{grid-template-columns:1fr;max-width:280px}
+}

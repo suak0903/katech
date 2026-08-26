@@ -155,6 +155,24 @@ Vier Fallen, die alle erst am echten Geraet auffielen:
   `setTimeout(..., 0)`, damit das unmittelbar folgende Klickereignis den
   Wert noch sieht.
 
+## 5c. Die Teamportraets
+
+Die Bestandsseite zeigt **kein einziges Portraet im sichtbaren Inhalt**. Alle
+23 Aufnahmen liegen aber auf dem Server: sie sind je Profilseite als
+Vorschaubild fuer soziale Netzwerke im Kopf hinterlegt (). Wer die
+Seite besucht, sieht sie nie, wer den Link teilt, schon. Gesammelt in
+, aufbereitet mit .
+
+**Sie liegen nur als 140x140 vor**, die Originale sind nicht mehr abrufbar
+(die Variante ohne Groessensuffix liefert 404). Hochskaliert auf 440x440.
+Das Set ist einheitlich: Schwarzweiss, heller Hintergrund, gleiche Bildsprache
+ueber alle Personen.
+
+**Falle:** Drei Aufnahmen sind PNG mit Transparenz. Die weisse Unterlage muss
+**vor** dem Hochskalieren gelegt werden, sonst brennt das Verfahren den
+transparenten Bereich als Schwarz ein und die drei fallen in der Kachelreihe
+sofort auf.
+
 ## 6. Stolperfallen aus diesem Projekt
 
 - **Der Server drosselt.** Ab etwa 70 schnellen Abrufen liefert `katech-solutions.com` HTTP 503.

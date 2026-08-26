@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="../media/apple-touch-icon.png">
 <link rel="preload" href="../font/Barlow-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../font/OpenSans-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../css/site.css?v=27">
+<link rel="stylesheet" href="../css/site.css?v=28">
 <script type="application/ld+json">{
  "@context": "https://schema.org",
  "@type": "ProfilePage",
@@ -102,9 +102,19 @@
 </section>
 <section class="sec">
   <div class="wrap wrap--narrow">
-    <div class="factbox rv">
-      <h3>Managing Director</h3>
-      <ul><li>Team: Sales, Poland</li><li>Based in Stęszew</li></ul>
+    <div class="profil rv">
+      <picture>
+        <source srcset="../media/team-aleksander-konieczny.webp" type="image/webp">
+        <img src="../media/team-aleksander-konieczny.jpg" alt="Aleksander Konieczny"
+             width="440" height="440" loading="eager" decoding="async">
+      </picture>
+      <div class="profil__daten">
+        <h2>Managing Director</h2>
+        <dl>
+          <dt>Team</dt><dd>Sales, Poland</dd>
+          <dt>Based in</dt><dd>Stęszew</dd>
+        </dl>
+      </div>
     </div>
     <div class="prose rv"><p>Aleksander Konieczny graduated from Chemical and Process Engineering at Wrocław University of Technology with a M. Sc. Eng. degree. He has been professionally active in the food production sector for more than 25 years. Aleksander ran his own ice cream and bakery company. After that, he worked as a technologist, the head of R&amp;D and the manager of a modern dairy production plant. Before joining KaTech the last 15 years of his professional path was working for G.C. Hahn &amp; Co, beginning as the technologist and eventually becoming the Managing Director of the Polish branch. During that period he participated in creating numerous new products for the Polish food market. He has experience in various branches of food technology, with main focus on dairy products, fine food and ice cream.</p></div>
   </div>
@@ -112,9 +122,16 @@
 <section class="sec sec--sand">
   <div class="wrap">
     <div class="sec__head"><p class="eyebrow">Sales, Poland</p><h2>Colleagues in this team.</h2></div>
-    <div class="grid grid--3 rv"><a class="tile" href="../artur-dyba/">
-      <span class="tile__num">Stęszew</span>
-      <h3>Artur Dyba</h3><p>Business Development</p>
+    <div class="grid grid--3 rv"><a class="person" href="../artur-dyba/">
+      <span class="person__foto"><picture>
+        <source srcset="../media/team-artur-dyba.webp" type="image/webp">
+        <img src="../media/team-artur-dyba.jpg" alt="Artur Dyba"
+             width="440" height="440" loading="lazy" decoding="async"></picture></span>
+      <span class="person__text">
+        <span class="person__ort">Stęszew</span>
+        <span class="person__name">Artur Dyba</span>
+        <span class="person__rolle">Business Development</span>
+      </span>
     </a></div>
     <div class="btn-row btn-row--single rv" style="margin-top:30px">
       <a class="btn btn--outline" href="../our-people/">The whole team</a>
@@ -200,6 +217,6 @@
     </div>
   </div>
 </div>
-<script src="../js/site.js?v=27" defer></script>
+<script src="../js/site.js?v=28" defer></script>
 </body>
 </html>

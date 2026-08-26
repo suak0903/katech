@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="../media/apple-touch-icon.png">
 <link rel="preload" href="../font/Barlow-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../font/OpenSans-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../css/site.css?v=27">
+<link rel="stylesheet" href="../css/site.css?v=28">
 <script type="application/ld+json">{
  "@context": "https://schema.org",
  "@type": "ProfilePage",
@@ -102,9 +102,19 @@
 </section>
 <section class="sec">
   <div class="wrap wrap--narrow">
-    <div class="factbox rv">
-      <h3>Business Development</h3>
-      <ul><li>Team: Sales, Poland</li><li>Based in Stęszew</li></ul>
+    <div class="profil rv">
+      <picture>
+        <source srcset="../media/team-artur-dyba.webp" type="image/webp">
+        <img src="../media/team-artur-dyba.jpg" alt="Artur Dyba"
+             width="440" height="440" loading="eager" decoding="async">
+      </picture>
+      <div class="profil__daten">
+        <h2>Business Development</h2>
+        <dl>
+          <dt>Team</dt><dd>Sales, Poland</dd>
+          <dt>Based in</dt><dd>Stęszew</dd>
+        </dl>
+      </div>
     </div>
     <div class="prose rv"><p>Artur Dyba graduated from the University of Technology in Poznań with a M. Sc. Eng. degree. He has worked in the food industry right from the beginning of his professional career. After graduation he worked as a consultant for ISO and HACCP implementation in a number of companies in the food sector. In 2004 he started working for G.C. Hahn &amp; Co. as a specialist for sales and technology. His areas of expertise included dairy products, mayonnaise, as well as ready meals. When joining KaTech in 2013, he had 10 years of professional experience in offering food ingredients to the clients, launching new products and solving technological problems.</p></div>
   </div>
@@ -112,9 +122,16 @@
 <section class="sec sec--sand">
   <div class="wrap">
     <div class="sec__head"><p class="eyebrow">Sales, Poland</p><h2>Colleagues in this team.</h2></div>
-    <div class="grid grid--3 rv"><a class="tile" href="../aleksander-konieczny/">
-      <span class="tile__num">Stęszew</span>
-      <h3>Aleksander Konieczny</h3><p>Managing Director</p>
+    <div class="grid grid--3 rv"><a class="person" href="../aleksander-konieczny/">
+      <span class="person__foto"><picture>
+        <source srcset="../media/team-aleksander-konieczny.webp" type="image/webp">
+        <img src="../media/team-aleksander-konieczny.jpg" alt="Aleksander Konieczny"
+             width="440" height="440" loading="lazy" decoding="async"></picture></span>
+      <span class="person__text">
+        <span class="person__ort">Stęszew</span>
+        <span class="person__name">Aleksander Konieczny</span>
+        <span class="person__rolle">Managing Director</span>
+      </span>
     </a></div>
     <div class="btn-row btn-row--single rv" style="margin-top:30px">
       <a class="btn btn--outline" href="../our-people/">The whole team</a>
@@ -200,6 +217,6 @@
     </div>
   </div>
 </div>
-<script src="../js/site.js?v=27" defer></script>
+<script src="../js/site.js?v=28" defer></script>
 </body>
 </html>
