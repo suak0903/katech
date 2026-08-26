@@ -1,0 +1,145 @@
+# CLAUDE - KaTech-Demonstrator
+
+Redesign-Vorschau für **KaTech Ingredient Solutions GmbH** (Lübeck, Ingredion-Tochter).
+Akquise-Demonstrator, kein Kundenauftrag. Auftrag und Hintergrund liegen im Vault unter
+`projects/KaTech/` ([[Demonstrator-Auftrag]], [[CD-Analyse]], [[Demo-Drehbuch]]).
+
+**Live:** https://suak0903.github.io/katech/ · **Original:** https://katech-solutions.com/
+**Demo-Termin:** Fr 04.09.2026, 13:00, Teams, mit Group Managing Director Cyril Carrat.
+
+---
+
+## 1. Abweichung vom Kit, die man kennen muss
+
+Das Web-Starter-Kit sieht handgeschriebene HTML-Dateien vor, in die `build-site.mjs` das Chrome
+über Marker einsetzt. **Hier werden alle Seiten erzeugt.** Bei 200 Seiten, davon über hundert
+Produktseiten mit je eigenem Text und Bild aus dem Bestand, ist Handarbeit nicht sinnvoll.
+
+Der Zweck der Kit-Regel bleibt erfüllt, sogar strenger: Kopfleiste, mobiles Menü, Fußzeile,
+Demo-Leiste und Consent-Banner stehen **ausschließlich** in `_src/gen_chrome.py`. Es gibt keinen
+Chrome-Textblock, den man versehentlich kopieren könnte. `_src/check.py` misst das nach und meldet
+die Zahl der Kopf- und Fußvarianten über alle Seiten; **Sollwert ist jeweils 1**.
+
+Das Ergebnis ist statisches HTML wie überall sonst: kein Framework, kein Laufzeit-Include, keine
+Datenbank. Der Generator läuft vor dem Ausliefern, nicht im Browser des Besuchers.
+
+## 2. Aufbau
+
+```
+index.html, <bereich>/, <bereich>/<produkt>/   200 erzeugte Seiten, Pfade wie im Original
+css/site.css      Design-System (Schriften, Token, Komponenten)
+js/site.js        Nav, Menü, Parallaxe, Reveal, Lightbox, Consent, Formular
+font/             Barlow + Open Sans, self-hosted (OFL)
+media/            aufbereitete Bestandsbilder, WebP + JPG
+_src/             Generator, Datenbasis, Prüfwerkzeuge (nicht Teil der Auslieferung)
+```
+
+### Generator
+
+| Datei | Aufgabe |
+|---|---|
+| `gen.py` | Hauptlauf: Startseite, Hubs, Bereiche, Produktseiten, Textseiten |
+| `gen_chrome.py` | **Einzige Quelle** für Kopf, Menü, Fuß, Demo-Leiste, Consent |
+| `gen_lib.py` | Seitenrahmen, Kopfdaten, JSON-LD, Sektionsbausteine, `VERSION` |
+| `inhalt.py` | Redaktionelle Daten, Sonderseiten (News, Team, Kontakt, Hinweisseite) |
+| `check.py` | Tote Verweise, Chrome-Gleichheit, Typografie, noindex, H1, alt-Texte |
+| `qa.mjs` | Klickt alle Bedienelemente durch (Playwright, braucht lokalen Server) |
+| `mobil.html` | iframe-Messharness für Mobilbreiten (320 bis 1440) |
+| `sitemap.py` | Schreibt `sitemap.xml` |
+
+### Ablauf bei jeder Änderung
+
+```bash
+cd _src
+# VERSION in gen_lib.py erhöhen, wenn css oder js geändert wurden
+python gen.py && python sitemap.py && python check.py
+# im Projektwurzelverzeichnis: python -m http.server 8777
+node qa.mjs
+git add -A && git commit && git push
+```
+
+## 3. Datenherkunft
+
+Alle Inhalte stammen aus der Bestandsseite, erhoben am 26.08.2026:
+
+| Datei in `_src/` | Inhalt |
+|---|---|
+| `data.json` | 160 englische Seiten mit Titel, Absätzen, Listen, Hauptbild |
+| `content.json` | Rohextrakt je Seite (Blöcke mit Tag) |
+| `news-clean.json` | 17 echte Pressemeldungen |
+| `team.json` | 23 Personenprofile mit Rolle, Team, Standort |
+| `media-map.json` | Zuordnung Seite zu aufbereitetem Bild |
+
+Die Roh-HTML-Dateien (`raw/`, `raw-news/`) und die Originalbilder (`assets/`) liegen lokal,
+sind aber nicht versioniert. Zum Wiederherstellen: `crawl.py`, `extract.py`, `news.py`,
+`team.py`, `download_media.py`, `prepare_media.py`, `upscale_food.py`, `fonts.py` in dieser
+Reihenfolge.
+
+## 4. Gestaltung
+
+Farbwerte und Layoutmuster kommen aus dem Ingredion-Konzerndesign. **Der tragende Befund:** das
+KaTech-Logo führt bereits exakt die Ingredion-Token (`#6cb33e`, `#ffe115`, `#373738`), während
+das Bestands-Stylesheet von 2013 noch die alten Werte trägt. Die Website hinkt ihrem eigenen
+Logo hinterher. Vollständige Analyse: [[CD-Analyse]] im Vault.
+
+Eigenständigkeit entsteht nicht über abweichende Farben, sondern über deren **Gewichtung**:
+Ingredion führt mit Blau, hier führen Grün und Teal, und das Gelb, das der Konzern kaum nutzt,
+ist das KaTech-Erkennungszeichen.
+
+**Schriften:** Barlow für Überschriften (freier Ersatz für das lizenzpflichtige Milo Pro des
+Konzerns), Open Sans für Fließtext (dieselbe Familie wie beim Konzern). Beide self-hosted.
+
+**Signaturmuster:** der Split-Block aus Farbfläche und Foto, direkt aus dem Ingredion-Layout
+übernommen. Rechte Winkel überall, keine Schatten, Trennung über Flächenwechsel und Haarlinien.
+
+## 5. Entschieden und nicht mehr diskutieren
+
+- **Original-URL-Pfade bleiben.** `/cheese/cream-cheese/` heißt hier genauso. Das ist das
+  stärkste Migrationsargument und darf nicht der Bequemlichkeit geopfert werden.
+- **Englisch einsprachig.** Der Sprachumschalter ist ein Stub mit Hinweis. DE und PL sind im
+  echten Projekt der größte Posten und werden hier bewusst nicht angetäuscht.
+- **Kein Backend.** Das Anfrageformular zeigt nach dem Absenden einen Hinweis. Kein Shop, kein
+  Chat, kein Login, weil das Original all das auch nicht hat.
+- **Team-Rollen kommen aus dem Bestand**, auch wenn sie veraltet sind. Carrats Profil zeigt
+  „Technical Director" (Stand 2017). Das ist **Absicht**: es ist die vorbereitete Live-Änderung
+  der Demo (siehe [[Demo-Drehbuch]]). Vor dem Termin muss `ROLLEN_OVERRIDE` in `inhalt.py` leer
+  sein, sonst ist die Pointe verbraucht.
+- **Bestandstexte werden übernommen, aber typografisch normalisiert** (`gen_lib.normalisieren`):
+  keine Gedankenstriche, keine typografischen Anführungszeichen. Gilt auch für JSON-LD.
+- **Kachel- und Einstiegstexte der Produktbereiche sind neu geschrieben** (`BEREICHS_KURZTEXT`).
+  Der Bestandstext ist dort Lexikonprosa („cheese is a nutritious food made mostly from the milk
+  of cows") und taugt nicht als Einstieg.
+
+## 6. Stolperfallen aus diesem Projekt
+
+- **Der Server drosselt.** Ab etwa 70 schnellen Abrufen liefert `katech-solutions.com` HTTP 503.
+  Crawler brauchen mindestens eine Sekunde Pause und einen Wiederholversuch mit Backoff.
+- **Bilder liegen teils auf `khpartner.com`**, der Domain der Vorgängergesellschaft. Beim
+  Abholen beide Hosts berücksichtigen.
+- **Die WordPress-REST-API liefert nur 199 der 743 Medien.** Verlässlicher ist es, alle Bild-URLs
+  aus den gecachten HTML-Seiten zu ziehen (auch aus `style`-Attributen).
+- **Team-Profile sind WordPress-Posts** wie die News und tauchen sonst fälschlich im
+  Newsarchiv auf. Unterscheidungsmerkmal ist die Kategorie `our-people/...`.
+- **Bestandsbilder sind klein** (432 bis 700 Pixel). Alles, was groß ausgespielt wird, läuft
+  vorher durch Real-ESRGAN (`upscale_food.py`, `prepare_media.py`).
+- **Die Demo-Leiste ist fixiert** und verdeckte anfangs den Fußbereich, wodurch Klicks ins Leere
+  gingen. Deshalb `body{padding-bottom:56px}`, das beim Schließen der Leiste entfällt.
+- **Consent-Banner und Demo-Leiste sitzen beide unten.** Solange das Banner offen ist, tritt die
+  Demo-Leiste zurück (`visibility`), sonst überlagern sie sich.
+- **`.foot a` überschreibt spätere Unterstreichungen.** Links im Hinweistext des Fußes brauchen
+  `.foot .foot__demo a`, sonst heben sie sich nur über die Farbe ab (Barrierefreiheitsfehler).
+
+## 7. Messwerte (lokal, 26.08.2026)
+
+| Prüfung | Ergebnis |
+|---|---|
+| Seiten | 200, keine toten Verweise |
+| Chrome | 1 Kopfvariante, 1 Fußvariante über alle Seiten |
+| Mobilbreiten 320 bis 1440 | kein horizontaler Überlauf auf 20 geprüften Seiten |
+| Bedienelemente | alle Prüfungen bestanden, keine Konsolenfehler |
+| Lighthouse | Performance 94, Barrierefreiheit 96, Best Practices 100 |
+| SEO-Wert | 69, ausschließlich wegen `noindex` - so gewollt |
+
+Die Performance ist lokal gemessen, ohne Kompression. GitHub Pages liefert komprimiert, der
+Live-Wert liegt darüber. **Nach dem Deploy live nachmessen** (Kit-Regel: erst messen, dann
+bewerten).

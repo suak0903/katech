@@ -733,34 +733,58 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
       <span class="old">{L.esc(a)}</span><span class="new">{L.esc(b)}</span></div>'''
                  for l, a, b in metriken)
 
-    warum = [
-        ("A fixed price means fixed",
-         "You get a price for a defined scope before the work starts. No hourly surprises, "
-         "no change requests for things that were obviously part of it."),
-        ("The sweet spot",
-         "Not an anonymous agency with long internal routes, and not a hobbyist. One contact "
-         "who does the work, and who has run technical organisations himself."),
-        ("It grows with you",
-         "Content management, news, an assistant, analytics: each is a step you can take later, "
-         "from free through usage-based to a small monthly fee."),
-        ("The site belongs to you",
-         "Full rights, no lock-in, no subscription you cannot leave. If you want to take it "
-         "elsewhere, you take it elsewhere."),
+    # "Who I am": Herkunft statt Angebot. Inhalte von akyol.de, Sektionen
+    # Philosophie, Geschaeftsverantwortung und Wertversprechen.
+    werdegang = [
+        ("Eighteen years in industry, at the seam between engineering and market",
+         "Business responsibility in operating roles, not in advisory ones. As Business Manager "
+         "in healthcare IT I ran a unit of 80 people, from sales through to development, with "
+         "hospital groups among the customers. In renewable energy it was wind power with "
+         "international partners and solar thermal across EMEA, including work with Siemens "
+         "and the German Aerospace Center.",
+         "https://www.akyol.de/index.html#industrie", "The projects behind this"),
+        ("Transformation as line work",
+         "Lean Six Sigma, an ERP rollout, post-merger integration of people and systems with "
+         "buy-in rather than turnover, commercial analytics for a sales force of a thousand "
+         "across EMEA. The kind of work where the organisational chart is the easy part.",
+         "", ""),
+        ("Research first: RWTH Aachen",
+         "A doctorate in artificial intelligence and image processing, awarded with distinction, "
+         "at a time when AI was a niche subject. Gesture recognition for automotive on-board "
+         "systems, a sign language exhibit at the Heinz Nixdorf MuseumsForum, publications and "
+         "teaching. The question was the same then as now: what can the machine actually do, "
+         "and how does it land with the person using it.",
+         "https://www.akyol.de/index.html#wurzeln", "Where this comes from"),
+        ("Why this preview exists at all",
+         "I work as an interim manager for technical mid-sized companies and for group "
+         "subsidiaries that are still run in a mid-sized way. A website built like this is not "
+         "my trade, it is the shortest way to show what an organisation can do for itself once "
+         "the work is set up properly. One contact who has run technical organisations himself, "
+         "rather than a chain of internal handovers.",
+         "https://www.akyol.de/", "akyol.de"),
     ]
-    wk = "".join(f"<div><h4>{L.esc(t)}</h4><p>{L.esc(x)}</p></div>" for t, x in warum)
+    wk = "".join(
+        f"<div><h4>{L.esc(t)}</h4><p>{L.esc(x)}</p>"
+        + (f'<p style="margin-top:14px"><a href="{u}" target="_blank" rel="noopener">'
+           f'{L.esc(lt)}</a></p>' if u else "")
+        + "</div>" for t, x, u, lt in werdegang)
 
     refs = [
-        ("akyol", "akyol.de", "My own site: interim management, blog and talks.",
-         "https://www.akyol.de", True),
-        ("coreform", "core:form", "Pilates studio, paid customer project.",
-         "https://www.core-form.de", False),
-        ("barista", "Barista-Biker", "Coffee bike and events, paid customer project on its own domain.",
-         "https://barista-biker.de/", False),
-        ("cancontrols", "CanControls", "Measurement technology for engine development, B2B high tech.",
+        ("cancontrols", "CanControls", "Measurement technology for engine development. B2B, "
+         "technical audience, explanation-heavy subject matter.",
          "https://suak0903.github.io/cancontrols/", False),
-        ("seitec", "SEITec", "Safety and electrical engineering, industrial services.",
+        ("seitec", "SEITec", "Safety and electrical engineering for industrial clients. "
+         "Certifications, services, plant environment.",
          "https://suak0903.github.io/seitec/", False),
-        ("msrodenkirchen", "MS Rodenkirchen", "Restaurant ship in Cologne, most recent concept.",
+        ("akyol", "akyol.de", "My own site: interim management, writing and talks. "
+         "The reference implementation for everything shown here.",
+         "https://www.akyol.de", True),
+        ("coreform", "core:form", "Pilates studio in Cologne, in operation on its own domain.",
+         "https://www.core-form.de", False),
+        ("barista", "Barista-Biker", "Mobile coffee service and events, in operation on its "
+         "own domain.", "https://barista-biker.de/", False),
+        ("msrodenkirchen", "MS Rodenkirchen", "Restaurant ship in Cologne. The most recent "
+         "concept, built one week before this one.",
          "https://suak0903.github.io/ms-rodenkirchen/", False),
     ]
     rk = []
@@ -785,7 +809,7 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
            ("03", "The full picture", "#scope"), ("04", "Scope scale", "#scale"),
            ("05", "What is different", "#different"),
            ("06", "Technology and peace of mind", "#tech"),
-           ("07", "References", "#refs"), ("08", "Why me", "#why")]
+           ("07", "References", "#refs"), ("08", "Who I am", "#who")]
     toc_html = "".join(f'<a href="{z}"><i>{n}</i> {L.esc(t)}</a>' for n, t, z in toc)
 
     # Groessenordnungen des Bestands, alle Werte gemessen (siehe _src/data.json,
@@ -971,8 +995,8 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
 <section class="sec sec--sand" id="scale">
   <div class="wrap">
     {L.sec_kopf(eyebrow="Scope", h2="How far this goes.",
-                lead="A website can be a single page or a platform. The price follows that "
-                     "scale, so it helps to say out loud where a project sits.")}
+                lead="A website can be a single page or a platform. Saying out loud where "
+                     "a project sits keeps everyone talking about the same thing.")}
     <div class="rv">
       <div class="scale">
         <div class="scale__bar">
@@ -1037,6 +1061,9 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
       <div><h4>Your addresses stay valid</h4>
         <p>Every page here sits at the address it has today. Bookmarks, links in supplier
           documents and search results keep working.</p></div>
+      <div><h4>The site belongs to you</h4>
+        <p>Full rights to everything that is built, no lock-in, no dependency you cannot leave.
+          If you want to move it elsewhere or hand it to your own IT, you do exactly that.</p></div>
     </div>
   </div>
 </section>
@@ -1044,16 +1071,27 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
 <section class="sec" id="refs">
   <div class="wrap">
     {L.sec_kopf(eyebrow="References", h2="Other sites I have built.",
-                lead="From my own site through paid customer projects to concepts in other "
-                     "industries.")}
+                lead="B2B and industry first, then the range. Some are in operation on their "
+                     "own domain, others are concepts like this one.")}
     <div class="refs rv">{"".join(rk)}</div>
   </div>
 </section>
 
-<section class="sec sec--sand" id="why">
+<section class="sec sec--sand" id="who">
   <div class="wrap">
-    {L.sec_kopf(eyebrow="Why me", h2="What you get beyond the pages.")}
+    {L.sec_kopf(eyebrow="Who I am", h2="Twenty-five years of people and machines.",
+                lead="Dr.-Ing. Suat Akyol, interim manager for technical mid-sized companies and "
+                     "for group subsidiaries that are still run in a mid-sized way. Research, "
+                     "line management, and artificial intelligence in day-to-day operations.")}
     <div class="why rv">{wk}</div>
+    <figure class="quote rv">
+      <blockquote>Few people connect strategic and tactical thinking as effectively as he does.</blockquote>
+      <figcaption>A former superior, quoted on akyol.de</figcaption>
+    </figure>
+    <div class="btn-row rv" style="margin-top:36px">
+      <a class="btn btn--outline" href="https://www.akyol.de" target="_blank" rel="noopener">akyol.de</a>
+      <a class="btn btn--outline" href="https://www.linkedin.com/in/dr-ing-suat-akyol" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
   </div>
 </section>
 
@@ -1086,6 +1124,16 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
 GRUPPEN_REIHENFOLGE = ["Management", "Technical, Germany", "Technical, United Kingdom",
                        "Sales, Germany", "Sales, United Kingdom", "Sales, Poland", "Purchasing"]
 
+# Rollen, die von der Bestandsseite abweichen sollen. Die Profile der
+# Bestandsseite stammen aus 2014 bis 2018 und sind teilweise ueberholt;
+# hier wird korrigiert, ohne die Datenbasis anzufassen.
+# Schluessel ist der Seiten-Slug, Wert die anzuzeigende Rolle.
+ROLLEN_OVERRIDE = {}
+
+
+def rolle_von(person):
+    return ROLLEN_OVERRIDE.get(person["slug"], person["rolle"])
+
 
 def _team(schreibe, SEITEN, kurz):
     pfad = os.path.join(os.path.dirname(os.path.abspath(__file__)), "team.json")
@@ -1104,7 +1152,7 @@ def _team(schreibe, SEITEN, kurz):
         karten = "".join(f'''<a class="tile" href="{root}{p['slug']}/">
       <span class="tile__num">{L.esc(p['ort'])}</span>
       <h3>{L.esc(p['name'])}</h3>
-      <p>{L.esc(p['rolle'])}</p>
+      <p>{L.esc(rolle_von(p))}</p>
     </a>''' for p in mitglieder)
         bloecke.append(f'''<section class="sec{' sec--sand' if len(bloecke) % 2 else ''}">
   <div class="wrap">
@@ -1151,18 +1199,18 @@ def _team(schreibe, SEITEN, kurz):
         kollegen = [k for k in leute if k["gruppe"] == p["gruppe"] and k["slug"] != p["slug"]][:3]
         weitere = "".join(f'''<a class="tile" href="{r}{k['slug']}/">
       <span class="tile__num">{L.esc(k['ort'])}</span>
-      <h3>{L.esc(k['name'])}</h3><p>{L.esc(k['rolle'])}</p>
+      <h3>{L.esc(k['name'])}</h3><p>{L.esc(rolle_von(k))}</p>
     </a>''' for k in kollegen)
         vita = "".join(f"<p>{L.esc(a)}</p>" for a in p["vita"]) or f"<p>{L.esc(PLATZHALTER)}</p>"
         inhalt = L.subhero(r, crumbs=[("Start", r + "index.html"), ("Company", r + "company/"),
                                       ("Our people", r + "our-people/"), (p["name"], None)],
                            eyebrow=p["gruppe"], h1=L.esc(p["name"]),
-                           sub=p["rolle"])
+                           sub=rolle_von(p))
         inhalt += f'''
 <section class="sec">
   <div class="wrap wrap--narrow">
     <div class="factbox rv">
-      <h3>{L.esc(p['rolle'])}</h3>
+      <h3>{L.esc(rolle_von(p))}</h3>
       <ul><li>Team: {L.esc(p['gruppe'])}</li><li>Based in {L.esc(p['ort'])}</li></ul>
     </div>
     <div class="prose rv">{vita}</div>
@@ -1181,10 +1229,10 @@ def _team(schreibe, SEITEN, kurz):
 </section>'''
         schreibe(p["slug"] + "/index.html", L.seite(
             p["slug"] + "/index.html", p["name"],
-            f"{p['name']}, {p['rolle']} at KaTech Ingredient Solutions, {p['ort']}.",
+            f"{p['name']}, {rolle_von(p)} at KaTech Ingredient Solutions, {p['ort']}.",
             inhalt, aktiv="company/", og="og-company.jpg",
             jsonld={"@context": "https://schema.org", "@type": "ProfilePage",
-                    "mainEntity": {"@type": "Person", "name": p["name"], "jobTitle": p["rolle"],
+                    "mainEntity": {"@type": "Person", "name": p["name"], "jobTitle": rolle_von(p),
                                    "worksFor": {"@type": "Organization",
                                                 "name": "KaTech Ingredient Solutions GmbH"}}}))
 
