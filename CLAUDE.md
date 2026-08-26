@@ -159,9 +159,9 @@ Vier Fallen, die alle erst am echten Geraet auffielen:
 
 Die Bestandsseite zeigt **kein einziges Portraet im sichtbaren Inhalt**. Alle
 23 Aufnahmen liegen aber auf dem Server: sie sind je Profilseite als
-Vorschaubild fuer soziale Netzwerke im Kopf hinterlegt (). Wer die
+Vorschaubild fuer soziale Netzwerke im Kopf hinterlegt (`og:image`). Wer die
 Seite besucht, sieht sie nie, wer den Link teilt, schon. Gesammelt in
-, aufbereitet mit .
+`portraits.json`, aufbereitet mit `prepare_portraits.py`.
 
 **Sie liegen nur als 140x140 vor**, die Originale sind nicht mehr abrufbar
 (die Variante ohne Groessensuffix liefert 404). Hochskaliert auf 440x440.
