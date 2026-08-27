@@ -71,6 +71,35 @@ NUR_BILD_IM_ORIGINAL = _kategorie_laden("nur_bild")
 
 def ist_nur_bild(slug):
     return slug in NUR_BILD_IM_ORIGINAL
+
+
+def _bestand_laden():
+    """Alle Adressen, die es auf der Bestandsseite tatsaechlich gibt. Nur fuer
+    sie darf ein Verweis dorthin gesetzt werden; die Hub-Seiten dieses
+    Entwurfs existieren im Original nicht."""
+    hier = os.path.dirname(os.path.abspath(__file__))
+    vorhanden = set()
+    d = os.path.join(hier, "data.json")
+    if os.path.exists(d):
+        vorhanden |= {s for s in json.load(open(d, encoding="utf-8"))["seiten"] if s}
+    for datei in ("news-clean.json", "team.json"):
+        pf = os.path.join(hier, datei)
+        if os.path.exists(pf):
+            vorhanden |= {e["slug"] for e in json.load(open(pf, encoding="utf-8"))}
+    vorhanden.discard("bakery-old")   # liefert im Bestand 404
+    return vorhanden
+
+
+IM_BESTAND = _bestand_laden()
+
+# Seiten, die im Bestand Inhalt tragen, hier aber bewusst nicht ausgebaut sind.
+# purchasing traegt dort nur eine interne Notiz, die einen Mitarbeiter
+# namentlich vorfuehrt.
+NICHT_AUSGEBAUT = {"purchasing"}
+
+
+def ist_nicht_ausgebaut(slug):
+    return slug in NICHT_AUSGEBAUT
 KACHEL_LEER = "This page carries no content on the existing site."
 
 
@@ -305,6 +334,10 @@ VEGAN_GRUPPENBILD = {
     "Dairy alternatives": "p-vegan-vegan-cheese-alternatives",
     "Savoury": "p-vegan-vegan-sauces",
 }
+
+PFEIL_EXTERN = ('<svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">'
+                '<path d="M4.2 2h5.8v5.8M10 2 2.4 9.6" stroke="currentColor" stroke-width="1.6" '
+                'stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
 MONATE = ["January", "February", "March", "April", "May", "June",
           "July", "August", "September", "October", "November", "December"]
@@ -917,10 +950,24 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
 
     def eintrag(slug, titel=None, tiefe=0):
         name = titel or kurztitel(slug)
-        marke = ('<span class="sm__leer" title="no content on the existing site">empty</span>'
-                 if ist_leer(slug) else "")
+        if ist_leer(slug):
+            marke = ('<span class="sm__mk" title="no content on the existing site">'
+                     'empty</span>')
+        elif ist_nicht_ausgebaut(slug):
+            marke = ('<span class="sm__mk sm__mk--offen" '
+                     'title="not built out in this preview">not built</span>')
+        else:
+            marke = ""
+        # Verweis auf dieselbe Seite im Original, aber nur wo es sie dort gibt.
+        # Die Hub-Seiten dieses Entwurfs existieren im Bestand nicht.
+        original = ""
+        if slug in IM_BESTAND:
+            original = (f'<a class="sm__orig" href="https://katech-solutions.com/{slug}/" '
+                        f'target="_blank" rel="noopener" '
+                        f'aria-label="Open {L.esc(name)} on the original site">'
+                        f'{PFEIL_EXTERN}</a>')
         return (f'<li class="sm__i sm__i--{tiefe}">'
-                f'<a href="{root}{slug}/">{L.esc(name)}</a>{marke}</li>')
+                f'<a href="{root}{slug}/">{L.esc(name)}</a>{marke}{original}</li>')
 
     bloecke = []
 
@@ -1009,7 +1056,10 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
                        eyebrow="Overview", h1="Every page, in order.",
                        sub="The complete structure of the existing site, every page "
                            "reachable at its original address. Entries marked empty carry no "
-                           "content on the existing site.")
+                           "content on the existing site; entries marked not built are not "
+                           "worked out in this preview. The small arrow behind an entry opens "
+                           "the same page on the original site, so anything stated here can be "
+                           "checked.")
     inhalt += "\n" + abschnitte_html
     schreibe("sitemap/index.html", L.seite(
         "sitemap/index.html", "Sitemap",
