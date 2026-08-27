@@ -7,7 +7,7 @@ import html, json, os, re
 
 import gen_chrome as chrome
 
-VERSION = 42  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
+VERSION = 44  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
 PAGES_URL = "https://suak0903.github.io/katech/"
 ORIGINAL = "https://katech-solutions.com/"
 ORT = "KaTech Ingredient Solutions"
@@ -43,6 +43,41 @@ def kanonisch(zielpfad):
 
 def og_bild(root, name):
     return PAGES_URL + "media/" + name
+
+
+def weiterleitung(zielpfad, ziel_rel, titel):
+    """Bestandsadresse, die auf ihre neue Seite fuehrt.
+
+    Die Seite steht nicht im Menue und traegt kein Chrome: sie ist eine
+    Durchreiche, kein Aufenthaltsort. Wer kein Skript und kein Refresh
+    zulaesst, sieht einen Verweis.
+    """
+    root = wurzel(zielpfad)
+    ziel = root + ziel_rel
+    return f'''<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{esc(titel)} | {ORT}</title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="refresh" content="0; url={ziel}">
+<link rel="canonical" href="{PAGES_URL}{ziel_rel}">
+<style>
+  body{{font:16px/1.6 system-ui,sans-serif;margin:0;display:grid;place-items:center;
+    min-height:100vh;background:#f4f4f1;color:#373738;padding:24px;text-align:center}}
+  a{{color:#4f6e18}}
+</style>
+</head>
+<body>
+<main>
+  <p>This page has moved.</p>
+  <p><a href="{ziel}">Continue to {esc(titel)}</a></p>
+</main>
+<script>location.replace({json.dumps(ziel)});</script>
+</body>
+</html>
+'''
 
 
 def brotkrumen(zielpfad, inhalt):

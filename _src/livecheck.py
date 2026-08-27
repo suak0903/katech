@@ -20,6 +20,10 @@ PRUEFUNGEN = [
     ("case-studies/", "Expertise", "Case studies unter Expertise"),
     ("about-this-preview/", "all 201 are in this preview", "Abdeckung benannt"),
     ("yogurt/drinking-yogurt/", "BreadcrumbList", "Breadcrumb-Markup"),
+    ("yogurt/drinking-yogurt/", "data-lb", "Produktbild vergroesserbar"),
+    ("cyril-carrat/", "zoom--portraet", "Portraet vergroesserbar"),
+    ("about-this-preview/", "ref__link", "Referenzbilder verlinkt"),
+    ("media/refs/cancontrols.jpg", None, "Referenzbild als JPG"),
 ]
 
 for pfad, erwartet, was in PRUEFUNGEN:
@@ -31,7 +35,10 @@ for pfad, erwartet, was in PRUEFUNGEN:
                 urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=30)
             roh = antwort.read()
             if erwartet is None:
-                zustand = "ok" if roh.startswith(b"%PDF") else "kein PDF"
+                # Datei statt Seite: nur pruefen, dass echte Daten kommen
+                anfang = (b"%PDF", b"\xff\xd8\xff", b"RIFF", b"\x89PNG")
+                zustand = ("ok" if roh.startswith(anfang) and len(roh) > 2000
+                           else f"unerwarteter Inhalt ({len(roh)} Bytes)")
             else:
                 zustand = "ok" if erwartet in roh.decode("utf-8", "replace") else "NICHT GEFUNDEN"
             break

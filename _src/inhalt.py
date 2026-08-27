@@ -15,27 +15,35 @@ STANDORTE = [
      "tel": "+49 451 4070 2-0", "telhref": "+4945140702000",
      "fax": "+49 451 4070 2-377", "mail": "hello@katech-solutions.com",
      "karte": "https://www.google.com/maps?q=Aegidienstra%C3%9Fe+22,+23552+L%C3%BCbeck&output=embed",
-     "bild": "hq-luebeck"},
+     "bild": "hq-luebeck",
+     "seite": "technical-development-suite-germany",
+     "adressseite": "find-us/katech-head-office-germany"},
     {"name": "Production and warehouse", "ort": "Wesenberg, Germany",
      "adresse": ["KaTech Ingredient Solutions GmbH", "Buurdieksweg 4", "23858 Wesenberg", "Germany"],
      "tel": "+49 451 4070 2-0", "telhref": "+4945140702000",
      "fax": "+49 451 4070 2-125", "mail": "verkaufsservice@katech-solutions.com",
      "karte": "https://www.google.com/maps?q=Buurdieksweg+4,+23858+Wesenberg&output=embed",
-     "bild": "blending-tower"},
+     "bild": "blending-tower",
+     "seite": "production-facilities-germany",
+     "adressseite": "find-us/katech-production-germany"},
     {"name": "Technical development suite", "ort": "Ellesmere Port, United Kingdom",
      "adresse": ["KaTech Ingredient Solutions Ltd", "Unit 19 Venture Point",
                  "Stanney Mill Road", "Ellesmere Port, Cheshire CH2 4NE", "United Kingdom"],
      "tel": "+44 151 357 3700", "telhref": "+441513573700",
      "fax": "+44 151 357 4103", "mail": "custservuk@katech-solutions.com",
      "karte": "https://www.google.com/maps?q=Venture+Point+Stanney+Mill+Road+Ellesmere+Port+CH2+4NE&output=embed",
-     "bild": "warehouse"},
+     "bild": "warehouse",
+     "seite": "technical-development-suite-uk",
+     "adressseite": "find-us/katech-uk"},
     {"name": "Sales office", "ort": "Stęszew, Poland",
      "adresse": ["KaTech Ingredient Solutions Sp. z o. o.", "ul. Powstańców Wlkp. 49",
                  "62-060 Stęszew", "Poland"],
      "tel": "+48 61 67 07 001", "telhref": "+48616707001",
      "fax": "+48 61 67 07 001", "mail": "kontakt@katech-solutions.com",
      "karte": "https://www.google.com/maps?q=ul.+Powsta%C5%84c%C3%B3w+Wlkp.+49,+62-060+St%C4%99szew&output=embed",
-     "bild": "reception"},
+     "bild": "reception",
+     "seite": "sales-office-poland",
+     "adressseite": "find-us/katech-poland"},
 ]
 
 GESCHAEFTSFUEHRUNG = ["Cyril Carrat", "Michael O'Riordan", "Marcel Hergett", "Matthias Reeb"]
@@ -827,6 +835,49 @@ def _legal_titel(slug):
                 "Data protection information for applicants"}.get(slug, slug)
 
 
+def standort_von(slug):
+    """Der Standort, dessen Beschreibung auf dieser Seite steht."""
+    for s in STANDORTE:
+        if s["seite"] == slug:
+            return s
+    return None
+
+
+def adressblock(root, s, *, mit_karte=True):
+    """Adresse, Erreichbarkeit und Karte eines Standorts.
+
+    Steht unter der Beschreibung, was an dem Ort geschieht - beides gehoert
+    zusammen auf eine Seite statt auf zwei (Suat 27.08.).
+    """
+    karte = ""
+    if mit_karte:
+        karte = f'''<div class="mapwrap mapwrap--ort rv">
+      <div class="mapph">
+        <p>This map is loaded from Google Maps. Loading it transfers data to Google.</p>
+        <button class="btn btn--ghost" type="button" data-map-load>Load map</button>
+      </div>
+      <iframe title="Map of {L.esc(s['ort'])}" data-src="{s['karte']}"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>'''
+    return f'''<section class="sec sec--sand" id="address">
+  <div class="wrap wrap--narrow">
+    {L.sec_kopf(eyebrow="Find us", h2="Where this site is.")}
+    <div class="loc rv">
+      <span class="loc__role">{L.esc(s['name'])}</span>
+      <h3>{L.esc(s['ort'])}</h3>
+      <address>{"<br>".join(L.esc(z) for z in s['adresse'])}</address>
+      <dl>
+        <dt>Phone</dt><dd><a href="tel:{s['telhref']}">{L.esc(s['tel'])}</a></dd>
+        <dt>Fax</dt><dd>{L.esc(s['fax'])}</dd>
+        <dt>E-mail</dt><dd><a href="mailto:{s['mail']}">{L.esc(s['mail'])}</a></dd>
+      </dl>
+    </div>
+    {karte}
+    <p class="loc__zurueck"><a href="{root}find-us/">All four locations at a glance</a></p>
+  </div>
+</section>'''
+
+
 def baue_textseiten(textseite, legalseite):
     """Alle Seiten der Bereiche Company, Expertise und Facilities.
     Die Zuordnung kommt aus struktur.py; Menuemarkierung und Breadcrumb
@@ -846,6 +897,9 @@ def baue_textseiten(textseite, legalseite):
                             "our-facilities") or slug.startswith("find-us/"):
                     continue
                 extra = ""
+                ort = standort_von(slug)
+                if ort:
+                    extra = adressblock("../", ort)
                 if slug == "certifications/rspo":
                     extra = dokument_ansicht("../../", "rspo")
                 if slug == "certifications":
@@ -1131,18 +1185,20 @@ def _kontakt(schreibe):
 
 def _find_us(schreibe):
     root = "../"
-    karten = "".join(f'''<div class="loc">
+    karten = "".join(f'''<div class="loc loc--karte">
       <span class="loc__role">{L.esc(s['name'])}</span>
-      <h3>{L.esc(s['ort'])}</h3>
+      <h3><a href="{root}{s['seite']}/">{L.esc(s['ort'])}</a></h3>
       <address>{"<br>".join(L.esc(z) for z in s['adresse'])}</address>
       <dl><dt>Phone</dt><dd><a href="tel:{s['telhref']}">{L.esc(s['tel'])}</a></dd>
       <dt>E-mail</dt><dd><a href="mailto:{s['mail']}">{L.esc(s['mail'])}</a></dd></dl>
+      <a class="loc__mehr" href="{root}{s['seite']}/">What happens here</a>
     </div>''' for s in STANDORTE)
     inhalt = L.subhero(root, crumbs=[("Start", root + "index.html"),
                                      ("Facilities", root + "our-facilities/"), ("Find us", None)],
                        eyebrow="Locations", h1="Four sites, three countries.",
                        sub="Development in Lübeck and Cheshire, production and warehousing in "
-                           "northern Germany, sales in Poland.",
+                           "northern Germany, sales in Poland. Each entry leads to what "
+                           "happens at that site.",
                        bild="plant-reinfeld", alt="KaTech production site")
     inhalt += f'''
 <section class="sec">
@@ -1155,42 +1211,13 @@ def _find_us(schreibe):
         "KaTech locations in Lübeck, Wesenberg, Ellesmere Port and Stęszew.",
         inhalt, aktiv="our-facilities/", og="og-facilities.jpg", jsonld=LD_ORG))
 
-    for s, slug in zip(STANDORTE, ["find-us/katech-head-office-germany",
-                                   "find-us/katech-production-germany",
-                                   "find-us/katech-uk", "find-us/katech-poland"]):
-        r = "../../"
-        inhalt = L.subhero(r, crumbs=[("Start", r + "index.html"),
-                                      ("Facilities", r + "our-facilities/"),
-                                      ("Find us", r + "find-us/"), (s["ort"], None)],
-                           eyebrow=s["name"], h1=L.esc(s["ort"]), bild=s["bild"], alt=s["ort"])
-        inhalt += f'''
-<section class="sec">
-  <div class="wrap wrap--narrow">
-    <div class="loc rv">
-      <span class="loc__role">{L.esc(s['name'])}</span>
-      <h3>{L.esc(s['ort'])}</h3>
-      <address>{"<br>".join(L.esc(z) for z in s['adresse'])}</address>
-      <dl>
-        <dt>Phone</dt><dd><a href="tel:{s['telhref']}">{L.esc(s['tel'])}</a></dd>
-        <dt>Fax</dt><dd>{L.esc(s['fax'])}</dd>
-        <dt>E-mail</dt><dd><a href="mailto:{s['mail']}">{L.esc(s['mail'])}</a></dd>
-      </dl>
-    </div>
-    <div class="mapwrap rv" style="position:relative;aspect-ratio:16/8;border:1px solid var(--line);margin-top:26px">
-      <div class="mapph">
-        <p>This map is loaded from Google Maps.</p>
-        <button class="btn btn--ghost" type="button" data-map-load>Load map</button>
-      </div>
-      <iframe title="Map of {L.esc(s['ort'])}" data-src="{s['karte']}"
-        style="width:100%;height:100%;border:0" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-  </div>
-</section>'''
-        schreibe(slug + "/index.html", L.seite(
-            slug + "/index.html", s["ort"],
-            f"KaTech {s['name'].lower()} in {s['ort']}.", inhalt,
-            aktiv="our-facilities/", og="og-facilities.jpg"))
+    # Die vier Adressseiten des Bestands. Ihr Inhalt steht jetzt auf der
+    # jeweiligen Standortseite; sie bleiben unter ihrer Adresse erreichbar
+    # und fuehren dorthin weiter (Suat 27.08.).
+    for st in STANDORTE:
+        schreibe(st["adressseite"] + "/index.html",
+                 L.weiterleitung(st["adressseite"] + "/index.html", st["seite"] + "/",
+                                 f"{st['name']}, {st['ort']}"))
 
 
 def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
@@ -1212,7 +1239,10 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
 
     def eintrag(slug, titel=None, tiefe=0):
         name = titel or kurztitel(slug)
-        if ist_leer(slug):
+        if slug in S.WEITERGELEITET:
+            marke = ('<span class="sm__mk sm__mk--um" '
+                     'title="kept as an address, leads to the site page">moved</span>')
+        elif ist_leer(slug):
             marke = ('<span class="sm__mk" title="no content on the existing site">'
                      'empty</span>')
         elif ist_nicht_ausgebaut(slug):
@@ -1265,6 +1295,9 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
                     eintraege.append(eintrag(s, tiefe=1))
                     continue
                 eintraege.append(eintrag(s))
+                if s == "find-us":
+                    for u in sorted(S.WEITERGELEITET):
+                        eintraege.append(eintrag(u, tiefe=1))
                 if s == "our-people":
                     for u in ("our-people/sales-team", "our-people/development-team"):
                         eintraege.append(eintrag(u, tiefe=1))
@@ -1319,7 +1352,9 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
                            "reachable at its original address. Entries marked empty carry no "
                            "content on the existing site either. The small arrow behind an "
                            "entry opens the same page on the original site, so anything stated "
-                           "here can be checked. Only one entry has no arrow: bakery-old has "
+                           "here can be checked. Entries marked moved keep their address "
+                           "from the existing site and lead to the page that now carries "
+                           "their content. Only one entry has no arrow: bakery-old has "
                            "sub-pages on the existing site but no page of its own.")
     inhalt += "\n" + abschnitte_html
     schreibe("sitemap/index.html", L.seite(
@@ -1941,6 +1976,10 @@ def _team(schreibe, SEITEN, kurz):
 # es je einen Satz, der das technische Problem benennt, das KaTech loest.
 # --------------------------------------------------------------------------
 BEREICHS_KURZTEXT = {
+    # find-us traegt im Bestand keinen Fliesstext; ohne diesen Eintrag stuende
+    # der Verweisstreifen auf der Facilities-Seite ohne Beschreibung da.
+    "find-us": "Addresses, phone numbers and routes for all four sites, each leading "
+               "through to what happens there.",
     "vegan": "Meat and fish alternatives that keep their bite. Texture built on dedicated pilot "
              "machinery, not on paper.",
     "yogurt": "Set, stirred, drinking or Greek style: the mouthfeel consumers expect, at the fat "

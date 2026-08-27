@@ -22,10 +22,21 @@ print(f"HTML-Dateien: {len(seiten)}")
 
 kopf_md5, fuss_md5 = defaultdict(list), defaultdict(list)
 
+weitergeleitet = []
 for pfad in seiten:
     rel = os.path.relpath(pfad, ROOT).replace(os.sep, "/")
     doc = open(pfad, encoding="utf-8").read()
     verzeichnis = os.path.dirname(pfad)
+
+    # Weiterleitungen sind keine Seiten: keine Ueberschrift, kein Chrome.
+    # Geprueft wird nur, ob das Ziel existiert.
+    m_um = re.search(r'<meta http-equiv="refresh" content="0; url=([^"]+)"', doc)
+    if m_um:
+        ziel = os.path.normpath(os.path.join(verzeichnis, m_um.group(1)))
+        if not os.path.exists(os.path.join(ziel, "index.html")):
+            fehler["Weiterleitung ins Leere"].append(f"{rel} -> {m_um.group(1)}")
+        weitergeleitet.append(rel)
+        continue
 
     # noindex
     if 'content="noindex, nofollow"' not in doc:
@@ -79,6 +90,7 @@ for pfad in seiten:
             fehler["img ohne alt"].append(rel)
             break
 
+print(f"davon Weiterleitungen: {len(weitergeleitet)}")
 print(f"Kopf-Varianten: {len(kopf_md5)} | Fuss-Varianten: {len(fuss_md5)}")
 if len(kopf_md5) > 1:
     for h, s in kopf_md5.items():

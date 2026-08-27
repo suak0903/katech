@@ -130,15 +130,25 @@ COMPANY = [
 FACILITIES = [
     ("Sites and production",
      ("Where the work happens.",
-      "Development suites, production and warehousing across three countries."),
-     ["production-facilities-germany", "technical-development-suite-germany",
+      "Four sites in three countries. Each page shows what happens there and "
+      "carries the address underneath."),
+     ["technical-development-suite-germany", "production-facilities-germany",
       "technical-development-suite-uk", "sales-office-poland"]),
     ("Find us",
-     ("Addresses and routes.",
-      "Four locations in Germany, the United Kingdom and Poland."),
-     ["find-us", "find-us/katech-head-office-germany", "find-us/katech-production-germany",
-      "find-us/katech-uk", "find-us/katech-poland"]),
+     ("All four addresses at a glance.",
+      "The overview, with a way through to each site."),
+     ["find-us"]),
 ]
+
+# Adressseiten des Bestands. Ihr Inhalt steht jetzt auf der jeweiligen
+# Standortseite; sie bleiben unter ihrer Adresse erreichbar und leiten
+# dorthin weiter. Sie gehoeren in die Sitemap, aber nicht ins Menue.
+WEITERGELEITET = {
+    "find-us/katech-head-office-germany": "technical-development-suite-germany",
+    "find-us/katech-production-germany": "production-facilities-germany",
+    "find-us/katech-uk": "technical-development-suite-uk",
+    "find-us/katech-poland": "sales-office-poland",
+}
 
 # --- Seiten ohne Bereichsabschnitt ----------------------------------------
 LEGAL = ["imprint", "privacy-policy", "terms-of-use", "cookie-policy-eu",
@@ -191,6 +201,8 @@ def zuordnung(produktbereiche, baum, news_slugs, team_slugs):
         zu[u] = "solutions"
     zu["bakery-old"] = "solutions"
 
+    for s in WEITERGELEITET:
+        zu[s] = "facilities"
     for abschnitte, bereich in ((EXPERTISE, "expertise"), (COMPANY, "company"),
                                 (FACILITIES, "facilities")):
         for _, _, seiten in abschnitte:

@@ -370,10 +370,21 @@ def hub_generisch(slug, titel, eyebrow, h1, sub, gruppen, og, bild="hq-luebeck",
                 text=intro_von(s, 96) or t2 or I.KACHEL_LEER,
                 ziel=link(root, s),
                 leer=I.ist_leer(s)))
+        # Vier Eintraege stehen zweispaltig ruhiger als 3+1; ein einzelner
+        # Eintrag wird kein Raster, sondern ein Verweisstreifen.
+        if len(eintraege) == 1:
+            s_einzeln, t_einzeln, t2_einzeln = eintraege[0]
+            koerper = f'''<a class="weiter rv" href="{link(root, s_einzeln)}">
+      <span class="weiter__t">{L.esc(kurztitel(s_einzeln) if s_einzeln in SEITEN else t_einzeln)}</span>
+      <span class="weiter__x">{L.esc(intro_von(s_einzeln, 130) or t2_einzeln or "")}</span>
+    </a>'''
+        else:
+            spalten = 2 if len(eintraege) == 4 else 3
+            koerper = f'<div class="grid grid--{spalten} rv">{"".join(kacheln)}</div>'
         bloecke.append(f'''<section class="sec{" sec--sand" if n % 2 else ""}">
   <div class="wrap">
     {L.sec_kopf(eyebrow=gruppen_titel, h2=gruppen_lead[0], lead=gruppen_lead[1])}
-    <div class="grid grid--3 rv">{"".join(kacheln)}</div>
+    {koerper}
   </div>
 </section>''')
     if zusatz:
