@@ -64,6 +64,13 @@ def crumbs_von(root, slug, *, zwischen=None):
     ist_bereichsstart = b and S.BEREICHS_START.get(b) == slug
     if b and not ist_bereichsstart:
         weg.append((BEREICHS_TITEL[b], root + BEREICHS_ZIEL[b]))
+    # Liegt die Seite unter einer anderen Seite, steht diese im Pfad. Ohne das
+    # sprang /certifications/rspo von Company direkt auf RSPO und liess die
+    # Zertifikatsseite dazwischen aus (Suat 27.08.).
+    if not zwischen and "/" in slug:
+        eltern = slug.rsplit("/", 1)[0]
+        if eltern in SEITEN or os.path.exists(os.path.join(OUT, eltern, "index.html")):
+            weg.append((kurztitel(eltern), root + eltern + "/"))
     for titel, ziel in (zwischen or []):
         weg.append((titel, ziel))
     weg.append((BEREICHS_TITEL[b] if ist_bereichsstart else kurztitel(slug), None))
@@ -508,9 +515,11 @@ def produktseite(slug):
   </div>
 </section>'''
 
+    # Umgehaengte Seiten stehen unter ihrer Kategorie, nicht unter ihrem Ordner
+    crumb_eltern = S.eltern_von(slug, bereich)
     inhalt = L.subhero(
         root, crumbs=crumbs_von(root, slug,
-                                zwischen=[(kurztitel(bereich), root + bereich + "/")]),
+                                zwischen=[(kurztitel(crumb_eltern), root + crumb_eltern + "/")]),
         eyebrow=kurztitel(bereich),
         h1=L.esc(titel_von(slug)) + (" " + I.stub_marke(slug) if ist_stub else ""),
         sub=kurz(absaetze[0], 190) if absaetze else "")
@@ -521,6 +530,7 @@ def produktseite(slug):
     {L.prosa(bloecke)}
   </div>
 </section>
+{I.reiter_block(root, slug)}
 {nachbarn}
 {cta_block(root)}'''
     schreibe(ziel(slug), L.seite(
@@ -594,7 +604,7 @@ def textseite(slug, *, eyebrow, crumbs_extra=None, bild=None, extra_html="", akt
     root = "../" * (slug.count("/") + 1)
     s = SEITEN.get(slug, {})
     absaetze = s.get("absaetze", [])
-    bloecke = [L.absatz(t) for t in absaetze]
+    bloecke = [L.absatz(t, root) for t in absaetze]
     if s.get("listen"):
         bloecke.append(L.faktenkasten("At a glance", s["listen"][:10]))
     # Seiten ohne Bestandsinhalt werden sichtbar als solche gekennzeichnet,
@@ -622,6 +632,37 @@ def textseite(slug, *, eyebrow, crumbs_extra=None, bild=None, extra_html="", akt
         kurz(s.get("description") or (absaetze[0] if absaetze else ""), 158) or I.PLATZHALTER[:150],
         inhalt, aktiv=aktiv if aktiv is not None else aktiv_von(slug),
         og="og-" + (bereich_von(slug) or "company") + ".jpg"))
+
+
+def legalseite(slug):
+    """Rechtstexte des Bestands, wortgetreu und vollstaendig.
+
+    Sie liefen vorher ueber textseite() und landeten dort als Platzhalter,
+    weil der erste Extraktor ihren Inhalt nicht erfasst hatte - die Privacy
+    policy traegt im Bestand knapp 30.000 Zeichen (Suat 27.08.). Auffaellig-
+    keiten werden nicht still korrigiert, sondern als Kommentar ausgewiesen.
+    """
+    root = "../"
+    koerper, anmerkungen = I.legal_html(slug)
+    titel = I._legal_titel(slug)
+    crumbs = crumbs_von(root, slug)
+    inhalt = L.subhero(root, crumbs=crumbs, eyebrow="Legal", h1=L.esc(titel),
+                       sub="Taken over from the existing site word for word. "
+                           "Nothing here has been rewritten.",
+                       bild=None, alt=titel)
+    inhalt += f'''
+<section class="sec">
+  <div class="wrap wrap--narrow">
+    {anmerkungen}
+    <div class="prose prose--legal">{koerper}</div>
+    <p class="legal__quelle"><a href="https://katech-solutions.com/{slug}/"
+       rel="noopener noreferrer" target="_blank">View this page on the existing site</a></p>
+  </div>
+</section>'''
+    schreibe(ziel(slug), L.seite(
+        ziel(slug), titel,
+        f"{titel} of KaTech Ingredient Solutions GmbH.",
+        inhalt, aktiv="", og="og-company.jpg"))
 
 
 def main():
@@ -653,7 +694,7 @@ def main():
     print(f"  {len(bereiche)} Bereiche")
 
     print("Unternehmens- und Expertise-Seiten ...")
-    I.baue_textseiten(textseite)
+    I.baue_textseiten(textseite, legalseite)
 
     print("Sonderseiten ...")
     I.baue_sonderseiten(schreibe, SEITEN, BAUM, NEWS, MEDIA, kurztitel, titel_von, intro_von, kurz, geschrieben)

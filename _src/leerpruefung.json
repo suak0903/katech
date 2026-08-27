@@ -16,6 +16,7 @@
   "our-people/development-team",
   "our-people/sales-team",
   "products",
+  "purchasing",
   "raw-materials",
   "replication",
   "specials",
@@ -35,7 +36,6 @@
   "soups"
  ],
  "inhalt": [
-  "find-us",
-  "purchasing"
+  "find-us"
  ]
 }

@@ -73,6 +73,56 @@ def ist_nur_bild(slug):
     return slug in NUR_BILD_IM_ORIGINAL
 
 
+def _reiter_laden():
+    """Die drei Reiter, die jede Produktseite des Bestands unter der
+    Beschreibung fuehrt: New product, Troubleshooting, Cost optimisation.
+    Der erste Extraktor hatte sie uebersehen (Suat 27.08.)."""
+    pfad = os.path.join(os.path.dirname(os.path.abspath(__file__)), "content2.json")
+    if not os.path.exists(pfad):
+        return {}
+    roh = json.load(open(pfad, encoding="utf-8"))
+    return {s: e["reiter"] for s, e in roh.items() if e.get("reiter")}
+
+
+REITER = _reiter_laden()
+
+
+def reiter_block(root, slug):
+    """Die drei Beratungswege als Abschnitte untereinander. Im Bestand sind es
+    Reiter; hier stehen sie offen, damit nichts hinter einem Klick liegt."""
+    r = REITER.get(slug)
+    if not r:
+        return ""
+    teile = []
+    for n, (kennung, eintrag) in enumerate(r.items()):
+        koerper, liste = [], []
+        for b in eintrag["bloecke"]:
+            if b["tag"] == "li":
+                liste.append(b["text"])
+            else:
+                if liste:
+                    koerper.append("<ul>" + "".join(f"<li>{L.esc(x)}</li>" for x in liste) + "</ul>")
+                    liste = []
+                koerper.append(f"<p>{L.esc(b['text'])}</p>")
+        if liste:
+            koerper.append("<ul>" + "".join(f"<li>{L.esc(x)}</li>" for x in liste) + "</ul>")
+        teile.append(f'''<div class="wege__w">
+        <span class="wege__n">{n + 1:02d}</span>
+        <div class="wege__t">
+          <h3>{L.esc(eintrag["titel"])}</h3>
+          {"".join(koerper)}
+        </div>
+      </div>''')
+    return f'''<section class="sec sec--sand">
+  <div class="wrap wrap--narrow">
+    {L.sec_kopf(eyebrow="How we can help", h2="Three ways into this product.",
+                lead="Whether you are building it new, fixing something that goes wrong in "
+                     "production, or looking for cost in the recipe.")}
+    <div class="wege rv">{"".join(teile)}</div>
+  </div>
+</section>'''
+
+
 def _bestand_laden():
     """Alle Adressen, die es auf der Bestandsseite tatsaechlich gibt. Nur fuer
     sie darf ein Verweis dorthin gesetzt werden; die Hub-Seiten dieses
@@ -95,7 +145,12 @@ IM_BESTAND = _bestand_laden()
 # Seiten, die im Bestand Inhalt tragen, hier aber bewusst nicht ausgebaut sind.
 # purchasing traegt dort nur eine interne Notiz, die einen Mitarbeiter
 # namentlich vorfuehrt.
-NICHT_AUSGEBAUT = {"purchasing"}
+# Kein Eintrag mehr. "purchasing" stand hier, ist aber im Bestand nicht
+# unfertig, sondern leer: die Seite traegt dort nur die interne Notiz
+# "Steve Williams needs to put something here". Sie wird deshalb wie jede
+# andere leere Bestandsseite behandelt; die Notiz wird nicht uebernommen,
+# weil sie einen Mitarbeiter namentlich vorfuehrt (Suat 27.08., Punkt 12).
+NICHT_AUSGEBAUT = set()
 
 
 def ist_nicht_ausgebaut(slug):
@@ -156,16 +211,97 @@ def stub_kasten(root, slug):
     </div>'''
 
 
+# Logo, Bildbeschreibung und - wo vorhanden - das Dokument dahinter.
 ZERTIFIKATE = [
-    ("cert-brcgs-cert-food-logo.png", "BRCGS Food Safety certification, AA rating"),
-    ("cert-ifs-food-box-rgb.png", "IFS Food certification"),
-    ("cert-rspo-1106196-logo-2021.png", "RSPO certified sustainable palm oil"),
-    ("cert-sedex-logo-small.png", "Sedex membership"),
-    ("cert-horzfoodchain-certificat.png", "FoodChain ID non-GMO certification"),
-    ("cert-gb-organic-logo-181x229-.png", "Organic certification"),
+    ("cert-brcgs-cert-food-logo.png", "BRCGS Food Safety certification, AA rating",
+     "katech-brcgs-2027.pdf"),
+    ("cert-ifs-food-box-rgb.png", "IFS Food certification", "katech-ifs-2027.pdf"),
+    ("cert-rspo-1106196-logo-2021.png", "RSPO certified sustainable palm oil",
+     "katech-rspo-2026.pdf"),
+    ("cert-sedex-logo-small.png", "Sedex membership", "katech-sedex-smeta-2021.pdf"),
+    ("cert-horzfoodchain-certificat.png", "FoodChain ID non-GMO certification",
+     "katech-non-gmo-2026.pdf"),
+    ("cert-gb-organic-logo-181x229-.png", "Organic certification", "katech-organic-2023.pdf"),
     ("cert-kosher-certification-197.png", "Kosher certification"),
     ("cert-halal-logo-blk-web-june-.png", "Halal certification"),
 ]
+
+# Die Dokumente, die der Bestand verlinkt. Sie liegen jetzt im Entwurf selbst
+# statt auf der alten Domain; die RSPO-Urkunde wird zusaetzlich direkt
+# angezeigt (Suat 27.08., Punkt 16).
+DOKUMENTE = {
+    "brcgs": ("katech-brcgs-2027.pdf", "BRCGS Food Safety certificate",
+              "Issued by DNV, certification decision 24 March 2026, valid until 25 April 2027."),
+    "ifs": ("katech-ifs-2027.pdf", "IFS Food certificate",
+            "Certificate C668964, unannounced audit February 2026, valid until 30 April 2027."),
+    "rspo": ("katech-rspo-2026.pdf", "RSPO supply chain certificate",
+             "Certificate BMC-RSPO-0088 by BM Certification, segregated and mass balance, "
+             "valid until 10 February 2029."),
+    "non-gmo": ("katech-non-gmo-2026.pdf", "FoodChain ID non-GMO certificate",
+                "Certificate 2461031 EU1116, threshold below 0.9 per cent, "
+                "valid until 31 December 2026."),
+    "sedex": ("katech-sedex-smeta-2021.pdf", "Sedex SMETA audit report",
+              "Ethical trade audit of the Reinfeld site, 2021."),
+    "organic": ("katech-organic-2023.pdf", "Organic certificate, United Kingdom",
+                "Biodynamic Association, GB-ORG-06, for KaTech Ingredient Solutions Ltd "
+                "in Ellesmere Port. The existing site links this document as "
+                "“Environmental Policy”."),
+}
+
+
+def dokument_karte(root, schluessel):
+    datei, titel, hinweis = DOKUMENTE[schluessel]
+    return f'''<li class="dok">
+  <a class="dok__l" href="{root}docs/{datei}" target="_blank" rel="noopener">
+    <span class="dok__ico" aria-hidden="true">PDF</span>
+    <span class="dok__t"><strong>{L.esc(titel)}</strong><span>{L.esc(hinweis)}</span></span>
+  </a>
+</li>'''
+
+
+def dokumente_block(root, schluessel_liste, *, h2, eyebrow="Documents", lead=""):
+    karten = "".join(dokument_karte(root, k) for k in schluessel_liste)
+    return f'''<section class="sec sec--sand">
+  <div class="wrap wrap--narrow">
+    {L.sec_kopf(eyebrow=eyebrow, h2=h2, lead=lead)}
+    <ul class="doks rv">{karten}</ul>
+  </div>
+</section>'''
+
+
+# Bildnamen der ersten Zertifikatsseite (pdf_vorschau.py erzeugt sie)
+DOKUMENT_BILD = {k: "cert-" + d[:-4].replace("katech-", "") + "-p1"
+                 for k, (d, _, _) in DOKUMENTE.items()}
+
+
+def dokument_ansicht(root, schluessel, *, h2="See it here.",
+                     lead="The existing site links this document; here it is on the page."):
+    """Das Dokument direkt auf der Seite, nicht nur als Verweis.
+
+    Als Bild der ersten Seite, nicht als eingebettetes PDF: eine
+    <object>-Einbettung zeigt in vielen Browsern nur den Ersatztext.
+    Das vollstaendige PDF haengt darunter (Suat 27.08., Punkt 16).
+    """
+    datei, titel, hinweis = DOKUMENTE[schluessel]
+    bild = DOKUMENT_BILD[schluessel]
+    return f'''<section class="sec">
+  <div class="wrap wrap--narrow">
+    {L.sec_kopf(eyebrow="The certificate", h2=h2, lead=lead)}
+    <figure class="pdfview rv">
+      <a href="{root}docs/{datei}" target="_blank" rel="noopener"
+         aria-label="Open {L.esc(titel)} as PDF">
+        <picture>
+          <source type="image/webp" srcset="{root}media/{bild}.webp">
+          <img src="{root}media/{bild}.jpg" width="1800" height="2546"
+               alt="First page of the {L.esc(titel)}" loading="lazy" decoding="async">
+        </picture>
+      </a>
+      <figcaption>{L.esc(titel)}. {L.esc(hinweis)}
+        <a href="{root}docs/{datei}" target="_blank" rel="noopener">Open the full document</a></figcaption>
+    </figure>
+  </div>
+</section>'''
+
 
 SCHRITTE = [
     ("01", "Understand the brief",
@@ -582,7 +718,100 @@ LEGAL_SEITEN = LEGAL = ["imprint", "privacy-policy", "terms-of-use", "cookie-pol
                         "data-protection-information-for-applicants"]
 
 
-def baue_textseiten(textseite):
+def _laden(name):
+    """Eine der erhobenen JSON-Dateien neben diesem Modul, oder {}."""
+    pfad = os.path.join(os.path.dirname(os.path.abspath(__file__)), name)
+    return json.load(open(pfad, encoding="utf-8")) if os.path.exists(pfad) else {}
+
+
+LEGAL_TEXTE = _laden("legal.json")
+
+# Auffaelligkeiten in den Rechtstexten des Bestands. Sie werden NICHT still
+# korrigiert - der Text bleibt wortgetreu, der Befund steht als sichtbarer
+# Kommentar daneben (Suat 27.08.: beim Rechtszeug gewissenhafter, erst so
+# uebernehmen wie es ist, hoechstens Hinweise als Empfehlung).
+LEGAL_ANMERKUNGEN = {
+    "privacy-policy": [
+        ("Seitentitel", "Die Ueberschrift ist der komplette Einleitungssatz mit 148 Zeichen. "
+         "Sie steht so auch im Bestand. Empfehlung: Titel auf „Privacy policy“ kuerzen, "
+         "der Satz wird zum ersten Absatz."),
+        ("Rechtsbegriff", "Der Text nennt die Verordnung abwechselnd DSGVO und GDPR. "
+         "Empfehlung: in der englischen Fassung durchgaengig GDPR."),
+        ("Anschrift", "Die Anschrift steht hier als „Aegiedienstraße“, im Imprint "
+         "als „Aegidienstraße“. Eine der beiden Schreibweisen ist falsch."),
+    ],
+    "imprint": [
+        ("Faxnummer", "Die Faxnummer erscheint zweimal in unterschiedlicher Form: "
+         "0451 40 70-377 und 0451 40 70 2-377."),
+    ],
+    "terms-of-use": [
+        ("Firmenname", "Der Text nennt durchgaengig „K. Hahn + Partners Food Technology Ltd“, "
+         "also den Namen vor der Umfirmierung zu KaTech Ingredient Solutions. "
+         "Empfehlung: aktualisieren."),
+        ("Seitentitel", "Die Seite traegt im Bestand keine Ueberschrift."),
+    ],
+    "cookie-policy-eu": [
+        ("Stand", "Der Text ist auf den 23.07.2025 datiert und damit ueber ein Jahr alt."),
+    ],
+}
+
+
+def _legal_anmerkung(titel, text):
+    return f'''<aside class="anm">
+  <span class="anm__marke">Note on the original</span>
+  <p><strong>{L.esc(titel)}:</strong> {L.esc(text)}</p>
+</aside>'''
+
+
+def legal_html(slug):
+    """Die Rechtstexte wortgetreu, in Originalreihenfolge, mit Listen."""
+    e = LEGAL_TEXTE.get(slug)
+    if not e:
+        return "", ""
+    teile, liste = [], []
+
+    def liste_leeren():
+        if liste:
+            teile.append("<ul>" + "".join(f"<li>{L.esc(x)}</li>" for x in liste) + "</ul>")
+            liste.clear()
+
+    for b in e["bloecke"]:
+        if b["tag"] == "li":
+            liste.append(b["text"])
+            continue
+        liste_leeren()
+        text = L.esc(b["text"])
+        if b.get("href"):
+            ziel_ = L.esc(b["href"])
+            if ziel_.startswith("/"):
+                ziel_ = "https://katech-solutions.com" + ziel_
+            text = f'{text} <a href="{ziel_}" rel="noopener noreferrer" target="_blank">Open</a>'
+        if b["tag"] in ("h2", "h3", "h4", "h5"):
+            stufe = {"h2": "h2", "h3": "h3", "h4": "h3", "h5": "h4"}[b["tag"]]
+            teile.append(f"<{stufe}>{L.esc(b['text'])}</{stufe}>")
+        elif b["tag"] in ("td", "th"):
+            teile.append(f"<p>{text}</p>")
+        else:
+            teile.append(f"<p>{text}</p>")
+    liste_leeren()
+
+    anm = "".join(_legal_anmerkung(t, x) for t, x in LEGAL_ANMERKUNGEN.get(slug, []))
+    return "".join(teile), anm
+
+
+def _legal_titel(slug):
+    """Kurzer Seitentitel. Der Bestand fuehrt bei der Privacy policy den
+    ganzen Einleitungssatz als Ueberschrift; der bleibt als erster Absatz
+    erhalten, die Ueberschrift wird lesbar. Vermerkt als Anmerkung."""
+    return {"privacy-policy": "Privacy policy",
+            "imprint": "Imprint",
+            "terms-of-use": "Terms of use",
+            "cookie-policy-eu": "Cookie policy (EU)",
+            "data-protection-information-for-applicants":
+                "Data protection information for applicants"}.get(slug, slug)
+
+
+def baue_textseiten(textseite, legalseite):
     """Alle Seiten der Bereiche Company, Expertise und Facilities.
     Die Zuordnung kommt aus struktur.py; Menuemarkierung und Breadcrumb
     leitet der Generator daraus ab."""
@@ -601,13 +830,19 @@ def baue_textseiten(textseite):
                             "our-facilities") or slug.startswith("find-us/"):
                     continue
                 extra = ""
+                if slug == "certifications/rspo":
+                    extra = dokument_ansicht("../../", "rspo")
                 if slug == "certifications":
                     extra = f'''<section class="sec sec--sand">
   <div class="wrap">
     {L.sec_kopf(eyebrow="Audited and certified", h2="The standards we hold.", zentriert=True)}
     {L.zertifikate("../", ZERTIFIKATE)}
   </div>
-</section>'''
+</section>
+''' + dokumente_block("../", ["brcgs", "ifs", "rspo", "non-gmo", "sedex", "organic"],
+                      h2="The certificates themselves.",
+                      lead="Every document the existing site links, held here rather than on "
+                           "the previous domain.")
                 if slug == "our-facilities":
                     extra = f'''<section class="sec sec--sand">
   <div class="wrap">
@@ -637,7 +872,7 @@ def baue_textseiten(textseite):
                   bild=None)
 
     for slug in LEGAL_SEITEN:
-        textseite(slug, eyebrow="Legal", crumbs_extra=None, bild=None, aktiv="")
+        legalseite(slug)
 
 
 # --------------------------------------------------------------------------
@@ -948,6 +1183,18 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
     import struktur as S
     root = "../"
 
+    def original_pfeil(slug, name):
+        """Verweis auf dieselbe Seite im Bestand, aber nur wo es sie dort gibt.
+        Die Hub-Seiten dieses Entwurfs existieren im Original nicht.
+        Die News-Zeilen hatten den Pfeil nicht, obwohl es alle 17 Beitraege
+        im Bestand gibt - Suat hat das am 27.08. gefunden (Punkt 2)."""
+        if slug not in IM_BESTAND:
+            return ""
+        return (f'<a class="sm__orig" href="https://katech-solutions.com/{slug}/" '
+                f'target="_blank" rel="noopener" '
+                f'aria-label="Open {L.esc(name)} on the original site">'
+                f'{PFEIL_EXTERN}</a>')
+
     def eintrag(slug, titel=None, tiefe=0):
         name = titel or kurztitel(slug)
         if ist_leer(slug):
@@ -958,14 +1205,7 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
                      'title="not built out in this preview">not built</span>')
         else:
             marke = ""
-        # Verweis auf dieselbe Seite im Original, aber nur wo es sie dort gibt.
-        # Die Hub-Seiten dieses Entwurfs existieren im Bestand nicht.
-        original = ""
-        if slug in IM_BESTAND:
-            original = (f'<a class="sm__orig" href="https://katech-solutions.com/{slug}/" '
-                        f'target="_blank" rel="noopener" '
-                        f'aria-label="Open {L.esc(name)} on the original site">'
-                        f'{PFEIL_EXTERN}</a>')
+        original = original_pfeil(slug, name)
         return (f'<li class="sm__i sm__i--{tiefe}">'
                 f'<a href="{root}{slug}/">{L.esc(name)}</a>{marke}{original}</li>')
 
@@ -1019,7 +1259,8 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
     # ---- News ------------------------------------------------------------
     nw = "".join(f'<li class="sm__i sm__i--0"><a href="{root}{n["slug"]}/">'
                  f'{L.esc(kurz_lokal(n["titel"], 62))}</a>'
-                 f'<span class="sm__d">{datum_lang(n["datum"])}</span></li>'
+                 f'<span class="sm__d">{datum_lang(n["datum"])}</span>'
+                 f'{original_pfeil(n["slug"], n["titel"])}</li>'
                  for n in NEWS if n["slug"] != "news" and n["absaetze"])
     bloecke.append(("News", "news",
                     [f'<div class="sm__sp sm__sp--breit"><h3>Press releases</h3>'
@@ -1056,10 +1297,10 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
                        eyebrow="Overview", h1="Every page, in order.",
                        sub="The complete structure of the existing site, every page "
                            "reachable at its original address. Entries marked empty carry no "
-                           "content on the existing site; entries marked not built are not "
-                           "worked out in this preview. The small arrow behind an entry opens "
-                           "the same page on the original site, so anything stated here can be "
-                           "checked.")
+                           "content on the existing site either. The small arrow behind an "
+                           "entry opens the same page on the original site, so anything stated "
+                           "here can be checked. Only one entry has no arrow: bakery-old has "
+                           "sub-pages on the existing site but no page of its own.")
     inhalt += "\n" + abschnitte_html
     schreibe("sitemap/index.html", L.seite(
         "sitemap/index.html", "Sitemap",
@@ -1225,8 +1466,16 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
         "and its yellow kept as the mark of identity",
         "All 13 product areas and every product type below them, navigable and with their own "
         "text and image from the existing site",
-        "173 of the 200 pages carry real content; the remaining 27 are marked as not built out "
-        "rather than quietly left blank, so the boundary of this preview is visible",
+        "Every page of the existing site is here. 22 of them carry no content on the existing "
+        "site either; they are marked as empty and link to the original, so you can check that "
+        "for yourself rather than take our word for it",
+        "The three advice tabs that sit under each product description on the existing site "
+        "(new product, troubleshooting, cost optimisation) carried over for all 67 products "
+        "that have them, open on the page instead of hidden behind a click",
+        "All legal texts taken over word for word, with anything inconsistent flagged as a "
+        "visible note rather than silently corrected",
+        "The certificates themselves held on the site: BRCGS, IFS, RSPO, non-GMO, Sedex and the "
+        "environmental policy, instead of links pointing at the previous domain",
         "Every existing page kept at its original address, so bookmarks and external links "
         "continue to work",
         "Company, expertise, facilities, certifications and locations, restructured into four "
@@ -1243,7 +1492,7 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
         "Static delivery without WordPress, plugins or a database",
     ]
     offen = [
-        "Filling the 27 pages that are marked as not built out, plus the detail content and the "
+        "Writing content for the 22 pages that are empty on the existing site as well, plus the "
         "full news archive beyond the English part shown here",
         "The German and Polish versions, and the habit of making every future change three times",
         "Connecting the enquiry route to your mailboxes, including who receives which product area",

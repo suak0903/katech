@@ -167,13 +167,13 @@ p:last-child{margin-bottom:0}
 }
 .lang button svg{flex:none;display:block;border:1px solid rgba(255,255,255,.4)}
 .lang button:hover{color:#fff;border-color:rgba(255,255,255,.35)}
-.lang button[aria-current="true"]{color:var(--ink);background:var(--accent);border-color:var(--accent)}
-.lang button[aria-current="true"] svg{border-color:rgba(55,55,56,.35)}
+.lang button[aria-current="true"]{color:#fff;background:none;border-color:var(--accent)}
+.lang button[aria-current="true"] svg{border-color:var(--accent)}
 .nav.scrolled .lang button,.nav.solid .lang button{color:var(--ink-soft)}
 .nav.scrolled .lang button svg,.nav.solid .lang button svg{border-color:var(--line)}
 .nav.scrolled .lang button:hover,.nav.solid .lang button:hover{color:var(--ink);border-color:var(--line)}
 .nav.scrolled .lang button[aria-current="true"],.nav.solid .lang button[aria-current="true"]{
-  color:var(--ink);background:var(--accent);border-color:var(--accent)}
+  color:var(--ink);background:none;border-color:var(--accent)}
 
 .burger{
   display:none;margin-left:auto;width:46px;height:46px;background:none;border:0;cursor:pointer;
@@ -241,7 +241,7 @@ p:last-child{margin-bottom:0}
 }
 .mmenu__lang button:hover{border-color:rgba(255,255,255,.6);color:#fff}
 .mmenu__lang button[aria-current="true"]{
-  color:var(--ink);background:var(--accent);border-color:var(--accent)}
+  color:#fff;background:none;border-color:var(--accent)}
 .mmenu.open .mmenu__list li{opacity:0;transform:translateX(18px);animation:mmin .42s var(--ease) forwards}
 .mmenu.open .mmenu__list li:nth-child(1){animation-delay:.06s}
 .mmenu.open .mmenu__list li:nth-child(2){animation-delay:.10s}
@@ -423,7 +423,8 @@ p:last-child{margin-bottom:0}
 /* ---------- Zertifikatsleiste ---------- */
 .certs{display:flex;flex-wrap:wrap;gap:clamp(20px,3.5vw,46px);align-items:center;justify-content:center}
 .certs img{height:clamp(46px,5vw,62px);width:auto;filter:grayscale(1);opacity:.62;transition:filter .3s var(--ease),opacity .3s var(--ease)}
-.certs img:hover{filter:none;opacity:1}
+.certs img:hover,.certs a:hover img,.certs a:focus-visible img{filter:none;opacity:1}
+.certs a{display:block;line-height:0}
 
 /* ---------- News ---------- */
 .newsitem{display:grid;grid-template-columns:150px 1fr;gap:26px;padding:26px 0;border-bottom:1px solid var(--line);align-items:start}
@@ -892,8 +893,9 @@ body.ohne-demobar{padding-bottom:0}
 .sm__i--1::before,.sm__i--2::before{content:'';display:inline-block;width:7px;height:1px;
   background:var(--line);vertical-align:middle;margin-right:8px}
 .sm__mk{display:inline-block;margin-left:8px;font-size:10.5px;font-weight:600;
-  letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);
-  background:var(--sand);border:1px solid var(--line);padding:1px 6px;vertical-align:middle}
+  letter-spacing:.08em;text-transform:uppercase;color:#fff;
+  background:var(--brand-deep);border:1px solid var(--brand-deep);padding:1px 6px;
+  vertical-align:middle}
 .sm__mk--offen{color:var(--ink);background:var(--accent);border-color:var(--accent)}
 /* Verweis auf dieselbe Seite im Original: nur das Zeichen, kein Text */
 .sm__l a.sm__orig{display:inline-flex;align-items:center;justify-content:center;
@@ -913,3 +915,66 @@ body.ohne-demobar{padding-bottom:0}
 .card--leer .card__media,.tile--leer{opacity:.72}
 .card--leer:hover .card__media,.tile--leer:hover{opacity:1}
 .stubtag--leer{background:var(--line);color:var(--ink)}
+
+/* ---------------------------------------------------------------- Wege
+   Die drei Beratungswege einer Produktseite (im Bestand Reiter, hier
+   offen untereinander, damit nichts hinter einem Klick liegt). */
+.wege{display:grid;gap:0;margin-top:2.5rem}
+.wege__w{
+  display:grid;grid-template-columns:3.5rem 1fr;gap:1.25rem;
+  padding:2rem 0;border-top:1px solid var(--line);
+}
+.wege__w:last-child{border-bottom:1px solid var(--line)}
+.wege__n{
+  font:700 14px/1 var(--font-display);letter-spacing:.12em;
+  color:var(--brand-deep);padding-top:.5rem;font-variant-numeric:tabular-nums;
+}
+.wege__t h3{font-size:21px;margin:0 0 .75rem}
+.wege__t p { margin: 0 0 .75rem; }
+.wege__t p:last-child, .wege__t ul:last-child { margin-bottom: 0; }
+.wege__t ul { margin: 0 0 .75rem; padding-left: 1.1rem; }
+.wege__t li { margin-bottom: .3rem; }
+@media (max-width: 640px) {
+  .wege__w { grid-template-columns: 1fr; gap: .5rem; padding: 1.5rem 0; }
+  .wege__n { padding-top: 0; }
+}
+
+/* ------------------------------------------------- Dokumente und Anmerkungen */
+.doks{list-style:none;margin:2rem 0 0;padding:0;display:grid;gap:10px}
+.dok__l{
+  display:flex;align-items:center;gap:16px;padding:16px 18px;text-decoration:none;
+  background:var(--paper);border:1px solid var(--line);color:var(--ink);
+  transition:border-color .2s var(--ease),transform .2s var(--ease);
+}
+.dok__l:hover{border-color:var(--brand);transform:translateX(3px);color:var(--ink)}
+.dok__ico{
+  flex:none;width:44px;height:44px;display:grid;place-items:center;
+  background:var(--brand-deep);color:#fff;font:700 11px/1 var(--font-display);
+  letter-spacing:.08em;
+}
+.dok__t{display:grid;gap:2px;min-width:0}
+.dok__t strong{font-family:var(--font-display);font-size:17px}
+.dok__t span{font-size:14px;color:var(--ink-soft)}
+.pdfview{margin:2rem 0 0}
+.pdfview img{width:100%;height:auto;border:1px solid var(--line);
+  box-shadow:0 12px 32px rgba(0,0,0,.10);transition:box-shadow .25s var(--ease)}
+.pdfview a:hover img{box-shadow:0 18px 44px rgba(0,0,0,.16)}
+.pdfview figcaption{margin-top:14px;font-size:14px;color:var(--ink-soft)}
+
+/* Sichtbarer Kommentar zu einer Auffaelligkeit im Bestandstext. Der Text
+   selbst bleibt unveraendert; der Befund steht daneben. */
+.anm{
+  margin:0 0 1.5rem;padding:16px 20px;background:#fffbea;
+  border-left:4px solid var(--accent);
+}
+.anm__marke{
+  display:block;font:700 11px/1 var(--font-display);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;
+}
+.anm p{margin:0;font-size:15.5px}
+.prose--legal h2{font-size:clamp(22px,2.4vw,28px);margin-top:2.2em}
+.prose--legal h3{font-size:19px;margin-top:1.8em}
+.prose--legal p,.prose--legal li{font-size:15.5px;line-height:1.7}
+.prose--legal>*:first-child{margin-top:0}
+.legal__quelle{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--line);
+  font-size:14px;color:var(--ink-soft)}

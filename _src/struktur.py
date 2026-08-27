@@ -101,18 +101,14 @@ EXPERTISE = [
      ("The raw material base.",
       "What we formulate from, and where it comes from."),
      ["our-ingredients", "our-ingredients/ingredients-list"]),
-    ("Evidence",
-     ("What it looks like in practice.",
-      "Worked examples from the application areas."),
-     ["case-studies"]),
 ]
 
 # --- Company: wer das Unternehmen ist -------------------------------------
 COMPANY = [
     ("The business",
      ("What drives the company.",
-      "Vision, approach and the way we work with customers."),
-     ["our-vision", "our-approach", "how-we-work", "our-people", "careers"]),
+      "Vision, approach, the people and the work we can show."),
+     ["our-vision", "our-approach", "how-we-work", "our-people", "case-studies", "careers"]),
     ("Standards and sourcing",
      ("What we can prove.",
       "Certifications, raw material policy and the sustainability position."),
@@ -217,3 +213,20 @@ def zuordnung(produktbereiche, baum, news_slugs, team_slugs):
     for b, start in BEREICHS_START.items():
         zu[start] = b
     return zu
+
+
+# --------------------------------------------------------------------------
+# Umgehaengte Seiten: welcher Produktbereich fuehrt sie im Breadcrumb.
+# Ohne diese Umkehr zeigt der Pfad auf den Ordner der Adresse statt auf die
+# Kategorie, unter der die Seite tatsaechlich haengt - bei
+# soups/freshpasteurised stand deshalb "Start / Solutions / Soups /" statt
+# "Soups and sauces" (Suat 27.08.).
+# --------------------------------------------------------------------------
+ELTERN = {kind: eltern for eltern, kinder in FREMDE_KINDER.items() for kind in kinder}
+# Der aufgeloeste Ein-Seiten-Bereich selbst haengt ebenfalls dort.
+ELTERN["soups"] = "soups-and-sauces"
+
+
+def eltern_von(slug, vorgabe):
+    """Der Produktbereich, unter dem eine Seite im Breadcrumb steht."""
+    return ELTERN.get(slug, vorgabe)

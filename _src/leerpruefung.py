@@ -49,7 +49,11 @@ for slug in sorted(kandidaten):
 
     text = re.sub(r"\s+", " ", inhalt.get_text(" ", strip=True))
     # Titel und Standardfloskeln abziehen
-    for weg in ("Comments are closed.", "Read more...", "click!"):
+    # Interne Redaktionsnotizen sind kein Inhalt. /purchasing traegt im Bestand
+    # ausschliesslich den Satz "Steve Williams needs to put something here" -
+    # die Seite ist damit leer, nicht befuellt (Suat 27.08.).
+    for weg in ("Comments are closed.", "Read more...", "click!",
+                "Steve Williams needs to put something here"):
         text = text.replace(weg, " ")
     h = inhalt.find(["h1", "h2"])
     if h:
@@ -78,6 +82,11 @@ for slug in sorted(kandidaten):
         gefunden.append(f"Downloads: {[d.split('/')[-1] for d in dateien][:3]}")
 
     nur_bild = bool(bilder) and len(text) <= 25 and not tabellen and not rahmenfenster and not dateien
+    # /purchasing traegt neben der internen Notiz nur ein Portraetfoto des
+    # genannten Mitarbeiters. Beides gehoert nicht in den Entwurf, die Seite
+    # ist leer (Suat 27.08.).
+    if slug == "purchasing":
+        gefunden, nur_bild = [], False
     if gefunden:
         doch_inhalt.append((slug, gefunden, nur_bild))
         print(f"  {slug:44s} {'NUR BILD' if nur_bild else 'INHALT GEFUNDEN'}")

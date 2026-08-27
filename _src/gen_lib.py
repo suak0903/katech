@@ -7,7 +7,7 @@ import html, json, os, re
 
 import gen_chrome as chrome
 
-VERSION = 32  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
+VERSION = 35  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
 PAGES_URL = "https://suak0903.github.io/katech/"
 ORIGINAL = "https://katech-solutions.com/"
 ORT = "KaTech Ingredient Solutions"
@@ -284,17 +284,44 @@ def galerie(root, bilder):
 
 
 def zertifikate(root, eintraege):
-    imgs = "".join(
-        f'<img src="{root}media/{b}" alt="{esc(a)}" loading="lazy" decoding="async">'
-        for b, a in eintraege)
-    return f'<div class="certs rv">{imgs}</div>'
+    """Die Zertifikatslogos. Wo das Dokument dazu vorliegt, fuehrt das Logo
+    dorthin - der Bestandstext verspricht genau das ("click on the logos
+    opposite to download the relevant PDF"), im Entwurf waren sie stumm."""
+    teile = []
+    for eintrag in eintraege:
+        bild, alt_text = eintrag[0], eintrag[1]
+        dokument = eintrag[2] if len(eintrag) > 2 else None
+        img = (f'<img src="{root}media/{bild}" alt="{esc(alt_text)}" '
+               f'loading="lazy" decoding="async">')
+        if dokument:
+            teile.append(f'<a href="{root}docs/{dokument}" target="_blank" rel="noopener" '
+                         f'aria-label="{esc(alt_text)}, open as PDF">{img}</a>')
+        else:
+            teile.append(img)
+    return f'<div class="certs rv">{"".join(teile)}</div>'
 
 
 def prosa(bloecke):
     return '<div class="prose rv">' + "".join(bloecke) + "</div>"
 
 
-def absatz(t):
+# Saetze des Bestands, die auf ein Dokument verweisen, ohne dass der Verweis
+# beim Uebernehmen mitgekommen waere. Sie werden nicht umgeschrieben, sondern
+# bekommen ihren Link zurueck (Suat 27.08.).
+VERWEIS_REPARATUR = {
+    "Click here to view the KaTech RSPO certificate .":
+        ('Click here to view the KaTech RSPO certificate.',
+         "docs/katech-rspo-2026.pdf"),
+}
+
+
+def absatz(t, root=""):
+    reparatur = VERWEIS_REPARATUR.get(t.strip())
+    if reparatur:
+        text, ziel = reparatur
+        vorn, hinten = text.split("Click here", 1)
+        return (f'<p>{esc(vorn)}<a href="{root}{ziel}" target="_blank" '
+                f'rel="noopener">Click here</a>{esc(hinten)}</p>')
     return f"<p>{esc(t)}</p>"
 
 

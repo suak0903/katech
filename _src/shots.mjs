@@ -23,6 +23,15 @@ const SEITEN = [
   ['news-brc', '/katech-receives-highest-brc-food-aa-rating-for-food-safety/'],
   ['contact', '/contact-us/'],
   ['about-this-preview', '/about-this-preview/'],
+  // Runde vom 27.08.: Reiter, Rechtstexte, Zertifikate, umgehaengte Suppenseite
+  ['reiter', '/yogurt/drinking-yogurt/'],
+  ['privacy', '/privacy-policy/'],
+  ['terms', '/terms-of-use/'],
+  ['rspo', '/certifications/rspo/'],
+  ['certifications', '/certifications/'],
+  ['sitemap', '/sitemap/'],
+  ['soups-fresh', '/soups/freshpasteurised/'],
+  ['purchasing', '/purchasing/'],
 ];
 
 const browser = await chromium.launch();
