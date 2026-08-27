@@ -174,7 +174,7 @@ def start():
     teile.append(f'''<section class="sec" id="solutions">
   <div class="wrap">
     {L.sec_kopf(eyebrow="What we solve", h2="Your product category, our formulation work.",
-                lead="Eleven application areas, more than one hundred product types. Every solution "
+                lead="Twelve product areas, 101 product types. Every solution "
                      "is developed for your recipe, your process and your raw materials.")}
     {L.raster(karten, 3)}
     <div class="btn-row btn-row--single rv" style="margin-top:34px">
@@ -329,7 +329,7 @@ def hub_solutions():
 
     inhalt = L.subhero(root, crumbs=[("Start", root + "index.html"), ("Solutions", None)],
                        eyebrow="Product areas", h1="Everything we formulate for.",
-                       sub="Eleven application areas with more than one hundred product types. "
+                       sub="Twelve product areas with 101 product types below them. "
                            "Each one is a starting point, never a finished recipe.",
                        bild="sensory-panel",
                        alt="Sensory panel with product samples at KaTech",

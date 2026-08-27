@@ -1350,9 +1350,6 @@ def _fehlerseite(schreibe):
 def _hinweise(schreibe, SEITEN, BAUM, NEWS):
     """Die Pflicht-Hinweisseite des Demonstrator-Standards."""
     root = "../"
-    anzahl_seiten = len(SEITEN)
-    anzahl_news = len([n for n in NEWS if n["slug"] != "news" and n["absaetze"]])
-
     swatches = [("--brand", "#6cb33e", "Logo green"), ("--brand-deep", "#4f6e18", "Text green"),
                 ("--teal", "#006a71", "Signature surface"), ("--ink", "#373738", "Text and footer"),
                 ("--accent", "#ffe115", "Logo yellow"), ("--blue", "#0073d8", "Technical accent"),
@@ -1364,13 +1361,14 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
         ("Design", "Template from 2013, unchanged since launch",
          "Built on the Ingredion colour and layout system, with the KaTech logo unchanged"),
         ("Structure", "Mega menu with over 100 entries at once",
-         "Four clear routes, every page still reachable and kept at its original address"),
+         "Five clear routes, every page still reachable and kept at its original address"),
         ("Images", "Small images at 432 by 288 pixels, some loaded from a third-party domain",
          "The same photographs, sharpened and delivered as WebP from one domain"),
         ("Speed", "WordPress with several stylesheets, jQuery and an old slider",
          "Static HTML, no framework, no database, no plugin updates"),
         ("Findability for AI", "One generic schema block, no machine-readable structure",
-         "Organization, ItemList, Article and Breadcrumb schema on every page type"),
+         "Organization, ItemList, Article, ProfilePage and BreadcrumbList markup, "
+         "the last on every subpage"),
         ("Mobile", "Layout from before responsive design was standard",
          "Built mobile first, tested down to 320 pixels"),
         ("Maintenance", "Every change goes through an agency",
@@ -1380,9 +1378,10 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
       <td data-l="This preview">{L.esc(b)}</td></tr>''' for m, a, b in vergleich)
 
     metriken = [("Stylesheets", "3 files", "1 file"),
-                ("JavaScript", "jQuery, qTip, Colorbox, RoyalSlider", "One file, 9 KB"),
+                ("JavaScript", "jQuery, qTip, Colorbox, RoyalSlider", "One file, 18 KB"),
                 ("Fonts", "System fonts, no self-hosting", "2 families, self-hosted"),
-                ("Schema types", "none worth indexing", "4 types across all pages")]
+                ("Schema types", "none worth indexing",
+                 "Breadcrumbs on all 206 subpages, plus 5 more types")]
     mk = "".join(f'''<div><span class="lbl">{L.esc(l)}</span>
       <span class="old">{L.esc(a)}</span><span class="new">{L.esc(b)}</span></div>'''
                  for l, a, b in metriken)
@@ -1469,14 +1468,14 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
     # Groessenordnungen des Bestands, alle Werte gemessen (siehe _src/data.json,
     # news.json, team.json und die Sitemaps der Bestandsseite)
     umfang = [
-        ("387", "page addresses in the existing sitemap, across all three languages"),
-        ("160", "English pages, each carried over here at its original address"),
-        ("13", "product areas with over one hundred product types below them"),
-        ("107", "news and press posts in the archive, 41 of them in English"),
+        ("494", "content addresses in the existing sitemap, across all three languages"),
+        ("201", "of them in English, and all 201 are in this preview"),
+        ("293", "in German and Polish, not part of this preview"),
+        ("101", "product types in twelve areas, every one with its own page"),
+        ("67", "product pages that carry three advice tabs each"),
         ("23", "individual team profiles, each with its own page"),
         ("743", "media files registered in the existing site"),
-        ("8", "certification marks to keep current"),
-        ("3", "languages: English, German and Polish"),
+        ("1,471", "attachment pages WordPress generates on top, with no content of their own"),
     ]
     umfang_html = "".join(
         f"<div><b>{L.esc(w)}</b><span>{L.esc(t)}</span></div>" for w, t in umfang)
@@ -1484,37 +1483,39 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
     umgesetzt = [
         "Complete design system in the Ingredion colour and layout world, with the KaTech logo "
         "and its yellow kept as the mark of identity",
-        "All 13 product areas and every product type below them, navigable and with their own "
-        "text and image from the existing site",
-        "Every page of the existing site is here. 22 of them carry no content on the existing "
-        "site either; they are marked as empty and link to the original, so you can check that "
-        "for yourself rather than take our word for it",
+        "All twelve product areas and all 101 product types below them, navigable and each "
+        "with its own text and image from the existing site",
+        "All 201 English addresses of the existing site: 160 pages and 41 posts, each at its "
+        "original address. 22 of them carry no content on the existing site either; they are "
+        "marked as empty and link to the original, so you can check that for yourself rather "
+        "than take our word for it",
         "The three advice tabs that sit under each product description on the existing site "
-        "(new product, troubleshooting, cost optimisation) carried over for all 67 products "
-        "that have them, open on the page instead of hidden behind a click",
+        "(new product, troubleshooting, cost optimisation), carried over for all 67 products "
+        "that have them, and readable even if scripting is switched off",
         "All legal texts taken over word for word, with anything inconsistent flagged as a "
         "visible note rather than silently corrected",
-        "The certificates themselves held on the site: BRCGS, IFS, RSPO, non-GMO, Sedex and the "
-        "environmental policy, instead of links pointing at the previous domain",
-        "Every existing page kept at its original address, so bookmarks and external links "
-        "continue to work",
-        "Company, expertise, facilities, certifications and locations, restructured into four "
-        "clear routes instead of a menu with over one hundred entries",
-        "News archive and all team profiles as individual pages",
+        "The six certificate documents held on the site itself: BRCGS, IFS, RSPO, non-GMO, "
+        "Sedex and the organic certificate, instead of links pointing at the previous domain",
+        "Solutions, expertise, company, facilities and news restructured into five clear routes, "
+        "instead of a mega menu that opens over one hundred entries at once",
+        "The complete English news archive and all 23 team profiles as individual pages, "
+        "with the portraits recovered from thumbnails because the originals no longer resolve",
         "Enquiry form, mobile navigation, image gallery and consent-gated maps, tested by machine "
         "on desktop and on a phone",
         "Machine-readable structure for search engines and AI assistants: organisation, product "
-        "lists, articles and breadcrumbs",
-        "Social preview images, sitemap, error page and a text file that tells AI assistants what "
-        "this company does",
+        "lists, articles, people, and a breadcrumb trail on every one of the 206 subpages",
+        "Social preview images, a graphical sitemap of every page, error page and a text file "
+        "that tells AI assistants what this company does",
         "Built for phones first and verified down to 320 pixels without a single horizontal "
         "overflow",
         "Static delivery without WordPress, plugins or a database",
     ]
     offen = [
-        "Writing content for the 22 pages that are empty on the existing site as well, plus the "
-        "full news archive beyond the English part shown here",
-        "The German and Polish versions, and the habit of making every future change three times",
+        "The German and Polish sites: 293 addresses that this preview does not cover",
+        "Writing content for the 22 pages that are empty on the existing site as well",
+        "The two company films, which the existing site embeds from Vimeo and which cannot be "
+        "played from outside it",
+        "The habit of making every future change three times, once per language",
         "Connecting the enquiry route to your mailboxes, including who receives which product area",
         "A publishing workflow and the training that goes with it, so your team changes content "
         "without calling an agency",
@@ -1571,20 +1572,21 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
 <section class="sec sec--sand" id="built">
   <div class="wrap">
     {L.sec_kopf(eyebrow="What was built", h2="The same site, rebuilt.",
-                lead="Nothing was left out. Every area of the existing site exists here, and "
-                     "every page kept its original address.")}
-    {L.stats([(str(anzahl_seiten), "existing pages carried over"),
-              ("13", "product areas, all built out"),
-              (str(anzahl_news), "news releases, complete"),
-              ("167", "original images reused")])}
+                lead="The English site has 201 addresses: 160 pages, 41 posts. Every one of "
+                     "them is here, at its original address. Nothing was left out and nothing "
+                     "was invented.")}
+    {L.stats([("201", "English addresses on the existing site"),
+              ("201", "of them here, which is all of them"),
+              ("12", "product areas, all built out"),
+              ("157", "original images reused")])}
     <div class="grid grid--2 rv" style="margin-top:36px">
       <div class="loc">
         <span class="loc__role">Finished and working</span>
         <h3>What you can click today</h3>
         <ul style="margin:0;padding-left:1.2em;font-size:15.5px;color:var(--ink-soft)">
-          <li>Start page, all eleven product areas and every product type below them</li>
+          <li>Start page, all twelve product areas and all 101 product types below them</li>
           <li>Company, expertise, facilities, certifications and locations</li>
-          <li>Complete news archive with detail pages</li>
+          <li>The complete English news archive with detail pages</li>
           <li>Enquiry form, mobile navigation, image gallery, consent-gated maps</li>
           <li>Schema markup, social preview images, sitemap and error page</li>
         </ul>

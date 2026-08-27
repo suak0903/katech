@@ -101,6 +101,10 @@ EXPERTISE = [
      ("The raw material base.",
       "What we formulate from, and where it comes from."),
      ["our-ingredients", "our-ingredients/ingredients-list"]),
+    ("Evidence",
+     ("What it looks like in practice.",
+      "Worked examples from the application areas."),
+     ["case-studies"]),
 ]
 
 # --- Company: wer das Unternehmen ist -------------------------------------
@@ -108,7 +112,7 @@ COMPANY = [
     ("The business",
      ("What drives the company.",
       "Vision, approach, the people and the work we can show."),
-     ["our-vision", "our-approach", "how-we-work", "our-people", "case-studies", "careers"]),
+     ["our-vision", "our-approach", "how-we-work", "our-people", "careers"]),
     ("Standards and sourcing",
      ("What we can prove.",
       "Certifications, raw material policy and the sustainability position."),

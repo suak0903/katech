@@ -7,7 +7,10 @@ sys.stdout.reconfigure(encoding="utf-8")
 BASIS = "https://suak0903.github.io/katech/"
 
 PRUEFUNGEN = [
-    ("yogurt/drinking-yogurt/", "wege__w", "Reiter auf der Produktseite"),
+    ("yogurt/drinking-yogurt/", "tabs__bar", "Reiter als Tabs"),
+    ("vegan/", "Vegan solutions", "Bereichsseite heisst Vegan solutions"),
+    ("solutions/", "subhero__cta", "Weg zur Vegan-Seite im Hero"),
+    ("solutions/", 'id="plant"', "Anker fuer Plant-based"),
     ("privacy-policy/", "prose--legal", "Privacy policy vollstaendig"),
     ("certifications/rspo/", "cert-rspo-2026-p1", "RSPO-Zertifikat sichtbar"),
     ("certifications/", "katech-ifs-2027.pdf", "Zertifikatsdokumente verlinkt"),

@@ -7,7 +7,7 @@ import html, json, os, re
 
 import gen_chrome as chrome
 
-VERSION = 39  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
+VERSION = 40  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
 PAGES_URL = "https://suak0903.github.io/katech/"
 ORIGINAL = "https://katech-solutions.com/"
 ORT = "KaTech Ingredient Solutions"
@@ -45,14 +45,59 @@ def og_bild(root, name):
     return PAGES_URL + "media/" + name
 
 
+def brotkrumen(zielpfad, inhalt):
+    """BreadcrumbList aus dem sichtbaren Pfad der Seite.
+
+    Der Pfad wird aus dem fertigen HTML gelesen statt getrennt gefuehrt,
+    damit Markup und Anzeige nicht auseinanderlaufen koennen.
+    """
+    m = re.search(r'<nav class="crumbs"[^>]*>(.*?)</nav>', inhalt, re.S)
+    if not m:
+        return None
+    # Die Trennstriche tragen aria-hidden und sind keine Stationen
+    roh = re.sub(r'<span aria-hidden="true">.*?</span>', "\u0001", m.group(1))
+    stationen = []
+    for verweis, mit_text, nur_text in re.findall(
+            r'<a href="([^"]*)">([^<]*)</a>|<span[^>]*>([^<]*)</span>', roh):
+        name = (mit_text or nur_text).strip()
+        if name:
+            stationen.append((name, verweis))
+    # Das letzte Glied steht ohne Auszeichnung da
+    letztes = re.sub(r"<[^>]+>", " ", roh).split("\u0001")[-1].strip()
+    if letztes and (not stationen or stationen[-1][0] != letztes):
+        stationen.append((letztes, ""))
+    if len(stationen) < 2:
+        return None
+
+    root = wurzel(zielpfad)
+    diese_seite = PAGES_URL + zielpfad.replace("index.html", "")
+    eintraege = []
+    for i, (name, verweis) in enumerate(stationen, 1):
+        if verweis:
+            ziel = verweis[len(root):] if root and verweis.startswith(root) else verweis
+            adresse = PAGES_URL + ziel.replace("index.html", "").lstrip("./")
+        else:
+            adresse = diese_seite
+        eintraege.append({"@type": "ListItem", "position": i,
+                          "name": name, "item": adresse})
+    return {"@context": "https://schema.org", "@type": "BreadcrumbList",
+            "itemListElement": eintraege}
+
+
 def seite(zielpfad, titel, beschreibung, inhalt, *, aktiv="", solid=False,
           og="og-default.jpg", jsonld=None, extra_head="", body_klasse=""):
     root = wurzel(zielpfad)
     v = f"?v={VERSION}"
     ld = ""
+    bloecke = []
     if jsonld:
-        ld = ('\n<script type="application/ld+json">'
-              + normalisieren(json.dumps(jsonld, ensure_ascii=False, indent=1)) + "</script>")
+        bloecke.append(jsonld)
+    krumen = brotkrumen(zielpfad, inhalt)
+    if krumen:
+        bloecke.append(krumen)
+    for b in bloecke:
+        ld += ('\n<script type="application/ld+json">'
+               + normalisieren(json.dumps(b, ensure_ascii=False, indent=1)) + "</script>")
     return f'''<!doctype html>
 <html lang="en" class="no-js">
 <head>

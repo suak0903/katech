@@ -36,12 +36,12 @@ FOOT_SPALTEN = [
         ("Cost optimisation", "cost-optimisation/"),
         ("Ingredients used", "our-ingredients/"),
         ("Fat and sugar reduction", "fat-reduction/"),
+        ("Case studies", "case-studies/"),
     ]),
     ("Company", [
         ("Our vision", "our-vision/"),
         ("How we work", "how-we-work/"),
         ("Our people", "our-people/"),
-        ("Case studies", "case-studies/"),
         ("Certifications", "certifications/"),
         ("Sourcing and sustainability", "sourcing-and-sustainability/"),
         ("Careers", "careers/"),
