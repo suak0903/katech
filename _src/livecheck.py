@@ -24,6 +24,11 @@ PRUEFUNGEN = [
     ("cyril-carrat/", "zoom--portraet", "Portraet vergroesserbar"),
     ("about-this-preview/", "ref__link", "Referenzbilder verlinkt"),
     ("media/refs/cancontrols.jpg", None, "Referenzbild als JPG"),
+    ("technical-development-suite-germany/", 'id="address"', "Adresse auf der Standortseite"),
+    ("find-us/", "loc__mehr", "Find us fuehrt zu den Standorten"),
+    ("find-us/katech-uk/", "technical-development-suite-uk", "alte Adresse leitet weiter"),
+    ("our-facilities/", "weiter__t", "Facilities mit Verweisstreifen"),
+    ("sitemap/", "sm__mk--um", "Sitemap kennzeichnet Weiterleitungen"),
 ]
 
 for pfad, erwartet, was in PRUEFUNGEN:

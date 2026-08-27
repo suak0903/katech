@@ -1416,7 +1416,7 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
                 ("JavaScript", "jQuery, qTip, Colorbox, RoyalSlider", "One file, 18 KB"),
                 ("Fonts", "System fonts, no self-hosting", "2 families, self-hosted"),
                 ("Schema types", "none worth indexing",
-                 "Breadcrumbs on all 206 subpages, plus 5 more types")]
+                 "Breadcrumbs on all 202 subpages, plus 5 more types")]
     mk = "".join(f'''<div><span class="lbl">{L.esc(l)}</span>
       <span class="old">{L.esc(a)}</span><span class="new">{L.esc(b)}</span></div>'''
                  for l, a, b in metriken)
@@ -1543,10 +1543,17 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
         "instead of a mega menu that opens over one hundred entries at once",
         "The complete English news archive and all 23 team profiles as individual pages, "
         "with the portraits recovered from thumbnails because the originals no longer resolve",
+        "Each of the four sites on one page: what happens there, with the address and the map "
+        "underneath, instead of a description and a separate address page for the same place",
+        "Addresses that no longer carry their own page still work. The four address pages of "
+        "the existing site lead to the site page that now holds their content, so nothing that "
+        "is bookmarked or linked runs into a dead end",
+        "Every product photograph and every portrait opens full size on click, and the image "
+        "gallery works by keyboard and by swipe",
         "Enquiry form, mobile navigation, image gallery and consent-gated maps, tested by machine "
         "on desktop and on a phone",
         "Machine-readable structure for search engines and AI assistants: organisation, product "
-        "lists, articles, people, and a breadcrumb trail on every one of the 206 subpages",
+        "lists, articles, people, and a breadcrumb trail on every one of the 202 subpages",
         "Social preview images, a graphical sitemap of every page, error page and a text file "
         "that tells AI assistants what this company does",
         "Built for phones first and verified down to 320 pixels without a single horizontal "
@@ -1628,9 +1635,11 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
         <h3>What you can click today</h3>
         <ul style="margin:0;padding-left:1.2em;font-size:15.5px;color:var(--ink-soft)">
           <li>Start page, all twelve product areas and all 101 product types below them</li>
-          <li>Company, expertise, facilities, certifications and locations</li>
+          <li>Company, expertise, certifications with all six certificate documents</li>
+          <li>The four sites, each with what happens there, the address and the map</li>
           <li>The complete English news archive with detail pages</li>
-          <li>Enquiry form, mobile navigation, image gallery, consent-gated maps</li>
+          <li>Enquiry form, mobile navigation, every image full size on click,
+            consent-gated maps</li>
           <li>Schema markup, social preview images, sitemap and error page</li>
         </ul>
       </div>
