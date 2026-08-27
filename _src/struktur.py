@@ -35,9 +35,9 @@ SOLUTIONS = [
       "the area with the deepest formulation library."),
      ["yogurt", "cream", "cheese", "desserts", "milk-drinks"]),
     ("plant", "Plant-based",
-     ("Meat, fish and dairy alternatives.",
+     ("Alternatives for meat, fish, dairy and savoury.",
       "The fastest moving category we work in, with a dedicated centre of excellence and its "
-      "own pilot machinery in Lübeck."),
+      "own pilot machinery in Lübeck. Eighteen product types in four groups."),
      ["vegan"]),
     ("savoury", "Savoury",
      ("Emulsions that hold.",

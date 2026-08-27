@@ -292,11 +292,27 @@ def start():
 def hub_solutions():
     slug, root = "solutions", "../"
     bloecke = []
-    for cluster_id, cluster_titel, cluster_text, bereiche in I.CLUSTER:
-        karten = [L.karte(root, titel=kurztitel(b), text=intro_von(b, 108),
-                          ziel=link(root, b), bild=bild_von(b) or "sensory-panel",
-                          zusatz=f"{len(BAUM.get(b, []))} applications" if BAUM.get(b) else "",
-                          mehr="View area") for b in bereiche]
+    for cluster_id, cluster_titel, cluster_text, bereiche in S.SOLUTIONS:
+        if cluster_id == "plant":
+            # Plant-based bekommt die vier Gruppen als Kacheln, damit die Seite
+            # dasselbe zeigt wie die Sitemap. Die beiden Gruppen ohne Kopfseite
+            # fuehren auf den Abschnitt der Bereichsseite.
+            karten = []
+            for gruppe, kopf, kinder in S.VEGAN_GRUPPEN:
+                anzahl = len(kinder) + (1 if kopf else 0)
+                # ziel() ist eine Funktion in diesem Modul, deshalb anderer Name
+                gruppen_ziel = root + (kopf + "/" if kopf else "vegan/#" + I.anker(gruppe))
+                karten.append(L.karte(
+                    root, titel=gruppe,
+                    text=I.VEGAN_GRUPPENTEXT.get(gruppe, ""),
+                    ziel=gruppen_ziel, bild=I.VEGAN_GRUPPENBILD.get(gruppe),
+                    zusatz=f"{anzahl} product types", mehr="View group"))
+        else:
+            karten = [L.karte(root, titel=kurztitel(b), text=intro_von(b, 108),
+                              ziel=link(root, b), bild=bild_von(b) or "sensory-panel",
+                              zusatz=f"{len(BAUM.get(b, []) + S.FREMDE_KINDER.get(b, []))} applications"
+                                     if BAUM.get(b) else "",
+                              mehr="View area") for b in bereiche]
         bloecke.append(f'''<section class="sec{' sec--sand' if cluster_id in ('savoury',) else ''}" id="{cluster_id}">
   <div class="wrap">
     {L.sec_kopf(eyebrow=cluster_titel, h2=cluster_text[0], lead=cluster_text[1])}
@@ -418,9 +434,9 @@ def bereichsseite(slug):
         for n, (gruppe, kopfseite, kinder) in enumerate(gruppen):
             liste = ([kopfseite] if kopfseite else []) + kinder
             lead = intro_von(kopfseite, 150) if kopfseite else ""
-            bloecke.append(f'''<section class="sec{" sec--sand" if n % 2 == 0 else ""}">
+            bloecke.append(f'''<section class="sec{" sec--sand" if n % 2 == 0 else ""}" id="{I.anker(gruppe)}">
   <div class="wrap">
-    {L.sec_kopf(eyebrow=gruppe, h2=f"{len(liste)} product types.", lead=lead)}
+    {L.sec_kopf(eyebrow=gruppe, h2=f"{gruppe}: {len(liste)} product types.", lead=lead)}
     {L.raster([karte_fuer(u) for u in liste], 3)}
   </div>
 </section>''')

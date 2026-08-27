@@ -884,7 +884,9 @@ body.ohne-demobar{padding-bottom:0}
 .sm__k:first-child{margin-top:0;padding-top:0;border-top:0}
 .sm__k a{font-family:var(--font-display);font-size:16px}
 .sm__g{font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--ink-soft);margin-top:9px;padding-left:14px}
+  text-transform:uppercase;margin-top:10px;padding-left:14px}
+.sm__g a{color:var(--brand-deep)}
+.sm__g a:hover{text-decoration:underline;text-underline-offset:3px}
 .sm__i--1{padding-left:16px;font-size:14.5px}
 .sm__i--2{padding-left:28px;font-size:14.5px}
 .sm__i--1::before,.sm__i--2::before{content:'';display:inline-block;width:7px;height:1px;

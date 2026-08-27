@@ -279,6 +279,29 @@ NEWS_BILD = {
     "current-eu-approved-additives": "blending-tower",
 }
 
+def anker(text):
+    """Abschnitts-Kennung aus einem Gruppennamen."""
+    return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+
+
+# Kurztexte und Motive der vier Plant-based-Gruppen. Sie erscheinen auf der
+# Solutions-Seite und muessen dasselbe sagen wie die Gruppen der Bereichsseite.
+VEGAN_GRUPPENTEXT = {
+    "Meat alternatives": "Burger patties, mince, nuggets, cold cuts, patés and sausages. "
+                         "Bite and texture built on dedicated pilot machinery.",
+    "Fish alternatives": "Fish cakes and fish fingers with the flake and mouthfeel that "
+                         "consumers compare against the original.",
+    "Dairy alternatives": "Cheese, cream, yogurt, drinks and desserts without milk, and "
+                          "without the chalky finish that gives them away.",
+    "Savoury": "Mayonnaises, dressings, sauces and spreads. Emulsions that hold without egg.",
+}
+VEGAN_GRUPPENBILD = {
+    "Meat alternatives": "p-vegan-plant-based-mince",
+    "Fish alternatives": "p-vegan-plant-based-fish-alternatives",
+    "Dairy alternatives": "p-vegan-vegan-cheese-alternatives",
+    "Savoury": "p-vegan-vegan-sauces",
+}
+
 MONATE = ["January", "February", "March", "April", "May", "June",
           "July", "August", "September", "October", "November", "December"]
 
@@ -905,7 +928,11 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
             eintraege.append(f'<li class="sm__k"><a href="{root}{b}/">{L.esc(kurztitel(b))}</a></li>')
             if b == "vegan":
                 for gruppe, kopf, kinder in S.VEGAN_GRUPPEN:
-                    eintraege.append(f'<li class="sm__g">{L.esc(gruppe)}</li>')
+                    # Die Gruppe fuehrt auf ihre Kopfseite, sonst auf den
+                    # Abschnitt der Bereichsseite. Beides ist anklickbar.
+                    ziel = f"{root}{kopf}/" if kopf else f"{root}vegan/#{anker(gruppe)}"
+                    eintraege.append(
+                        f'<li class="sm__g"><a href="{ziel}">{L.esc(gruppe)}</a></li>')
                     for u in ([kopf] if kopf else []) + kinder:
                         eintraege.append(eintrag(u, tiefe=2))
             else:

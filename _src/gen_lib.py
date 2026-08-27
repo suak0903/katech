@@ -7,7 +7,7 @@ import html, json, os, re
 
 import gen_chrome as chrome
 
-VERSION = 29  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
+VERSION = 30  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
 PAGES_URL = "https://suak0903.github.io/katech/"
 ORIGINAL = "https://katech-solutions.com/"
 ORT = "KaTech Ingredient Solutions"
