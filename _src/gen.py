@@ -15,6 +15,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 import gen_lib as L
 import gen_chrome as C
 import inhalt as I
+import struktur as S
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.abspath(os.path.join(HERE, ".."))
@@ -28,6 +29,45 @@ SEITEN = DATEN["seiten"]
 BAUM = DATEN["baum"]
 
 geschrieben = []
+
+TEAM_DATEI = os.path.join(HERE, "team.json")
+TEAM = json.load(open(TEAM_DATEI, encoding="utf-8")) if os.path.exists(TEAM_DATEI) else []
+
+# Eine einzige Quelle fuer die Bereichszugehoerigkeit. Menuemarkierung,
+# Breadcrumb, Hub-Einordnung und Sitemap leiten sich daraus ab.
+BEREICH = S.zuordnung(
+    I.PRODUKTBEREICHE, BAUM,
+    [n["slug"] for n in NEWS if n["slug"] != "news"],
+    [p["slug"] for p in TEAM])
+
+BEREICHS_TITEL = {b: t for b, t, _ in S.BEREICHE}
+BEREICHS_ZIEL = {b: z for b, _, z in S.BEREICHE}
+
+
+def bereich_von(slug):
+    """Bereich einer Seite, leer wenn sie zu keinem gehoert."""
+    return BEREICH.get(slug, "")
+
+
+def aktiv_von(slug):
+    """Wert fuer die Menuemarkierung: das Ziel des Bereichs."""
+    b = bereich_von(slug)
+    return BEREICHS_ZIEL.get(b, "")
+
+
+def crumbs_von(root, slug, *, zwischen=None):
+    """Breadcrumb-Pfad. Wurzel ist immer der Bereich aus der Zuordnung,
+    damit Menuemarkierung und Pfad nicht auseinanderlaufen koennen."""
+    weg = [("Start", root + "index.html")]
+    b = bereich_von(slug)
+    # Die Startseite eines Bereichs fuehrt sich nicht selbst als Zwischenglied
+    ist_bereichsstart = b and S.BEREICHS_START.get(b) == slug
+    if b and not ist_bereichsstart:
+        weg.append((BEREICHS_TITEL[b], root + BEREICHS_ZIEL[b]))
+    for titel, ziel in (zwischen or []):
+        weg.append((titel, ziel))
+    weg.append((BEREICHS_TITEL[b] if ist_bereichsstart else kurztitel(slug), None))
+    return weg
 
 
 def schreibe(zielpfad, html):
@@ -71,12 +111,16 @@ def titel_von(slug):
 
 
 def kurztitel(slug):
-    """Kachel-Titel: kurz, ohne Marketing-Satz."""
+    """Beschriftung fuer Navigation, Kacheln und Sitemap.
+
+    Grundlage ist der Adressbestandteil, weil er kurz und eindeutig ist. Die
+    Titel des Bestands taugen dafuer nicht: dort stehen Werbesaetze wie
+    "Greek yogurt - the food of the gods". Wo der Adressbestandteil deutsch
+    oder unverstaendlich ist, greift die Tabelle in inhalt.KURZTITEL."""
     if slug in I.KURZTITEL:
         return I.KURZTITEL[slug]
     letzte = slug.split("/")[-1]
-    t = letzte.replace("-", " ")
-    t = re.sub(r"^katech ", "", t)
+    t = re.sub(r"^katech ", "", letzte.replace("-", " "))
     return t[:1].upper() + t[1:]
 
 
@@ -284,24 +328,54 @@ def hub_solutions():
                                                  for _, _, _, bs in I.CLUSTER for b in bs])))
 
 
-def hub_generisch(slug, titel, eyebrow, h1, sub, gruppen, og, bild="hq-luebeck"):
+def hub_generisch(slug, titel, eyebrow, h1, sub, gruppen, og, bild="hq-luebeck",
+                  zusatz=""):
     root = "../"
     bloecke = []
-    for gruppen_titel, gruppen_lead, eintraege in gruppen:
-        kacheln = [L.kachel(nummer=f"{i:02d}", titel=kurztitel(s) if s in SEITEN else t,
-                            text=intro_von(s, 96) or t2, ziel=link(root, s))
-                   for i, (s, t, t2) in enumerate(eintraege, 1)]
-        bloecke.append(f'''<section class="sec">
+    for n, (gruppen_titel, gruppen_lead, eintraege) in enumerate(gruppen):
+        kacheln = []
+        for i, (s, t, t2) in enumerate(eintraege, 1):
+            kacheln.append(L.kachel(
+                nummer=f"{i:02d}",
+                titel=kurztitel(s) if s in SEITEN else t,
+                text=intro_von(s, 96) or t2 or I.KACHEL_LEER,
+                ziel=link(root, s),
+                leer=I.ist_leer(s)))
+        bloecke.append(f'''<section class="sec{" sec--sand" if n % 2 else ""}">
   <div class="wrap">
     {L.sec_kopf(eyebrow=gruppen_titel, h2=gruppen_lead[0], lead=gruppen_lead[1])}
     <div class="grid grid--3 rv">{"".join(kacheln)}</div>
   </div>
 </section>''')
-    inhalt = L.subhero(root, crumbs=[("Start", root + "index.html"), (titel, None)],
+    if zusatz:
+        if slug == "our-facilities":
+            bloecke.append(zusatz.format(
+                kopf=L.sec_kopf(eyebrow="Impressions", h2="Inside the sites."),
+                galerie=L.galerie(root, [
+                    ("hq-luebeck", "KaTech head office in Lübeck"),
+                    ("blending-tower", "Blending tower at the production site"),
+                    ("lab-measurement", "Measurement in the development laboratory"),
+                    ("sensory-panel", "Sensory panel with product samples"),
+                    ("warehouse", "Temperature controlled warehouse"),
+                    ("plant-reinfeld", "Production site in northern Germany")])))
+        else:
+            bloecke.append(zusatz.format(
+                root=root,
+                kopf=L.sec_kopf(eyebrow="Sites and production",
+                                h2="Where the work happens.",
+                                lead="Development suites in Lübeck and Cheshire, production and "
+                                     "warehousing in northern Germany, a sales office in Poland.",
+                                zentriert=True)))
+    inhalt = L.subhero(root, crumbs=crumbs_von(root, BEREICHS_SEITE.get(slug, slug)),
                        eyebrow=eyebrow, h1=h1, sub=sub, bild=bild,
                        alt=titel) + "\n" + "\n".join(bloecke)
     schreibe(ziel(slug), L.seite(ziel(slug), titel, sub, inhalt,
-                                 aktiv=slug + "/", og=og))
+                                 aktiv=aktiv_von(BEREICHS_SEITE.get(slug, slug)), og=og))
+
+
+# Hub-Slug zu der Seite, deren Bereichszuordnung gilt
+BEREICHS_SEITE = {"expertise": "expertise", "company": "company",
+                  "our-facilities": "our-facilities"}
 
 
 # ==========================================================================
@@ -315,9 +389,16 @@ def bereichsseite(slug):
     kopf_text = absaetze[0] if absaetze else ""
     rest = absaetze[1:6]
 
-    karten = [L.karte(root + "../" if False else root, titel=kurztitel(u),
-                      text=intro_von(u, 96), ziel=root + u + "/",
-                      bild=bild_von(u), mehr="Open") for u in unter]
+    # Seiten, die im Bestand woanders liegen, hier aber hingehoeren
+    unter = unter + S.FREMDE_KINDER.get(slug, [])
+
+    def karte_fuer(u):
+        return L.karte(root, titel=kurztitel(u), text=intro_von(u, 96),
+                       ziel=root + u + "/", bild=bild_von(u), mehr="Open",
+                       leer=I.ist_leer(u))
+
+    gruppen = S.VEGAN_GRUPPEN if slug == "vegan" else None
+    karten = [karte_fuer(u) for u in unter]
 
     prosa_bloecke = [L.absatz(t) for t in rest]
     prosa_html = ""
@@ -329,7 +410,22 @@ def bereichsseite(slug):
 </section>'''
 
     kacheln_html = ""
-    if karten:
+    if gruppen:
+        # Vier Gruppen statt achtzehn Seiten nebeneinander. Wo der Bestand eine
+        # Kopfseite hat, fuehrt sie die Gruppe an; sonst bleibt es bei einer
+        # Ueberschrift, damit keine Seite erfunden wird.
+        bloecke = []
+        for n, (gruppe, kopfseite, kinder) in enumerate(gruppen):
+            liste = ([kopfseite] if kopfseite else []) + kinder
+            lead = intro_von(kopfseite, 150) if kopfseite else ""
+            bloecke.append(f'''<section class="sec{" sec--sand" if n % 2 == 0 else ""}">
+  <div class="wrap">
+    {L.sec_kopf(eyebrow=gruppe, h2=f"{len(liste)} product types.", lead=lead)}
+    {L.raster([karte_fuer(u) for u in liste], 3)}
+  </div>
+</section>''')
+        kacheln_html = "\n".join(bloecke)
+    elif karten:
         kacheln_html = f'''<section class="sec sec--sand">
   <div class="wrap">
     {L.sec_kopf(eyebrow="Applications", h2=f"{len(unter)} product types in this area.",
@@ -341,8 +437,7 @@ def bereichsseite(slug):
 </section>'''
 
     inhalt = L.subhero(
-        root, crumbs=[("Start", root + "index.html"), ("Solutions", root + "solutions/"),
-                      (kurztitel(slug), None)],
+        root, crumbs=crumbs_von(root, slug),
         eyebrow="Product area", h1=L.esc(titel_von(slug)),
         sub=kurz(kopf_text, 230), bild=bild_von(slug) or "sensory-panel",
         alt=kurztitel(slug))
@@ -350,7 +445,7 @@ def bereichsseite(slug):
     schreibe(ziel(slug), L.seite(
         ziel(slug), kurztitel(slug),
         kurz(s.get("description") or kopf_text, 158) or f"KaTech solutions for {kurztitel(slug)}.",
-        inhalt, aktiv="solutions/",
+        inhalt, aktiv=aktiv_von(slug),
         og="og-solutions.jpg",
         jsonld=I.ld_liste(kurztitel(slug), [(kurztitel(u), L.PAGES_URL + u + "/") for u in unter])))
 
@@ -363,8 +458,13 @@ def produktseite(slug):
     geschwister = [g for g in BAUM.get(bereich, []) if g != slug]
 
     bloecke = [L.absatz(t) for t in absaetze[:8]]
-    ist_stub = not bloecke
-    if ist_stub:
+    # Drei Faelle: (a) im Original nur ein Bild, hier vollstaendig uebernommen,
+    # (b) im Original ohne jeden Inhalt, (c) hier nicht ausgebaut.
+    nur_bild = I.ist_nur_bild(slug) and bool(bild_von(slug))
+    ist_stub = not bloecke and not nur_bild
+    if nur_bild and not bloecke:
+        bloecke = [L.absatz(I.BILD_HINWEIS)]
+    elif ist_stub:
         bloecke = [I.stub_kasten(root, slug)]
     if s.get("listen"):
         bloecke.append(L.faktenkasten("Covered in this application",
@@ -393,10 +493,10 @@ def produktseite(slug):
 </section>'''
 
     inhalt = L.subhero(
-        root, crumbs=[("Start", root + "index.html"), ("Solutions", root + "solutions/"),
-                      (kurztitel(bereich), root + bereich + "/"), (kurztitel(slug), None)],
+        root, crumbs=crumbs_von(root, slug,
+                                zwischen=[(kurztitel(bereich), root + bereich + "/")]),
         eyebrow=kurztitel(bereich),
-        h1=L.esc(titel_von(slug)) + (" " + I.STUB_MARKE if ist_stub else ""),
+        h1=L.esc(titel_von(slug)) + (" " + I.stub_marke(slug) if ist_stub else ""),
         sub=kurz(absaetze[0], 190) if absaetze else "")
     inhalt += f'''
 <section class="sec">
@@ -411,7 +511,7 @@ def produktseite(slug):
         ziel(slug), kurztitel(slug),
         kurz(s.get("description") or (absaetze[0] if absaetze else ""), 158)
         or f"KaTech stabilising solutions for {kurztitel(slug).lower()}.",
-        inhalt, aktiv="solutions/", og="og-solutions.jpg"))
+        inhalt, aktiv=aktiv_von(slug), og="og-solutions.jpg"))
 
 
 def cta_block(root):
@@ -431,7 +531,7 @@ def cta_block(root):
 # ==========================================================================
 # 4. Textseiten des Unternehmens
 # ==========================================================================
-def textseite(slug, *, eyebrow, crumbs_extra=None, bild=None, extra_html="", aktiv="company/"):
+def textseite(slug, *, eyebrow, crumbs_extra=None, bild=None, extra_html="", aktiv=None):
     root = "../" * (slug.count("/") + 1)
     s = SEITEN.get(slug, {})
     absaetze = s.get("absaetze", [])
@@ -444,13 +544,10 @@ def textseite(slug, *, eyebrow, crumbs_extra=None, bild=None, extra_html="", akt
     if ist_stub:
         bloecke = [I.stub_kasten(root, slug)]
 
-    crumbs = [("Start", root + "index.html")]
-    if crumbs_extra:
-        crumbs += crumbs_extra
-    crumbs.append((kurztitel(slug), None))
+    crumbs = crumbs_von(root, slug, zwischen=crumbs_extra)
 
     inhalt = L.subhero(root, crumbs=crumbs, eyebrow=eyebrow,
-                       h1=L.esc(titel_von(slug)) + (" " + I.STUB_MARKE if ist_stub else ""),
+                       h1=L.esc(titel_von(slug)) + (" " + I.stub_marke(slug) if ist_stub else ""),
                        sub=kurz(absaetze[0], 200) if absaetze else "",
                        bild=bild, alt=kurztitel(slug))
     inhalt += f'''
@@ -464,7 +561,8 @@ def textseite(slug, *, eyebrow, crumbs_extra=None, bild=None, extra_html="", akt
     schreibe(ziel(slug), L.seite(
         ziel(slug), kurztitel(slug),
         kurz(s.get("description") or (absaetze[0] if absaetze else ""), 158) or I.PLATZHALTER[:150],
-        inhalt, aktiv=aktiv, og="og-company.jpg"))
+        inhalt, aktiv=aktiv if aktiv is not None else aktiv_von(slug),
+        og="og-" + (bereich_von(slug) or "company") + ".jpg"))
 
 
 def main():

@@ -173,6 +173,41 @@ ueber alle Personen.
 transparenten Bereich als Schwarz ein und die drei fallen in der Kachelreihe
 sofort auf.
 
+## 5d. OFFEN: Bereichszuordnung ist widerspruechlich (Suat 27.08.2026)
+
+**Befund.** Drei Stellen sagen unabhaengig voneinander, zu welchem Bereich eine
+Seite gehoert, und sie widersprechen sich:
+
+| Seite | verlinkt im Hub | markierter Menuepunkt | Breadcrumb |
+|---|---|---|---|
+| `our-people` | Expertise | Company | Start / Company / Our people |
+| `case-studies` | Expertise | Company | Start / Company / Case studies |
+| `our-facilities` | Company | Facilities | Start / Company / Our facilities |
+
+Wer im Expertise-Hub auf das Team klickt, landet also in Company. Wer im
+Company-Hub auf Facilities klickt, sieht oben Facilities und unten Company.
+
+**Ursache.** In `inhalt.py` werden drei Dinge getrennt gesetzt: die Liste, in
+der eine Seite steht (`COMPANY_SEITEN` bzw. `EXPERTISE_SEITEN`), der Wert
+`aktiv` fuer die Menuemarkierung und `crumbs_extra` fuer den Pfad. Die
+Hub-Kacheln in `baue_hubs` sind davon voellig unabhaengig. Vier Quellen fuer
+eine Aussage, entsprechend driften sie.
+
+**Richtung fuer die Loesung.** Eine Seite bekommt **genau eine**
+Bereichszugehoerigkeit; Menuemarkierung, Breadcrumb und Hub-Zuordnung werden
+daraus abgeleitet statt einzeln gepflegt. Verlinken darf jeder Hub, wo es
+inhaltlich hilft; die Kennzeichnung der Seite bleibt davon unberuehrt.
+
+**Offene inhaltliche Frage (Suat).** Vorschlag: `our-people` und
+`case-studies` wandern unter Company in den Abschnitt "The business";
+der Expertise-Abschnitt "Ingredients and people" heisst dann nur noch
+"What goes in" und fuehrt Ingredients used und Ingredients list.
+Ebenfalls zu klaeren: ob `Facilities` ein eigener Hauptmenuepunkt bleibt
+(dann eigener Breadcrumb-Zweig) oder unter Company zurueckgeht
+(dann vier Menuepunkte: Solutions, Expertise, Company, News).
+
+**Status: nur festgehalten, nicht umgesetzt.** Entscheidung steht bei Suat.
+
 ## 6. Stolperfallen aus diesem Projekt
 
 - **Der Server drosselt.** Ab etwa 70 schnellen Abrufen liefert `katech-solutions.com` HTTP 503.

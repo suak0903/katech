@@ -7,7 +7,7 @@ import html, json, os, re
 
 import gen_chrome as chrome
 
-VERSION = 28  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
+VERSION = 29  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
 PAGES_URL = "https://suak0903.github.io/katech/"
 ORIGINAL = "https://katech-solutions.com/"
 ORT = "KaTech Ingredient Solutions"
@@ -215,7 +215,7 @@ def sec_kopf(*, eyebrow="", h2="", lead="", zentriert=False):
     return f'<div class="{k}">{eb}{hd}{ld}</div>'
 
 
-def karte(root, *, titel, text, ziel, bild=None, zusatz="", mehr="Read more"):
+def karte(root, *, titel, text, ziel, bild=None, zusatz="", mehr="Read more", leer=False):
     medien = ""
     if bild:
         medien = f'''<div class="card__media">
@@ -225,7 +225,10 @@ def karte(root, *, titel, text, ziel, bild=None, zusatz="", mehr="Read more"):
       </picture>
     </div>'''
     zu = f'<span class="card__count">{esc(zusatz)}</span>' if zusatz else ""
-    return f'''<a class="card" href="{ziel}">
+    if leer:
+        zu += '<span class="card__leer">no content in the original</span>'
+        text = text or "This page carries no content on the existing site."
+    return f'''<a class="card{" card--leer" if leer else ""}" href="{ziel}">
     {medien}
     <div class="card__body">
       {zu}
@@ -236,11 +239,15 @@ def karte(root, *, titel, text, ziel, bild=None, zusatz="", mehr="Read more"):
   </a>'''
 
 
-def kachel(*, nummer, titel, text, ziel):
-    return f'''<a class="tile" href="{ziel}">
+def kachel(*, nummer, titel, text, ziel, leer=False):
+    """leer=True kennzeichnet Seiten, die im Bestand keinen Inhalt tragen -
+    sie bleiben sichtbar und erreichbar, sind aber als solche erkennbar."""
+    marke = '<span class="tile__leer">no content in the original</span>' if leer else ""
+    return f'''<a class="tile{" tile--leer" if leer else ""}" href="{ziel}">
     <span class="tile__num">{esc(nummer)}</span>
     <h3>{esc(titel)}</h3>
     <p>{esc(text)}</p>
+    {marke}
   </a>'''
 
 

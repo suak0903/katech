@@ -1,0 +1,41 @@
+{
+ "leer": [
+  "case-studies",
+  "cheese/cottage-cheese",
+  "cheese/quarg",
+  "customer-area",
+  "desserts/fruchtmousse",
+  "dips/dips-with-sour-cream",
+  "fat-reduction",
+  "fruit/fruit-compotes",
+  "fruit/torte-fillings",
+  "gm-status",
+  "milk-drinks/fruit-dairy-drinks",
+  "milk-drinks/with-coffee",
+  "our-approach",
+  "our-people/development-team",
+  "our-people/sales-team",
+  "products",
+  "raw-materials",
+  "replication",
+  "specials",
+  "stephankoruma-cabinet",
+  "sugar-reduction"
+ ],
+ "nur_bild": [
+  "bakery-old/cleaner-label-cakes",
+  "bakery-old/cleaner-label-muffins",
+  "bakery-old/cleaner-label-sponge",
+  "cheese/spreadable-cheese",
+  "cream/fromage-frais",
+  "desserts/jelly",
+  "dressings/dairy-based",
+  "fruit/confectionery-fillings",
+  "milk-drinks/buttermilk-drink-flavoured",
+  "soups"
+ ],
+ "inhalt": [
+  "find-us",
+  "purchasing"
+ ]
+}

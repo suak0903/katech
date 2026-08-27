@@ -15,6 +15,8 @@ VARIANTEN = [
     ("og-solutions", "sensory-panel", "Eleven product areas, one formulation team"),
     ("og-company", "hq-luebeck", "Lübeck, Cheshire, Reinfeld, Poznań"),
     ("og-expertise", "raw-materials", "Formulation knowledge and pilot plants"),
+    ("og-facilities", "blending-tower", "Pilot plants, production and warehousing"),
+    ("og-news", "hq-luebeck", "News from Lübeck"),
     ("og-preview", "lab-measurement", "Redesign preview by Dr.-Ing. Suat Akyol"),
     ("og-default", "blending-tower", "Bespoke solutions for the food industry"),
 ]

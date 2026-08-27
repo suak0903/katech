@@ -96,3 +96,53 @@ for art, liste in sorted(fehler.items(), key=lambda x: -len(x[1])):
         print("   ", e)
     if len(liste) > 6:
         print(f"    ... und {len(liste) - 6} weitere")
+
+
+# ==========================================================================
+# Bereichszuordnung: Menuemarkierung und Breadcrumb muessen uebereinstimmen
+# ==========================================================================
+print()
+print("=" * 72)
+print("Pruefung: stimmt der markierte Menuepunkt mit dem Breadcrumb ueberein?")
+print("=" * 72)
+
+BEREICHE = {"solutions/": "Solutions", "expertise/": "Expertise", "company/": "Company",
+            "our-facilities/": "Facilities", "news/": "News"}
+abweichung, ohne_marke, geprueft = [], [], 0
+
+for pfad in seiten:
+    rel = os.path.relpath(pfad, ROOT).replace(os.sep, "/")
+    if rel == "404.html":
+        continue
+    doc = open(pfad, encoding="utf-8").read()
+
+    m = re.search(r'<a href="([^"]*)" aria-current="page">([^<]+)</a>', doc)
+    markiert = m.group(2).strip() if m else None
+
+    c = re.search(r'<nav class="crumbs"[^>]*>(.*?)</nav>', doc, re.S)
+    zweig = None
+    if c:
+        glieder = re.findall(r"<a [^>]*>([^<]+)</a>|<span[^>]*>([^<]*)</span>", c.group(1))
+        namen = [(a or b).strip() for a, b in glieder if (a or b).strip() not in ("/", "")]
+        if len(namen) > 1:
+            zweig = namen[1]
+
+    geprueft += 1
+    if markiert is None and zweig in BEREICHE.values():
+        ohne_marke.append(f"{rel}: Breadcrumb sagt {zweig}, kein Menuepunkt markiert")
+    elif markiert and zweig and markiert != zweig:
+        abweichung.append(f"{rel}: Menue {markiert} <-> Breadcrumb {zweig}")
+
+print(f"Geprueft: {geprueft} Seiten")
+if abweichung:
+    print(f"ABWEICHUNG: {len(abweichung)}")
+    for a in abweichung[:14]:
+        print("   ", a)
+    if len(abweichung) > 14:
+        print(f"    ... und {len(abweichung) - 14} weitere")
+else:
+    print("Keine Abweichung zwischen Menuemarkierung und Breadcrumb.")
+if ohne_marke:
+    print(f"Ohne Menuemarkierung trotz Bereichs-Breadcrumb: {len(ohne_marke)}")
+    for a in ohne_marke[:10]:
+        print("   ", a)

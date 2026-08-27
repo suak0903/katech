@@ -41,38 +41,91 @@ STANDORTE = [
 GESCHAEFTSFUEHRUNG = ["Cyril Carrat", "Michael O'Riordan", "Marcel Hergett", "Matthias Reeb"]
 HANDELSREGISTER = "Local Court of Lübeck, HRB 12373 HL"
 
-PLATZHALTER = ("This page exists in the current website structure and is carried over so that "
-               "nothing is lost in the redesign. In this preview it is shown as a designed "
-               "placeholder: the live version carries the full text, images and downloads of "
-               "the existing page.")
+PLATZHALTER = "This page is carried over from the existing site structure."
 
 # Marke im Seitenkopf und Kasten im Inhalt, wenn eine Seite bewusst noch
 # nicht ausgebaut ist. Ohne diese Kennzeichnung wirkt eine solche Seite wie
 # ein Fehler statt wie eine gezogene Grenze.
-STUB_MARKE = ('<span class="stubtag">Not built out in this preview</span>')
+# Seiten, die auf der Bestandsseite tatsaechlich keinen Inhalt tragen.
+# Ermittelt mit leerpruefung.py: der komplette Inhaltsbereich wurde auf Text,
+# Listen, Tabellen, Bilder, Downloads und eingebettete Inhalte untersucht.
+def _leere_laden():
+    pfad = os.path.join(os.path.dirname(os.path.abspath(__file__)), "leerpruefung.json")
+    if not os.path.exists(pfad):
+        return set()
+    return set(json.load(open(pfad, encoding="utf-8")).get("leer", []))
+
+
+def _kategorie_laden(schluessel):
+    pfad = os.path.join(os.path.dirname(os.path.abspath(__file__)), "leerpruefung.json")
+    if not os.path.exists(pfad):
+        return set()
+    return set(json.load(open(pfad, encoding="utf-8")).get(schluessel, []))
+
+
+LEER_IM_ORIGINAL = _kategorie_laden("leer")
+# Seiten, die im Bestand ausschliesslich ein Produktbild tragen. Sie sind hier
+# vollstaendig uebernommen und duerfen deshalb keinen Mangel-Hinweis bekommen.
+NUR_BILD_IM_ORIGINAL = _kategorie_laden("nur_bild")
+
+
+def ist_nur_bild(slug):
+    return slug in NUR_BILD_IM_ORIGINAL
+KACHEL_LEER = "This page carries no content on the existing site."
+
+
+def ist_leer(slug):
+    return slug in LEER_IM_ORIGINAL
+
+
+STUB_MARKE_LEER = '<span class="stubtag stubtag--leer">No content in the original</span>'
+STUB_MARKE_OFFEN = '<span class="stubtag">Not built out in this preview</span>'
+
+
+def stub_marke(slug):
+    return STUB_MARKE_LEER if ist_leer(slug) else STUB_MARKE_OFFEN
+
+
+BILD_HINWEIS = ("On the existing site this page shows a product photograph and no text. "
+                "The photograph is carried over here; nothing else was there to carry.")
 
 
 def stub_kasten(root, slug):
+    """Hinweis auf Seiten ohne Inhalt. Der Wortlaut haengt davon ab, ob im
+    Original nichts steht oder ob nur diese Vorschau die Seite nicht ausgebaut
+    hat. Beide Faelle verlinken die Originalseite, damit die Aussage
+    nachpruefbar ist."""
     original = "https://katech-solutions.com/" + (slug + "/" if slug else "")
+    if ist_leer(slug):
+        h2 = "This page has no content on the existing site."
+        absaetze = (
+            "<p>The page exists in your current site structure, and it is carried over here at "
+            "its original address so that no link runs into a dead end. On the existing site it "
+            "shows a heading and nothing else: no text, no images, no downloads.</p>"
+            "<p>It is kept visible rather than quietly dropped, so that the gap is where it "
+            "belongs, in plain sight. Use the link below to check the original for yourself.</p>")
+    else:
+        h2 = "This page is not built out in this preview."
+        absaetze = (
+            "<p>The existing site carries content here, but it was not part of this preview. "
+            "The page is kept at its original address so that no link runs into a dead end.</p>"
+            "<p>In the real project it is filled like every other one. It is shown this way on "
+            "purpose rather than quietly left out, so you can see exactly where the boundary of "
+            "this preview runs.</p>")
     return f'''<div class="stub rv">
       <div class="stub__head">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
           <circle cx="10" cy="10" r="8.6" stroke="currentColor" stroke-width="1.7"/>
           <path d="M10 5.4V10l3.2 2.2" stroke="currentColor" stroke-width="1.7"/></svg>
-        <h2>This page is not built out yet.</h2>
+        <h2>{h2}</h2>
       </div>
-      <p>It exists in your current site structure and is carried over here at its original
-        address, so that nothing is lost and no link runs into a dead end. What is missing is
-        the content itself: the existing page carries text, images and downloads that were not
-        part of this preview.</p>
-      <p>In the real project this page is filled like every other one. It is shown this way on
-        purpose rather than quietly left out, so you can see exactly where the boundary of this
-        preview runs.</p>
+      {absaetze}
       <div class="stub__links">
-        <a class="btn btn--outline" href="{original}" target="_blank" rel="noopener">See the current page</a>
-        <a class="btn btn--outline" href="{root}about-this-preview/#scope">What is and is not included</a>
+        <a class="btn btn--outline" href="{original}" target="_blank" rel="noopener">See this page on the original site</a>
+        <a class="btn btn--outline" href="{root}sitemap/">Full sitemap</a>
       </div>
     </div>'''
+
 
 ZERTIFIKATE = [
     ("cert-brcgs-cert-food-logo.png", "BRCGS Food Safety certification, AA rating"),
@@ -178,6 +231,28 @@ KURZTITEL = {
     "our-people/sales-team": "Sales team",
     "our-people/development-team": "Development team",
     "our-ingredients/ingredients-list": "Ingredients list",
+    # Deutsche Reste im englischen Baum. Die Adresse bleibt unveraendert,
+    # nur die Beschriftung wird die des Bestandstitels.
+    "vegan/pflanzliche-burger-patties": "Plant-based burger patties",
+    "vegan/wurstchen-alternativen": "Plant-based sausages",
+    "desserts/fruchtmousse": "Fruchtmousse (German duplicate)",
+    # Adressbestandteile, die fuer sich genommen nichts sagen
+    "yogurt/layered": "Layered yogurt",
+    "yogurt/whipped": "Whipped yogurt",
+    "desserts/triflejelly": "Trifle jelly",
+    "dips/yogurtquarg-dips": "Dips with yogurt and quarg",
+    "cream/vegetable-non-dairy": "Vegetable and non-dairy",
+    "milk-drinks/with-coffee": "With coffee",
+    "soups/freshpasteurised": "Soups, fresh and pasteurised",
+    "bakery-old/cleaner-label-cakes": "Cleaner label cakes",
+    "bakery-old/cleaner-label-muffins": "Cleaner label muffins",
+    "bakery-old/cleaner-label-sponge": "Cleaner label sponge",
+    "cheese/cottage-cheese-dressing": "Cottage cheese dressing",
+    "our-people/sales-team": "Sales team",
+    "our-people/development-team": "Development team",
+    "venture-point": "Venture Point, UK",
+    "stephankoruma-cabinet": "Stephan and Koruma cabinet",
+    "nasz-cel": "Nasz cel (Polish page)",
 }
 
 # Motive fuer News-Beitraege. Die Bestandsseite haengt an ihre Beitraege keine
@@ -379,107 +454,102 @@ def ld_artikel(titel, datum, beschreibung, url):
 # Hub-Seiten (Expertise, Company)
 # --------------------------------------------------------------------------
 def baue_hubs(hub):
+    """Erzeugt Expertise, Company und Facilities aus der Struktur.
+    Solutions hat eine eigene Funktion, weil dort Kacheln mit Bild stehen."""
+    import struktur as S
+
     hub("expertise", "Expertise", "What we bring to the table",
         "Formulation knowledge, and the equipment to prove it.",
         "Our technologists work hands-on: from the first concept through pilot trials to the "
         "run on your production line.",
-        [("Development services",
-          ("Where our work starts.",
-           "Four routes into a project. Most customers arrive through one of them and end up "
-           "using several."),
-          [("new-products", "New product development", ""),
-           ("replication", "Replication", ""),
-           ("troubleshooting", "Troubleshooting", ""),
-           ("cost-optimisation", "Cost optimisation", "")]),
-         ("Reformulation",
-          ("Taking things out without taking taste out.",
-           "Fat and sugar reduction are texture problems long before they are nutrition claims."),
-          [("fat-reduction", "Fat reduction", ""),
-           ("sugar-reduction", "Sugar reduction", ""),
-           ("specials", "Specials", ""),
-           ("products", "Our products", "")]),
-         ("Ingredients and people",
-          ("What goes in, and who works on it.",
-           "The raw material base we formulate from, and the team behind it."),
-          [("our-ingredients", "Ingredients used", ""),
-           ("our-ingredients/ingredients-list", "Ingredients list", ""),
-           ("our-people", "Our people", ""),
-           ("case-studies", "Case studies", "")])],
+        [(titel, kopf, [(s, "", "") for s in seiten])
+         for titel, kopf, seiten in S.EXPERTISE],
         og="og-expertise.jpg", bild="lab-measurement")
+
+    hub("our-facilities", "Our facilities", "Facilities",
+        "State of the art facilities built with the customer in mind.",
+        "Pilot plants in Lübeck and Cheshire, production and warehousing in northern Germany, "
+        "a sales office near Poznań.",
+        [(titel, kopf, [(s, "", "") for s in seiten])
+         for titel, kopf, seiten in S.FACILITIES],
+        og="og-facilities.jpg", bild="blending-tower",
+        zusatz=GALERIE_FACILITIES)
 
     hub("company", "Company", "Who we are",
         "A food technology company that stayed hands-on.",
         "Founded in Lübeck in 2010, around 95 people across Germany, the UK and Poland, "
         "part of Ingredion since 2021.",
-        [("The business",
-          ("What drives the company.",
-           "Vision, approach and the way we work with customers."),
-          [("our-vision", "Our vision", ""),
-           ("our-approach", "Our approach", ""),
-           ("how-we-work", "How we work", ""),
-           ("careers", "Careers", "")]),
-         ("Sites and production",
-          ("Where the work happens.",
-           "Development suites, production and warehousing across three countries."),
-          [("our-facilities", "Our facilities", ""),
-           ("production-facilities-germany", "Production, Germany", ""),
-           ("technical-development-suite-germany", "Development suite, Germany", ""),
-           ("technical-development-suite-uk", "Development suite, UK", ""),
-           ("sales-office-poland", "Sales office, Poland", ""),
-           ("find-us", "Find us", "")]),
-         ("Standards and sourcing",
-          ("What we can prove.",
-           "Certifications, raw material policy and the sustainability position."),
-          [("certifications", "Certifications", ""),
-           ("gm-status", "GM status", ""),
-           ("raw-materials", "Raw materials", ""),
-           ("sourcing-and-sustainability", "Sourcing and sustainability", ""),
-           ("purchasing", "Purchasing", ""),
-           ("customer-area", "Customer area", "")])],
-        og="og-company.jpg", bild="hq-luebeck")
+        [(titel, kopf, [(s, "", "") for s in seiten])
+         for titel, kopf, seiten in S.COMPANY],
+        og="og-company.jpg", bild="hq-luebeck",
+        zusatz=VERWEIS_FACILITIES)
+
+
+GALERIE_FACILITIES = """<section class="sec sec--sand">
+  <div class="wrap">
+    {kopf}
+    {galerie}
+  </div>
+</section>"""
+
+VERWEIS_FACILITIES = """<section class="sec sec--teal">
+  <div class="wrap">
+    {kopf}
+    <div class="btn-row btn-row--single rv">
+      <a class="btn btn--ghost" href="{root}our-facilities/">Our facilities</a>
+    </div>
+  </div>
+</section>"""
 
 
 # --------------------------------------------------------------------------
 # Textseiten
 # --------------------------------------------------------------------------
-COMPANY_SEITEN = [
-    ("our-vision", "hq-luebeck"), ("our-approach", "reception"),
-    ("our-facilities", "blending-tower"), ("careers", "sensory-panel"),
-    ("production-facilities-germany", "plant-reinfeld"),
-    ("technical-development-suite-germany", "lab-measurement"),
-    ("technical-development-suite-uk", "warehouse"),
-    ("sales-office-poland", "reception"),
-    ("certifications", None), ("certifications/rspo", None),
-    ("gm-status", None), ("raw-materials", "raw-materials"),
-    ("sourcing-and-sustainability", None), ("purchasing", None),
-    ("customer-area", None), ("case-studies", None),
-    ("our-people/sales-team", None), ("our-people/development-team", None),
-]
+# Bilder fuer die Kopfbereiche einzelner Seiten. Wo nichts steht, bleibt der
+# Kopf ohne Bild.
+SEITEN_BILD = {
+    "our-vision": "hq-luebeck", "our-approach": "reception",
+    "our-facilities": "blending-tower", "careers": "sensory-panel",
+    "production-facilities-germany": "plant-reinfeld",
+    "technical-development-suite-germany": "lab-measurement",
+    "technical-development-suite-uk": "warehouse",
+    "sales-office-poland": "reception", "raw-materials": "raw-materials",
+    "new-products": "development-meeting", "products": "sensory-panel",
+    "our-ingredients": "raw-materials", "venture-point": "warehouse",
+}
 
-EXPERTISE_SEITEN = [
-    ("new-products", "development-meeting"), ("replication", None),
-    ("troubleshooting", None), ("cost-optimisation", None),
-    ("fat-reduction", None), ("sugar-reduction", None),
-    ("specials", None), ("products", "sensory-panel"),
-    ("our-ingredients", "raw-materials"), ("our-ingredients/ingredients-list", None),
-]
-
-LEGAL_SEITEN = ["imprint", "privacy-policy", "terms-of-use", "cookie-policy-eu",
-                "data-protection-information-for-applicants"]
+LEGAL_SEITEN = LEGAL = ["imprint", "privacy-policy", "terms-of-use", "cookie-policy-eu",
+                        "data-protection-information-for-applicants"]
 
 
 def baue_textseiten(textseite):
-    for slug, bild in COMPANY_SEITEN:
-        extra = ""
-        if slug == "certifications":
-            extra = f'''<section class="sec sec--sand">
+    """Alle Seiten der Bereiche Company, Expertise und Facilities.
+    Die Zuordnung kommt aus struktur.py; Menuemarkierung und Breadcrumb
+    leitet der Generator daraus ab."""
+    import struktur as S
+
+    for abschnitte, bereich, eyebrow in (
+            (S.COMPANY, "company", "Company"),
+            (S.EXPERTISE, "expertise", "Expertise"),
+            (S.FACILITIES, "facilities", "Facilities")):
+        for _, _, seiten in abschnitte:
+            for slug in seiten:
+                # Diese Seiten haben eigene Funktionen mit mehr Inhalt
+                # (Prozessschritte, Teamkacheln, Standortkarten) und wuerden
+                # hier nur ueberschrieben.
+                if slug in ("find-us", "how-we-work", "our-people",
+                            "our-facilities") or slug.startswith("find-us/"):
+                    continue
+                extra = ""
+                if slug == "certifications":
+                    extra = f'''<section class="sec sec--sand">
   <div class="wrap">
     {L.sec_kopf(eyebrow="Audited and certified", h2="The standards we hold.", zentriert=True)}
     {L.zertifikate("../", ZERTIFIKATE)}
   </div>
 </section>'''
-        if slug == "our-facilities":
-            extra = f'''<section class="sec sec--sand">
+                if slug == "our-facilities":
+                    extra = f'''<section class="sec sec--sand">
   <div class="wrap">
     {L.sec_kopf(eyebrow="Impressions", h2="Inside the sites.")}
     {L.galerie("../", [("hq-luebeck", "KaTech head office in Lübeck"),
@@ -490,17 +560,21 @@ def baue_textseiten(textseite):
                        ("plant-reinfeld", "Production site in northern Germany")])}
   </div>
 </section>'''
-        # "Our facilities" steht als eigener Punkt in der Hauptnavigation und
-        # muss dort markiert werden, nicht unter "Company".
-        aktiv = "our-facilities/" if slug == "our-facilities" else "company/"
-        textseite(slug, eyebrow="Company",
-                  crumbs_extra=[("Company", "../" * (slug.count("/") + 1) + "company/")],
-                  bild=bild, extra_html=extra, aktiv=aktiv)
+                textseite(slug, eyebrow=eyebrow,
+                          crumbs_extra=None,
+                          bild=SEITEN_BILD.get(slug), extra_html=extra)
 
-    for slug, bild in EXPERTISE_SEITEN:
-        textseite(slug, eyebrow="Expertise",
-                  crumbs_extra=[("Expertise", "../" * (slug.count("/") + 1) + "expertise/")],
-                  bild=bild, aktiv="expertise/")
+    # Seiten ausserhalb der Abschnitte, die trotzdem erreichbar bleiben
+    for slug in ("venture-point", "stephankoruma-cabinet", "nasz-cel"):
+        textseite(slug, eyebrow="Company", crumbs_extra=None,
+                  bild=SEITEN_BILD.get(slug))
+
+    # Die beiden Teamlisten des Bestands. Sie tragen dort keinen Inhalt, bleiben
+    # aber erreichbar und haengen unter der Teamuebersicht.
+    for slug in ("our-people/sales-team", "our-people/development-team"):
+        textseite(slug, eyebrow="Our people",
+                  crumbs_extra=[("Our people", "../../our-people/")],
+                  bild=None)
 
     for slug in LEGAL_SEITEN:
         textseite(slug, eyebrow="Legal", crumbs_extra=None, bild=None, aktiv="")
@@ -755,7 +829,7 @@ def _find_us(schreibe):
       <dt>E-mail</dt><dd><a href="mailto:{s['mail']}">{L.esc(s['mail'])}</a></dd></dl>
     </div>''' for s in STANDORTE)
     inhalt = L.subhero(root, crumbs=[("Start", root + "index.html"),
-                                     ("Company", root + "company/"), ("Find us", None)],
+                                     ("Facilities", root + "our-facilities/"), ("Find us", None)],
                        eyebrow="Locations", h1="Four sites, three countries.",
                        sub="Development in Lübeck and Cheshire, production and warehousing in "
                            "northern Germany, sales in Poland.",
@@ -769,13 +843,14 @@ def _find_us(schreibe):
     schreibe("find-us/index.html", L.seite(
         "find-us/index.html", "Find us",
         "KaTech locations in Lübeck, Wesenberg, Ellesmere Port and Stęszew.",
-        inhalt, aktiv="company/", og="og-company.jpg", jsonld=LD_ORG))
+        inhalt, aktiv="our-facilities/", og="og-facilities.jpg", jsonld=LD_ORG))
 
     for s, slug in zip(STANDORTE, ["find-us/katech-head-office-germany",
                                    "find-us/katech-production-germany",
                                    "find-us/katech-uk", "find-us/katech-poland"]):
         r = "../../"
-        inhalt = L.subhero(r, crumbs=[("Start", r + "index.html"), ("Company", r + "company/"),
+        inhalt = L.subhero(r, crumbs=[("Start", r + "index.html"),
+                                      ("Facilities", r + "our-facilities/"),
                                       ("Find us", r + "find-us/"), (s["ort"], None)],
                            eyebrow=s["name"], h1=L.esc(s["ort"]), bild=s["bild"], alt=s["ort"])
         inhalt += f'''
@@ -805,46 +880,96 @@ def _find_us(schreibe):
         schreibe(slug + "/index.html", L.seite(
             slug + "/index.html", s["ort"],
             f"KaTech {s['name'].lower()} in {s['ort']}.", inhalt,
-            aktiv="company/", og="og-company.jpg"))
+            aktiv="our-facilities/", og="og-facilities.jpg"))
 
 
 def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
+    """Grafische Sitemap: alle Seiten hierarchisch und einzeln anklickbar."""
+    import struktur as S
     root = "../"
-    abschnitte = []
-    for _, titel, _, bereiche in CLUSTER:
-        zeilen = []
+
+    def eintrag(slug, titel=None, tiefe=0):
+        name = titel or kurztitel(slug)
+        marke = ('<span class="sm__leer" title="no content on the existing site">empty</span>'
+                 if ist_leer(slug) else "")
+        return (f'<li class="sm__i sm__i--{tiefe}">'
+                f'<a href="{root}{slug}/">{L.esc(name)}</a>{marke}</li>')
+
+    bloecke = []
+
+    # ---- Solutions -------------------------------------------------------
+    spalten = []
+    for _, gruppentitel, _, bereiche in S.SOLUTIONS:
+        eintraege = []
         for b in bereiche:
-            unter = "".join(f'<li><a href="{root}{u}/">{L.esc(kurztitel(u))}</a></li>'
-                            for u in BAUM.get(b, []))
-            zeilen.append(f'<li><a href="{root}{b}/"><strong>{L.esc(kurztitel(b))}</strong></a>'
-                          f'<ul>{unter}</ul></li>')
-        abschnitte.append(f"<h2>{L.esc(titel)}</h2><ul>{''.join(zeilen)}</ul>")
+            eintraege.append(f'<li class="sm__k"><a href="{root}{b}/">{L.esc(kurztitel(b))}</a></li>')
+            if b == "vegan":
+                for gruppe, kopf, kinder in S.VEGAN_GRUPPEN:
+                    eintraege.append(f'<li class="sm__g">{L.esc(gruppe)}</li>')
+                    for u in ([kopf] if kopf else []) + kinder:
+                        eintraege.append(eintrag(u, tiefe=2))
+            else:
+                for u in BAUM.get(b, []) + S.FREMDE_KINDER.get(b, []):
+                    eintraege.append(eintrag(u, tiefe=1))
+        spalten.append(f'<div class="sm__sp"><h3>{L.esc(gruppentitel)}</h3>'
+                       f'<ul class="sm__l">{"".join(eintraege)}</ul></div>')
+    bloecke.append(("Solutions", "solutions", spalten))
 
-    firma = "".join(f'<li><a href="{root}{s}/">{L.esc(kurztitel(s))}</a></li>'
-                    for s, _ in COMPANY_SEITEN)
-    exp = "".join(f'<li><a href="{root}{s}/">{L.esc(kurztitel(s))}</a></li>'
-                  for s, _ in EXPERTISE_SEITEN)
-    nw = "".join(f'<li><a href="{root}{n["slug"]}/">{L.esc(n["titel"])}</a></li>'
+    # ---- Expertise, Company, Facilities ----------------------------------
+    for abschnitte, titel, start_slug in ((S.EXPERTISE, "Expertise", "expertise"),
+                                          (S.COMPANY, "Company", "company"),
+                                          (S.FACILITIES, "Facilities", "our-facilities")):
+        spalten = []
+        for gruppentitel, _, seiten in abschnitte:
+            eintraege = []
+            for s in seiten:
+                eintraege.append(eintrag(s))
+                if s == "our-people":
+                    pfad_team = os.path.join(os.path.dirname(os.path.abspath(__file__)), "team.json")
+                    if os.path.exists(pfad_team):
+                        for p in json.load(open(pfad_team, encoding="utf-8")):
+                            eintraege.append(eintrag(p["slug"], p["name"], tiefe=1))
+                if s == "find-us":
+                    for u in BAUM.get("find-us", []):
+                        eintraege.append(eintrag(u, tiefe=1))
+            spalten.append(f'<div class="sm__sp"><h3>{L.esc(gruppentitel)}</h3>'
+                           f'<ul class="sm__l">{"".join(eintraege)}</ul></div>')
+        bloecke.append((titel, start_slug, spalten))
+
+    # ---- News ------------------------------------------------------------
+    nw = "".join(f'<li class="sm__i sm__i--0"><a href="{root}{n["slug"]}/">'
+                 f'{L.esc(kurz_lokal(n["titel"], 62))}</a>'
+                 f'<span class="sm__d">{datum_lang(n["datum"])}</span></li>'
                  for n in NEWS if n["slug"] != "news" and n["absaetze"])
-    legal = "".join(f'<li><a href="{root}{s}/">{L.esc(kurztitel(s))}</a></li>' for s in LEGAL_SEITEN)
-    abschnitte.append(f"<h2>Company</h2><ul>{firma}</ul>")
-    abschnitte.append(f"<h2>Expertise</h2><ul>{exp}</ul>")
-    abschnitte.append(f"<h2>News</h2><ul>{nw}</ul>")
-    abschnitte.append(f"<h2>Legal</h2><ul>{legal}</ul>")
+    bloecke.append(("News", "news",
+                    [f'<div class="sm__sp sm__sp--breit"><h3>Press releases</h3>'
+                     f'<ul class="sm__l">{nw}</ul></div>']))
 
-    inhalt = L.subhero(root, crumbs=[("Start", root + "index.html"), ("Sitemap", None)],
-                       eyebrow="Overview", h1="Every page in this preview.",
-                       sub="The full structure of the existing site, carried over one to one.")
-    inhalt += f'''
-<section class="sec">
+    # ---- Kontakt, Rechtliches, Meta --------------------------------------
+    meta = "".join(eintrag(s) for s in ["contact-us", "sitemap"] + LEGAL_SEITEN)
+    bloecke.append(("Contact and legal", "contact-us",
+                    [f'<div class="sm__sp"><h3>Direct</h3><ul class="sm__l">{meta}</ul></div>']))
+
+    abschnitte_html = "".join(
+        f'''<section class="sec{" sec--sand" if n % 2 else ""}">
   <div class="wrap">
-    <div class="prose rv" style="max-width:none;column-count:2;column-gap:48px">
-      {"".join(abschnitte)}
+    <div class="sm__kopf">
+      <h2><a href="{root}{ziel}/">{L.esc(titel)}</a></h2>
     </div>
+    <div class="sm__raster rv">{"".join(spalten)}</div>
   </div>
-</section>'''
+</section>''' for n, (titel, ziel, spalten) in enumerate(bloecke))
+
+    anzahl = len([s for s in SEITEN if s])
+    inhalt = L.subhero(root, crumbs=[("Start", root + "index.html"), ("Sitemap", None)],
+                       eyebrow="Overview", h1="Every page, in order.",
+                       sub="The complete structure of the existing site, every page "
+                           "reachable at its original address. Entries marked empty carry no "
+                           "content on the existing site.")
+    inhalt += "\n" + abschnitte_html
     schreibe("sitemap/index.html", L.seite(
-        "sitemap/index.html", "Sitemap", "Full page overview of the KaTech design preview.",
+        "sitemap/index.html", "Sitemap",
+        "Full page overview of the KaTech design preview, hierarchically ordered.",
         inhalt, og="og-company.jpg"))
 
 

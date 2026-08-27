@@ -176,6 +176,8 @@ def demoleiste(root):
   <span>Redesign preview, not an official {ORT} website.
     <a href="{pfad(root, "about-this-preview/")}">What is different?</a>
     <span class="demobar__sep">·</span>
+    <a href="{pfad(root, "sitemap/")}">Sitemap</a>
+    <span class="demobar__sep">·</span>
     <a href="{ORIGINAL}" target="_blank" rel="noopener">Original site</a></span>
   <button id="demoClose" type="button" aria-label="Dismiss notice">&times;</button>
 </div>'''
