@@ -530,6 +530,49 @@ def produktseite(slug):
         inhalt, aktiv=aktiv_von(slug), og="og-solutions.jpg"))
 
 
+def uebersicht_bakery_old():
+    """Uebersicht des aelteren Backwarenbaums. Die Adresse selbst gibt es im
+    Bestand nicht; die drei Seiten darunter schon."""
+    root = "../"
+    kinder = ["bakery-old/cleaner-label-cakes", "bakery-old/cleaner-label-muffins",
+              "bakery-old/cleaner-label-sponge"]
+    karten = [L.karte(root, titel=kurztitel(u), text=intro_von(u, 96) or I.BILD_HINWEIS,
+                      ziel=root + u + "/", bild=bild_von(u), mehr="Open") for u in kinder]
+    inhalt = L.subhero(root, crumbs=crumbs_von(root, "bakery-old"),
+                       eyebrow="Solutions", h1="Bakery, earlier version.",
+                       sub="Three pages from an earlier version of the bakery section that are "
+                           "still live on the existing site.")
+    inhalt += f'''
+<section class="sec">
+  <div class="wrap wrap--narrow">
+    <div class="notice rv">
+      <h3>About this address</h3>
+      <p>The existing site has no page at <strong>/bakery-old/</strong> itself, that address
+        returns an error there. The three pages below it are live, however, and they are kept
+        reachable here. The current bakery section is
+        <a href="{root}bakery/">Bakery</a>.</p>
+    </div>
+  </div>
+</section>
+<section class="sec sec--sand">
+  <div class="wrap">
+    {L.sec_kopf(eyebrow="Pages in this branch", h2="Three pages.")}
+    {L.raster(karten, 3)}
+  </div>
+</section>
+{cta_block(root)}'''
+    schreibe("bakery-old/index.html", L.seite(
+        "bakery-old/index.html", "Bakery, earlier version",
+        "Three pages from an earlier version of the KaTech bakery section.",
+        inhalt, aktiv=aktiv_von("bakery-old"), og="og-solutions.jpg"))
+
+
+def geschrieben_slugs():
+    """Bereits erzeugte Seiten als Slug-Menge."""
+    return {p[:-len("/index.html")] if p.endswith("/index.html") else p
+            for p in geschrieben}
+
+
 def cta_block(root):
     return f'''<section class="sec sec--teal">
   <div class="wrap wrap--narrow center">
@@ -595,6 +638,18 @@ def main():
             bereichsseite(b)
             for u in BAUM[b]:
                 produktseite(u)
+    # Seiten, die im Bestand unter einem anderen Elternteil liegen: sie
+    # erscheinen in der Navigation beim passenden Bereich, brauchen aber
+    # trotzdem ihre eigene Seite. Fuer /bakery-old/ selbst gibt es im
+    # Original keine Seite (404), deshalb nur die Kinder.
+    for kinder in S.FREMDE_KINDER.values():
+        for u in kinder:
+            if u not in geschrieben_slugs():
+                produktseite(u)
+    # /bakery-old/ liefert im Original 404, die drei Seiten darunter aber 200.
+    # Statt eine Seite zu erfinden oder eine tote Adresse zu hinterlassen,
+    # steht dort eine Uebersicht, die genau das sagt.
+    uebersicht_bakery_old()
     print(f"  {len(bereiche)} Bereiche")
 
     print("Unternehmens- und Expertise-Seiten ...")

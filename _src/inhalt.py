@@ -181,8 +181,11 @@ START_BEREICHE = ["vegan", "yogurt", "cheese", "mayonnaise", "cream", "bakery"]
 
 PRODUKTBEREICHE = ["vegan", "yogurt", "cheese", "cream", "desserts", "milk-drinks",
                    "mayonnaise", "dressings", "dips", "soups-and-sauces", "soups",
-                   "bakery", "fruit"]
-KEINE_BEREICHE = ["bakery-old", "find-us", "our-people", "our-ingredients", "certifications"]
+                   "bakery", "fruit", "bakery-old"]
+# bakery-old ist der aeltere Backwarenbaum des Bestands. Seine drei Seiten
+# werden erzeugt und erscheinen unter Bakery; eine eigene Bereichsseite
+# bekommt er nicht.
+KEINE_BEREICHE = ["find-us", "our-people", "our-ingredients", "certifications"]
 
 TITEL = {
     "vegan": "Plant-based meat and fish alternatives",
@@ -253,6 +256,7 @@ KURZTITEL = {
     "venture-point": "Venture Point, UK",
     "stephankoruma-cabinet": "Stephan and Koruma cabinet",
     "nasz-cel": "Nasz cel (Polish page)",
+    "bakery-old": "Bakery, earlier version",
 }
 
 # Motive fuer News-Beitraege. Die Bestandsseite haengt an ihre Beitraege keine
@@ -952,6 +956,8 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
             for s in seiten:
                 eintraege.append(eintrag(s))
                 if s == "our-people":
+                    for u in ("our-people/sales-team", "our-people/development-team"):
+                        eintraege.append(eintrag(u, tiefe=1))
                     pfad_team = os.path.join(os.path.dirname(os.path.abspath(__file__)), "team.json")
                     if os.path.exists(pfad_team):
                         for p in json.load(open(pfad_team, encoding="utf-8")):
@@ -972,10 +978,21 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
                     [f'<div class="sm__sp sm__sp--breit"><h3>Press releases</h3>'
                      f'<ul class="sm__l">{nw}</ul></div>']))
 
-    # ---- Kontakt, Rechtliches, Meta --------------------------------------
-    meta = "".join(eintrag(s) for s in ["contact-us", "sitemap"] + LEGAL_SEITEN)
-    bloecke.append(("Contact and legal", "contact-us",
-                    [f'<div class="sm__sp"><h3>Direct</h3><ul class="sm__l">{meta}</ul></div>']))
+    # ---- Team-Unterseiten an ihrer Stelle ergaenzen -----------------------
+    # (siehe oben bei our-people)
+
+    # ---- Kontakt, Rechtliches, uebrige Seiten ----------------------------
+    meta = "".join(eintrag(s) for s in ["contact-us", "sitemap"])
+    recht = "".join(eintrag(s) for s in LEGAL_SEITEN)
+    # Seiten des Bestands, die zu keinem Abschnitt gehoeren. Sie sind
+    # vorhanden und muessen deshalb auffindbar sein.
+    uebrig = "".join(eintrag(s) for s in S.UEBRIGE + ["bakery-old"])
+    bloecke.append(("Contact, legal and other pages", "contact-us", [
+        f'<div class="sm__sp"><h3>Direct</h3><ul class="sm__l">{meta}</ul></div>',
+        f'<div class="sm__sp"><h3>Legal</h3><ul class="sm__l">{recht}</ul></div>',
+        f'<div class="sm__sp"><h3>Other pages of the existing site</h3>'
+        f'<ul class="sm__l">{uebrig}</ul></div>',
+    ]))
 
     abschnitte_html = "".join(
         f'''<section class="sec{" sec--sand" if n % 2 else ""}">

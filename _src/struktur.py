@@ -74,7 +74,17 @@ VEGAN_GRUPPEN = [
 # Die Suppenseite liegt im Bestand in einem eigenen Bereich mit genau einer
 # Seite, obwohl es "Soups and sauces" gibt. Sie wird dort eingeordnet; ihre
 # Adresse bleibt unveraendert.
-FREMDE_KINDER = {"soups-and-sauces": ["soups/freshpasteurised"]}
+FREMDE_KINDER = {
+    "soups-and-sauces": ["soups/freshpasteurised"],
+    # Der Bestand fuehrt neben /bakery/ noch einen aelteren Baum /bakery-old/
+    # mit drei Seiten. Sie bleiben erreichbar und erscheinen unter Bakery.
+    "bakery": ["bakery-old/cleaner-label-cakes", "bakery-old/cleaner-label-muffins",
+               "bakery-old/cleaner-label-sponge"],
+}
+
+# Seiten des Bestands, die zu keinem Abschnitt gehoeren, aber vorhanden sind
+# und deshalb in der Sitemap stehen muessen.
+UEBRIGE = ["soups", "venture-point", "stephankoruma-cabinet", "nasz-cel"]
 
 # --- Expertise: was das Unternehmen kann ----------------------------------
 EXPERTISE = [

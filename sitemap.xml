@@ -26,6 +26,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://suak0903.github.io/katech/bakery-old/</loc>
+    <lastmod>2026-08-27</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://suak0903.github.io/katech/bakery/</loc>
     <lastmod>2026-08-27</lastmod>
     <priority>0.6</priority>
@@ -477,6 +482,21 @@
   </url>
   <url>
     <loc>https://suak0903.github.io/katech/yogurt/</loc>
+    <lastmod>2026-08-27</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://suak0903.github.io/katech/bakery-old/cleaner-label-cakes/</loc>
+    <lastmod>2026-08-27</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://suak0903.github.io/katech/bakery-old/cleaner-label-muffins/</loc>
+    <lastmod>2026-08-27</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://suak0903.github.io/katech/bakery-old/cleaner-label-sponge/</loc>
     <lastmod>2026-08-27</lastmod>
     <priority>0.6</priority>
   </url>
