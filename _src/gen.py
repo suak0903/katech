@@ -194,7 +194,7 @@ def start():
         liste=["Meat and fish alternatives on dedicated pilot equipment",
                "Plant-based dairy: yogurt, cream, drinks, desserts, cheese",
                "Clean label and allergen-free routes"],
-        cta=("Plant-based solutions", "vegan/"),
+        cta=("Vegan solutions", "vegan/"),
         bild=bild_von("vegan/plant-based-mince") or "sensory-panel",
         alt="Plant-based mince developed at KaTech"))
 
@@ -313,7 +313,7 @@ def hub_solutions():
                     root, titel=gruppe,
                     text=I.VEGAN_GRUPPENTEXT.get(gruppe, ""),
                     ziel=gruppen_ziel, bild=I.VEGAN_GRUPPENBILD.get(gruppe),
-                    zusatz=f"{anzahl} product types", mehr="View group"))
+                    zusatz=f"{anzahl} product types", mehr="View area"))
         else:
             karten = [L.karte(root, titel=kurztitel(b), text=intro_von(b, 108),
                               ziel=link(root, b), bild=bild_von(b) or "sensory-panel",
@@ -332,7 +332,13 @@ def hub_solutions():
                        sub="Eleven application areas with more than one hundred product types. "
                            "Each one is a starting point, never a finished recipe.",
                        bild="sensory-panel",
-                       alt="Sensory panel with product samples at KaTech") + "\n" + "\n".join(bloecke)
+                       alt="Sensory panel with product samples at KaTech",
+                       # Plant-based hat eine eigene Bereichsseite mit vier Gruppen
+                       # und war von der Solutions-Seite aus gar nicht erreichbar
+                       # (Suat 27.08.).
+                       knoepfe=[("Vegan solutions", root + "vegan/", "btn--primary"),
+                                ("All product areas", "#dairy", "btn--ghost")])
+    inhalt += "\n" + "\n".join(bloecke)
     inhalt += f'''
 <section class="sec sec--teal">
   <div class="wrap wrap--narrow center">

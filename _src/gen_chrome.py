@@ -20,28 +20,31 @@ NAV = [
 ]
 
 FOOT_SPALTEN = [
+    # Die ersten vier fuehren auf ihren Abschnitt der Solutions-Seite. Vegan
+    # solutions ist die eigene Bereichsseite und steht deshalb abgesetzt.
     ("Solutions", [
         ("Dairy and dairy alternatives", "solutions/#dairy"),
-        ("Plant-based meat and fish", "vegan/"),
+        ("Plant-based alternatives", "solutions/#plant"),
         ("Savoury", "solutions/#savoury"),
         ("Bakery and fruit", "solutions/#bakery"),
         ("All product areas", "solutions/"),
+        ("Vegan solutions", "vegan/"),
     ]),
     ("Expertise", [
-        ("How we work", "how-we-work/"),
-        ("Our people", "our-people/"),
-        ("Ingredients used", "our-ingredients/"),
         ("New product development", "new-products/"),
         ("Troubleshooting", "troubleshooting/"),
         ("Cost optimisation", "cost-optimisation/"),
+        ("Ingredients used", "our-ingredients/"),
+        ("Fat and sugar reduction", "fat-reduction/"),
     ]),
     ("Company", [
         ("Our vision", "our-vision/"),
-        ("Our facilities", "our-facilities/"),
+        ("How we work", "how-we-work/"),
+        ("Our people", "our-people/"),
+        ("Case studies", "case-studies/"),
         ("Certifications", "certifications/"),
         ("Sourcing and sustainability", "sourcing-and-sustainability/"),
         ("Careers", "careers/"),
-        ("Find us", "find-us/"),
         ("Customer area", "customer-area/"),
     ]),
 ]
@@ -152,6 +155,12 @@ def fuss(root):
             <path d="M20.4 20.4h-3.6v-5.6c0-1.3 0-3-1.9-3-1.9 0-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1c.5-.9 1.6-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5v6.2zM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zm1.8 13H3.5V9h3.6v11.4zM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7c0-.9-.8-1.7-1.8-1.7z"/>
           </svg>
           <span>KaTech on LinkedIn</span>
+        </a>
+        <a class="foot__social" href="{pfad(root, "find-us/")}">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
+          </svg>
+          <span>Find us</span>
         </a>
       </div>
 {chr(10).join(spalten)}

@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="../../media/apple-touch-icon.png">
 <link rel="preload" href="../../font/Barlow-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../font/OpenSans-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../css/site.css?v=35">
+<link rel="stylesheet" href="../../css/site.css?v=39">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -85,6 +85,7 @@
     <p class="eyebrow">Yogurt</p>
     <h1>Trendy, healthy frozen yogurt</h1>
     <p class="subhero__sub">Frozen yogurt has grown in popularity in recent years, driven by the dairy industry's development of innovative and fun flavourings and consumer demands for healthier food.</p>
+    
   </div>
 </section>
 <section class="sec">
@@ -99,25 +100,12 @@
 <section class="sec sec--sand">
   <div class="wrap wrap--narrow">
     <div class="sec__head"><p class="eyebrow">How we can help</p><h2>Three ways into this product.</h2><p class="lead">Whether you are building it new, fixing something that goes wrong in production, or looking for cost in the recipe.</p></div>
-    <div class="wege rv"><div class="wege__w">
-        <span class="wege__n">01</span>
-        <div class="wege__t">
-          <h3>New product</h3>
-          <p>KaTech can help you develop a wide range of new frozen yogurt products - using both of the commonly used manufacturing methods; either by blending with an ice-cream mix, or it can be made by culturing a ready to freeze mix.</p><p>Blending a percentage of natural yogurt and fruit puree into an ice-cream mix is more straight-forward as the high sugar and solids content required for ice-cream, can inhibit the starter culture during incubation.</p><p>We can also help you develop the two types of frozen yogurt products: soft-serve or hard frozen.</p><p>For soft serve, the yogurt mix is packed directly into one litre cartons or bag-in-box systems. These are then distributed chilled to soft ice cream sales outlets.</p><p>For hard frozen, the yogurt mix is transferred directly to the ice cream freezer, followed by filling into packs or on sticks.</p>
-        </div>
-      </div><div class="wege__w">
-        <span class="wege__n">02</span>
-        <div class="wege__t">
-          <h3>Troubleshooting</h3>
-          <p>We can help you develop the best product possible. Our technical team has all the expertise needed to troubleshoot the problems which can be encountered in the production of frozen yogurt.</p><p>Our approach is based on helping you develop a well balanced recipe with suitable emulsifiers and stabilisers. These have a direct influence on the finished product qualities, including:</p><ul><li>Mix viscosity</li><li>Extrusion properties</li><li>Over-run</li><li>Melting rate</li><li>Shape retention</li><li>Heat shock tolerance</li><li>Texture</li><li>Mouthfeel</li></ul>
-        </div>
-      </div><div class="wege__w">
-        <span class="wege__n">03</span>
-        <div class="wege__t">
-          <h3>Cost optimisation</h3>
-          <p>There are a number of ways we can work with you to reduce recipe costs while ensuring that you still have a great product. By optimising the stabiliser system, we can help food manufacturers to reduce costs by:</p><ul><li>Reducing the need to use expensive milk solids</li><li>Improving product whippability, with increased over-run of the frozen product</li></ul>
-        </div>
-      </div></div>
+    <div class="tabs rv" data-tabs>
+      <div class="tabs__bar" role="tablist" aria-label="Three ways into this product">
+        <button class="tabs__b" role="tab" id="t-yogurt-layered-0" type="button" aria-controls="p-yogurt-layered-0" aria-selected="true" tabindex="0"><span class="tabs__n">01</span><span class="tabs__t">New product</span></button><button class="tabs__b" role="tab" id="t-yogurt-layered-1" type="button" aria-controls="p-yogurt-layered-1" aria-selected="false" tabindex="-1"><span class="tabs__n">02</span><span class="tabs__t">Troubleshooting</span></button><button class="tabs__b" role="tab" id="t-yogurt-layered-2" type="button" aria-controls="p-yogurt-layered-2" aria-selected="false" tabindex="-1"><span class="tabs__n">03</span><span class="tabs__t">Cost optimisation</span></button>
+      </div>
+      <div class="tabs__box"><div class="tabs__p" role="tabpanel" id="p-yogurt-layered-0" aria-labelledby="t-yogurt-layered-0" tabindex="0"><h3 class="tabs__h">New product</h3><p>KaTech can help you develop a wide range of new frozen yogurt products - using both of the commonly used manufacturing methods; either by blending with an ice-cream mix, or it can be made by culturing a ready to freeze mix.</p><p>Blending a percentage of natural yogurt and fruit puree into an ice-cream mix is more straight-forward as the high sugar and solids content required for ice-cream, can inhibit the starter culture during incubation.</p><p>We can also help you develop the two types of frozen yogurt products: soft-serve or hard frozen.</p><p>For soft serve, the yogurt mix is packed directly into one litre cartons or bag-in-box systems. These are then distributed chilled to soft ice cream sales outlets.</p><p>For hard frozen, the yogurt mix is transferred directly to the ice cream freezer, followed by filling into packs or on sticks.</p></div><div class="tabs__p" role="tabpanel" id="p-yogurt-layered-1" aria-labelledby="t-yogurt-layered-1" tabindex="0"><h3 class="tabs__h">Troubleshooting</h3><p>We can help you develop the best product possible. Our technical team has all the expertise needed to troubleshoot the problems which can be encountered in the production of frozen yogurt.</p><p>Our approach is based on helping you develop a well balanced recipe with suitable emulsifiers and stabilisers. These have a direct influence on the finished product qualities, including:</p><ul><li>Mix viscosity</li><li>Extrusion properties</li><li>Over-run</li><li>Melting rate</li><li>Shape retention</li><li>Heat shock tolerance</li><li>Texture</li><li>Mouthfeel</li></ul></div><div class="tabs__p" role="tabpanel" id="p-yogurt-layered-2" aria-labelledby="t-yogurt-layered-2" tabindex="0"><h3 class="tabs__h">Cost optimisation</h3><p>There are a number of ways we can work with you to reduce recipe costs while ensuring that you still have a great product. By optimising the stabiliser system, we can help food manufacturers to reduce costs by:</p><ul><li>Reducing the need to use expensive milk solids</li><li>Improving product whippability, with increased over-run of the frozen product</li></ul></div></div>
+    </div>
   </div>
 </section>
 <section class="sec sec--sand">
@@ -182,37 +170,44 @@
           </svg>
           <span>KaTech on LinkedIn</span>
         </a>
+        <a class="foot__social" href="../../find-us/">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/>
+          </svg>
+          <span>Find us</span>
+        </a>
       </div>
       <nav aria-labelledby="foot-solutions">
         <h2 class="foot__h" id="foot-solutions">Solutions</h2>
         <ul>
         <li><a href="../../solutions/#dairy">Dairy and dairy alternatives</a></li>
-        <li><a href="../../vegan/">Plant-based meat and fish</a></li>
+        <li><a href="../../solutions/#plant">Plant-based alternatives</a></li>
         <li><a href="../../solutions/#savoury">Savoury</a></li>
         <li><a href="../../solutions/#bakery">Bakery and fruit</a></li>
         <li><a href="../../solutions/">All product areas</a></li>
+        <li><a href="../../vegan/">Vegan solutions</a></li>
         </ul>
       </nav>
       <nav aria-labelledby="foot-expertise">
         <h2 class="foot__h" id="foot-expertise">Expertise</h2>
         <ul>
-        <li><a href="../../how-we-work/">How we work</a></li>
-        <li><a href="../../our-people/">Our people</a></li>
-        <li><a href="../../our-ingredients/">Ingredients used</a></li>
         <li><a href="../../new-products/">New product development</a></li>
         <li><a href="../../troubleshooting/">Troubleshooting</a></li>
         <li><a href="../../cost-optimisation/">Cost optimisation</a></li>
+        <li><a href="../../our-ingredients/">Ingredients used</a></li>
+        <li><a href="../../fat-reduction/">Fat and sugar reduction</a></li>
         </ul>
       </nav>
       <nav aria-labelledby="foot-company">
         <h2 class="foot__h" id="foot-company">Company</h2>
         <ul>
         <li><a href="../../our-vision/">Our vision</a></li>
-        <li><a href="../../our-facilities/">Our facilities</a></li>
+        <li><a href="../../how-we-work/">How we work</a></li>
+        <li><a href="../../our-people/">Our people</a></li>
+        <li><a href="../../case-studies/">Case studies</a></li>
         <li><a href="../../certifications/">Certifications</a></li>
         <li><a href="../../sourcing-and-sustainability/">Sourcing and sustainability</a></li>
         <li><a href="../../careers/">Careers</a></li>
-        <li><a href="../../find-us/">Find us</a></li>
         <li><a href="../../customer-area/">Customer area</a></li>
         </ul>
       </nav>
@@ -249,6 +244,6 @@
     </div>
   </div>
 </div>
-<script src="../../js/site.js?v=35" defer></script>
+<script src="../../js/site.js?v=39" defer></script>
 </body>
 </html>

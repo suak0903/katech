@@ -518,6 +518,9 @@ p:last-child{margin-bottom:0}
 .foot a:hover{color:#fff;text-decoration:underline}
 .foot__brand img{height:46px;width:auto;margin-bottom:18px}
 .foot__brand p{max-width:38ch;font-size:15px;color:rgba(255,255,255,.68)}
+/* Zwei Knoepfe nebeneinander: LinkedIn und die Standorte (Suat 27.08.). */
+.foot__social+.foot__social{margin-left:10px}
+@media(max-width:520px){.foot__social+.foot__social{margin-left:0}}
 .foot__social{display:inline-flex;align-items:center;gap:10px;margin-top:20px;
   padding:10px 16px;border:1px solid rgba(255,255,255,.24);font-size:14.5px;font-weight:600;
   transition:border-color .25s var(--ease),background .25s var(--ease)}
@@ -916,27 +919,51 @@ body.ohne-demobar{padding-bottom:0}
 .card--leer:hover .card__media,.tile--leer:hover{opacity:1}
 .stubtag--leer{background:var(--line);color:var(--ink)}
 
-/* ---------------------------------------------------------------- Wege
-   Die drei Beratungswege einer Produktseite (im Bestand Reiter, hier
-   offen untereinander, damit nichts hinter einem Klick liegt). */
-.wege{display:grid;gap:0;margin-top:2.5rem}
-.wege__w{
-  display:grid;grid-template-columns:3.5rem 1fr;gap:1.25rem;
-  padding:2rem 0;border-top:1px solid var(--line);
+/* ---------------------------------------------------------------- Reiter
+   Die drei Beratungswege einer Produktseite. Im Bestand sind es Reiter,
+   hier ebenfalls - nur mit sichtbarer Laufmarke, Tastaturbedienung und
+   einem Zustand ohne JavaScript, in dem alle drei Felder lesbar sind. */
+.tabs__bar{
+  display:flex;gap:0;border-bottom:1px solid var(--line);
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
 }
-.wege__w:last-child{border-bottom:1px solid var(--line)}
-.wege__n{
-  font:700 14px/1 var(--font-display);letter-spacing:.12em;
-  color:var(--brand-deep);padding-top:.5rem;font-variant-numeric:tabular-nums;
+.tabs__bar::-webkit-scrollbar{display:none}
+.tabs__b{
+  flex:1 1 0;min-width:max-content;display:flex;align-items:baseline;gap:10px;
+  background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;
+  padding:16px 20px 14px;cursor:pointer;text-align:left;color:var(--ink-soft);
+  font-family:var(--font-display);font-size:17px;font-weight:600;
+  transition:color .25s var(--ease),border-color .25s var(--ease);
 }
-.wege__t h3{font-size:21px;margin:0 0 .75rem}
-.wege__t p { margin: 0 0 .75rem; }
-.wege__t p:last-child, .wege__t ul:last-child { margin-bottom: 0; }
-.wege__t ul { margin: 0 0 .75rem; padding-left: 1.1rem; }
-.wege__t li { margin-bottom: .3rem; }
-@media (max-width: 640px) {
-  .wege__w { grid-template-columns: 1fr; gap: .5rem; padding: 1.5rem 0; }
-  .wege__n { padding-top: 0; }
+.tabs__b:hover{color:var(--ink)}
+.tabs__n{
+  font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--line);
+  font-variant-numeric:tabular-nums;transition:color .25s var(--ease);
+}
+.tabs__b:hover .tabs__n{color:var(--ink-soft)}
+.tabs__b[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--brand)}
+.tabs__b[aria-selected="true"] .tabs__n{color:var(--brand-deep)}
+.tabs__b:focus-visible{outline:3px solid var(--brand);outline-offset:-3px}
+.tabs__box{padding-top:30px}
+.tabs__p{outline:0}
+.tabs__p p{margin:0 0 1em}
+.tabs__p ul{margin:0 0 1em;padding-left:1.15rem}
+.tabs__p li{margin-bottom:.35rem}
+.tabs__p>*:last-child{margin-bottom:0}
+/* Ohne Skript stehen alle drei untereinander, jedes mit seiner Ueberschrift. */
+.tabs__h{font-size:20px;margin:0 0 .7em}
+.tabs__p+.tabs__p{margin-top:2.2rem;padding-top:2.2rem;border-top:1px solid var(--line)}
+/* Sobald das Skript uebernimmt, traegt die Leiste die Beschriftung. */
+[data-tabs].bereit .tabs__h{position:absolute;width:1px;height:1px;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap}
+[data-tabs].bereit .tabs__p{display:none}
+[data-tabs].bereit .tabs__p.an{display:block;animation:tabein .34s var(--ease)}
+[data-tabs].bereit .tabs__p+.tabs__p{margin-top:0;padding-top:0;border-top:0}
+@keyframes tabein{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){[data-tabs].bereit .tabs__p.an{animation:none}}
+@media(max-width:640px){
+  .tabs__b{flex:0 0 auto;padding:14px 16px 12px;font-size:15.5px}
+  .tabs__box{padding-top:24px}
 }
 
 /* ------------------------------------------------- Dokumente und Anmerkungen */
@@ -978,3 +1005,7 @@ body.ohne-demobar{padding-bottom:0}
 .prose--legal>*:first-child{margin-top:0}
 .legal__quelle{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--line);
   font-size:14px;color:var(--ink-soft)}
+
+/* Handlungswege direkt im Hero einer Uebersichtsseite. */
+.subhero__cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+@media(max-width:520px){.subhero__cta .btn{width:100%;justify-content:center}}

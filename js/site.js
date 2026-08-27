@@ -378,7 +378,55 @@
     }
   }
 
-  /* 11. Anfrageformular (Attrappe) ----------------------------------- */
+  /* 11. Reiter auf den Produktseiten ---------------------------------
+     Ohne dieses Skript stehen die drei Beratungswege untereinander und sind
+     vollstaendig lesbar. Erst hier wird daraus eine Reiterleiste; die Klasse
+     "bereit" schaltet das zugehoerige CSS scharf. Bedienung mit Maus, Finger
+     und Tastatur nach dem ueblichen Muster fuer Reiter. */
+  var reiterGruppen = document.querySelectorAll('[data-tabs]');
+  for (var rg = 0; rg < reiterGruppen.length; rg++) {
+    (function (gruppe) {
+      var knoepfe = gruppe.querySelectorAll('.tabs__b');
+      var felder = gruppe.querySelectorAll('.tabs__p');
+      if (!knoepfe.length || knoepfe.length !== felder.length) return;
+
+      function zeigen(index, fokus) {
+        for (var i = 0; i < knoepfe.length; i++) {
+          var an = i === index;
+          knoepfe[i].setAttribute('aria-selected', an ? 'true' : 'false');
+          knoepfe[i].tabIndex = an ? 0 : -1;
+          felder[i].classList.toggle('an', an);
+        }
+        if (fokus) knoepfe[index].focus();
+      }
+
+      for (var k = 0; k < knoepfe.length; k++) {
+        (function (i) {
+          knoepfe[i].addEventListener('click', function () { zeigen(i, false); });
+        })(k);
+      }
+
+      gruppe.querySelector('.tabs__bar').addEventListener('keydown', function (e) {
+        var jetzt = 0;
+        for (var i = 0; i < knoepfe.length; i++) {
+          if (knoepfe[i].getAttribute('aria-selected') === 'true') jetzt = i;
+        }
+        var ziel = null;
+        if (e.key === 'ArrowRight') ziel = (jetzt + 1) % knoepfe.length;
+        if (e.key === 'ArrowLeft') ziel = (jetzt - 1 + knoepfe.length) % knoepfe.length;
+        if (e.key === 'Home') ziel = 0;
+        if (e.key === 'End') ziel = knoepfe.length - 1;
+        if (ziel === null) return;
+        e.preventDefault();
+        zeigen(ziel, true);
+      });
+
+      gruppe.classList.add('bereit');
+      zeigen(0, false);
+    })(reiterGruppen[rg]);
+  }
+
+  /* 12. Anfrageformular (Attrappe) ----------------------------------- */
   var form = document.getElementById('enquiry');
   if (form) {
     form.addEventListener('submit', function (e) {

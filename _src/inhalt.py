@@ -88,37 +88,55 @@ REITER = _reiter_laden()
 
 
 def reiter_block(root, slug):
-    """Die drei Beratungswege als Abschnitte untereinander. Im Bestand sind es
-    Reiter; hier stehen sie offen, damit nichts hinter einem Klick liegt."""
+    """Die drei Beratungswege als Reiter, wie im Bestand - nur sauberer.
+
+    Ohne JavaScript stehen alle drei Felder untereinander und sind vollstaendig
+    lesbar; erst das Skript macht daraus eine Reiterleiste. So geht nichts
+    verloren, wenn es nicht laeuft (Suat 27.08.).
+    """
     r = REITER.get(slug)
     if not r:
         return ""
-    teile = []
-    for n, (kennung, eintrag) in enumerate(r.items()):
+    kennung = slug.replace("/", "-")
+    knoepfe, felder = [], []
+    for n, (kuerzel, eintrag) in enumerate(r.items()):
         koerper, liste = [], []
         for b in eintrag["bloecke"]:
             if b["tag"] == "li":
                 liste.append(b["text"])
-            else:
-                if liste:
-                    koerper.append("<ul>" + "".join(f"<li>{L.esc(x)}</li>" for x in liste) + "</ul>")
-                    liste = []
-                koerper.append(f"<p>{L.esc(b['text'])}</p>")
+                continue
+            if liste:
+                koerper.append("<ul>" + "".join(f"<li>{L.esc(x)}</li>" for x in liste) + "</ul>")
+                liste = []
+            koerper.append(f"<p>{L.esc(b['text'])}</p>")
         if liste:
             koerper.append("<ul>" + "".join(f"<li>{L.esc(x)}</li>" for x in liste) + "</ul>")
-        teile.append(f'''<div class="wege__w">
-        <span class="wege__n">{n + 1:02d}</span>
-        <div class="wege__t">
-          <h3>{L.esc(eintrag["titel"])}</h3>
-          {"".join(koerper)}
-        </div>
-      </div>''')
+
+        id_knopf, id_feld = f"t-{kennung}-{n}", f"p-{kennung}-{n}"
+        erster = "true" if n == 0 else "false"
+        knoepfe.append(
+            f'<button class="tabs__b" role="tab" id="{id_knopf}" type="button" '
+            f'aria-controls="{id_feld}" aria-selected="{erster}" '
+            f'tabindex="{0 if n == 0 else -1}">'
+            f'<span class="tabs__n">{n + 1:02d}</span>'
+            f'<span class="tabs__t">{L.esc(eintrag["titel"])}</span></button>')
+        felder.append(
+            f'<div class="tabs__p" role="tabpanel" id="{id_feld}" '
+            f'aria-labelledby="{id_knopf}" tabindex="0">'
+            f'<h3 class="tabs__h">{L.esc(eintrag["titel"])}</h3>'
+            f'{"".join(koerper)}</div>')
+
     return f'''<section class="sec sec--sand">
   <div class="wrap wrap--narrow">
     {L.sec_kopf(eyebrow="How we can help", h2="Three ways into this product.",
                 lead="Whether you are building it new, fixing something that goes wrong in "
                      "production, or looking for cost in the recipe.")}
-    <div class="wege rv">{"".join(teile)}</div>
+    <div class="tabs rv" data-tabs>
+      <div class="tabs__bar" role="tablist" aria-label="Three ways into this product">
+        {"".join(knoepfe)}
+      </div>
+      <div class="tabs__box">{"".join(felder)}</div>
+    </div>
   </div>
 </section>'''
 
@@ -244,8 +262,7 @@ DOKUMENTE = {
               "Ethical trade audit of the Reinfeld site, 2021."),
     "organic": ("katech-organic-2023.pdf", "Organic certificate, United Kingdom",
                 "Biodynamic Association, GB-ORG-06, for KaTech Ingredient Solutions Ltd "
-                "in Ellesmere Port. The existing site links this document as "
-                "“Environmental Policy”."),
+                "in Ellesmere Port."),
 }
 
 
@@ -274,8 +291,7 @@ DOKUMENT_BILD = {k: "cert-" + d[:-4].replace("katech-", "") + "-p1"
                  for k, (d, _, _) in DOKUMENTE.items()}
 
 
-def dokument_ansicht(root, schluessel, *, h2="See it here.",
-                     lead="The existing site links this document; here it is on the page."):
+def dokument_ansicht(root, schluessel, *, h2="The certificate.", lead=""):
     """Das Dokument direkt auf der Seite, nicht nur als Verweis.
 
     Als Bild der ersten Seite, nicht als eingebettetes PDF: eine
@@ -353,13 +369,13 @@ PRODUKTBEREICHE = ["vegan", "yogurt", "cheese", "cream", "desserts", "milk-drink
 KEINE_BEREICHE = ["find-us", "our-people", "our-ingredients", "certifications"]
 
 TITEL = {
-    "vegan": "Plant-based meat and fish alternatives",
+    "vegan": "Vegan solutions",
     "cheese": "Cheese is a tasty, flexible and delicious foodstuff with endless applications",
     "how-we-work": "Working with you, to deliver on your objectives",
 }
 
 KURZTITEL = {
-    "vegan": "Plant-based",
+    "vegan": "Vegan solutions",
     "soups-and-sauces": "Soups and sauces",
     "milk-drinks": "Milk drinks",
     "our-approach": "Our approach",
@@ -732,26 +748,26 @@ LEGAL_TEXTE = _laden("legal.json")
 # uebernehmen wie es ist, hoechstens Hinweise als Empfehlung).
 LEGAL_ANMERKUNGEN = {
     "privacy-policy": [
-        ("Seitentitel", "Die Ueberschrift ist der komplette Einleitungssatz mit 148 Zeichen. "
-         "Sie steht so auch im Bestand. Empfehlung: Titel auf „Privacy policy“ kuerzen, "
-         "der Satz wird zum ersten Absatz."),
-        ("Rechtsbegriff", "Der Text nennt die Verordnung abwechselnd DSGVO und GDPR. "
-         "Empfehlung: in der englischen Fassung durchgaengig GDPR."),
-        ("Anschrift", "Die Anschrift steht hier als „Aegiedienstraße“, im Imprint "
-         "als „Aegidienstraße“. Eine der beiden Schreibweisen ist falsch."),
+        ("Page title", "The heading is the full opening sentence, 148 characters long. It reads "
+         "that way on the existing site too. Suggested: shorten the title to “Privacy "
+         "policy” and let the sentence become the first paragraph."),
+        ("Legal term", "The text refers to the regulation as DSGVO in some places and GDPR in "
+         "others. Suggested: use GDPR throughout in the English version."),
+        ("Address", "The street is spelled “Aegiedienstraße” here and "
+         "“Aegidienstraße” in the imprint. One of the two is wrong."),
     ],
     "imprint": [
-        ("Faxnummer", "Die Faxnummer erscheint zweimal in unterschiedlicher Form: "
-         "0451 40 70-377 und 0451 40 70 2-377."),
+        ("Fax number", "The fax number appears twice in two different forms: 0451 40 70-377 "
+         "and 0451 40 70 2-377."),
     ],
     "terms-of-use": [
-        ("Firmenname", "Der Text nennt durchgaengig „K. Hahn + Partners Food Technology Ltd“, "
-         "also den Namen vor der Umfirmierung zu KaTech Ingredient Solutions. "
-         "Empfehlung: aktualisieren."),
-        ("Seitentitel", "Die Seite traegt im Bestand keine Ueberschrift."),
+        ("Company name", "The text refers throughout to “K. Hahn + Partners Food "
+         "Technology Ltd”, the name used before the change to KaTech Ingredient "
+         "Solutions. Suggested: update."),
+        ("Page title", "The page carries no heading of its own."),
     ],
     "cookie-policy-eu": [
-        ("Stand", "Der Text ist auf den 23.07.2025 datiert und damit ueber ein Jahr alt."),
+        ("Date", "The text is dated 23 July 2025 and is therefore more than a year old."),
     ],
 }
 
@@ -841,8 +857,7 @@ def baue_textseiten(textseite, legalseite):
 </section>
 ''' + dokumente_block("../", ["brcgs", "ifs", "rspo", "non-gmo", "sedex", "organic"],
                       h2="The certificates themselves.",
-                      lead="Every document the existing site links, held here rather than on "
-                           "the previous domain.")
+                      lead="Every certificate as issued, ready to open or pass on.")
                 if slug == "our-facilities":
                     extra = f'''<section class="sec sec--sand">
   <div class="wrap">
@@ -1065,7 +1080,7 @@ def _kontakt(schreibe):
             </select></div>
           <div class="field full"><label for="f-area">Product area</label>
             <select id="f-area" name="area">
-              <option>Plant-based meat and fish</option><option>Yogurt</option>
+              <option>Vegan solutions</option><option>Yogurt</option>
               <option>Cheese</option><option>Cream</option><option>Milk drinks</option>
               <option>Desserts</option><option>Mayonnaise</option><option>Dressings and dips</option>
               <option>Soups and sauces</option><option>Bakery</option><option>Fruit</option>
@@ -1241,6 +1256,14 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
         for gruppentitel, _, seiten in abschnitte:
             eintraege = []
             for s in seiten:
+                # Seiten, die unter einer anderen Seite derselben Spalte liegen,
+                # werden dort eingerueckt gezeigt. Die vier Standorte standen
+                # sonst zweimal da: einmal als Kind von Find us, einmal als
+                # eigener Eintrag (Suat 27.08.).
+                eltern = s.rsplit("/", 1)[0] if "/" in s else None
+                if eltern and eltern in seiten:
+                    eintraege.append(eintrag(s, tiefe=1))
+                    continue
                 eintraege.append(eintrag(s))
                 if s == "our-people":
                     for u in ("our-people/sales-team", "our-people/development-team"):
@@ -1249,9 +1272,6 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
                     if os.path.exists(pfad_team):
                         for p in json.load(open(pfad_team, encoding="utf-8")):
                             eintraege.append(eintrag(p["slug"], p["name"], tiefe=1))
-                if s == "find-us":
-                    for u in BAUM.get("find-us", []):
-                        eintraege.append(eintrag(u, tiefe=1))
             spalten.append(f'<div class="sm__sp"><h3>{L.esc(gruppentitel)}</h3>'
                            f'<ul class="sm__l">{"".join(eintraege)}</ul></div>')
         bloecke.append((titel, start_slug, spalten))

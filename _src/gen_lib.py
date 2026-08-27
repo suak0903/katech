@@ -7,7 +7,7 @@ import html, json, os, re
 
 import gen_chrome as chrome
 
-VERSION = 35  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
+VERSION = 39  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
 PAGES_URL = "https://suak0903.github.io/katech/"
 ORIGINAL = "https://katech-solutions.com/"
 ORT = "KaTech Ingredient Solutions"
@@ -154,7 +154,7 @@ def hero(root, *, eyebrow, h1, sub, bild, cta=None, ribbon=None, alt=""):
 
 
 
-def subhero(root, *, crumbs, h1, sub="", eyebrow="", bild=None, alt=""):
+def subhero(root, *, crumbs, h1, sub="", eyebrow="", bild=None, alt="", knoepfe=None):
     weg = []
     for i, (t, z) in enumerate(crumbs):
         if z:
@@ -170,6 +170,13 @@ def subhero(root, *, crumbs, h1, sub="", eyebrow="", bild=None, alt=""):
               f'</picture></div>')
     eb = f'<p class="eyebrow">{esc(eyebrow)}</p>' if eyebrow else ""
     su = f'<p class="subhero__sub">{esc(sub)}</p>' if sub else ""
+    # Ein Hero darf einen Weg anbieten, den die Kacheln weiter unten nicht
+    # gleichwertig zeigen - etwa den Sonderbereich Plant-based (Suat 27.08.).
+    kn = ""
+    if knoepfe:
+        kn = '<div class="subhero__cta">' + "".join(
+            f'<a class="btn {stil}" href="{ziel}">{esc(text)}</a>'
+            for text, ziel, stil in knoepfe) + "</div>"
     return f'''<section class="subhero">
   {hg}
   <div class="subhero__inner">
@@ -177,6 +184,7 @@ def subhero(root, *, crumbs, h1, sub="", eyebrow="", bild=None, alt=""):
     {eb}
     <h1>{h1}</h1>
     {su}
+    {kn}
   </div>
 </section>'''
 
@@ -305,23 +313,17 @@ def prosa(bloecke):
     return '<div class="prose rv">' + "".join(bloecke) + "</div>"
 
 
-# Saetze des Bestands, die auf ein Dokument verweisen, ohne dass der Verweis
-# beim Uebernehmen mitgekommen waere. Sie werden nicht umgeschrieben, sondern
-# bekommen ihren Link zurueck (Suat 27.08.).
-VERWEIS_REPARATUR = {
-    "Click here to view the KaTech RSPO certificate .":
-        ('Click here to view the KaTech RSPO certificate.',
-         "docs/katech-rspo-2026.pdf"),
+# Saetze des Bestands, die nur auf ein Dokument zeigen, das im Entwurf direkt
+# auf derselben Seite steht. Sie entfallen, weil der Weg zum Dokument dort
+# ohnehin daneben liegt (Suat 27.08.).
+ABSATZ_ENTFAELLT = {
+    "Click here to view the KaTech RSPO certificate .",
 }
 
 
 def absatz(t, root=""):
-    reparatur = VERWEIS_REPARATUR.get(t.strip())
-    if reparatur:
-        text, ziel = reparatur
-        vorn, hinten = text.split("Click here", 1)
-        return (f'<p>{esc(vorn)}<a href="{root}{ziel}" target="_blank" '
-                f'rel="noopener">Click here</a>{esc(hinten)}</p>')
+    if t.strip() in ABSATZ_ENTFAELLT:
+        return ""
     return f"<p>{esc(t)}</p>"
 
 
