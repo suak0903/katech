@@ -114,11 +114,13 @@
     }
   }
 
-  /* 6. Lightbox ------------------------------------------------------ */
-  var galerie = document.querySelector('.gallery');
+  /* 6. Grossansicht --------------------------------------------------
+     Bedient jedes Bild mit data-lb: die Galerie, die Produktbilder und die
+     Portraets. Vorher hing sie allein an der Galerie, alle uebrigen Bilder
+     waren stumm (Suat 27.08.). */
   var lb = document.getElementById('lb');
-  if (galerie && lb) {
-    var knoepfe = Array.prototype.slice.call(galerie.querySelectorAll('button'));
+  var knoepfe = Array.prototype.slice.call(document.querySelectorAll('[data-lb]'));
+  if (knoepfe.length && lb) {
     var lbImg = lb.querySelector('img');
     var lbCount = lb.querySelector('.lb__count');
     var index = 0;
@@ -128,7 +130,10 @@
       var q = knoepfe[index].querySelector('img');
       lbImg.src = knoepfe[index].dataset.full || q.currentSrc || q.src;
       lbImg.alt = q.alt || '';
-      if (lbCount) lbCount.textContent = (index + 1) + ' / ' + knoepfe.length;
+      if (lbCount) {
+        lbCount.textContent = knoepfe.length > 1
+          ? (index + 1) + ' / ' + knoepfe.length : '';
+      }
     };
     var oeffnenLb = function (i) {
       zeigen(i); lb.hidden = false; document.body.style.overflow = 'hidden';
@@ -140,6 +145,10 @@
     knoepfe.forEach(function (b, i) {
       b.addEventListener('click', function () { oeffnenLb(i); });
     });
+    if (knoepfe.length < 2) {
+      lb.querySelector('.lb__prev').hidden = true;
+      lb.querySelector('.lb__next').hidden = true;
+    }
     lb.querySelector('.lb__close').addEventListener('click', schliessenLb);
     lb.querySelector('.lb__prev').addEventListener('click', function () { zeigen(index - 1); });
     lb.querySelector('.lb__next').addEventListener('click', function () { zeigen(index + 1); });

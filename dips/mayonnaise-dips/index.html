@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="../../media/apple-touch-icon.png">
 <link rel="preload" href="../../font/Barlow-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../font/OpenSans-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../css/site.css?v=40">
+<link rel="stylesheet" href="../../css/site.css?v=42">
 <script type="application/ld+json">{
  "@context": "https://schema.org",
  "@type": "BreadcrumbList",
@@ -120,10 +120,13 @@
 </section>
 <section class="sec">
   <div class="wrap wrap--narrow">
-    <figure style="margin:0 0 30px">
+    <figure class="prodbild"><button type="button" class="zoom" data-lb
+      aria-label="Enlarge: Mayonnaise dips">
       <picture><source srcset="../../media/p-dips-mayonnaise-dips.webp" type="image/webp">
-      <img src="../../media/p-dips-mayonnaise-dips.jpg" alt="Mayonnaise dips" loading="lazy" decoding="async" width="800" height="533"></picture>
-    </figure>
+      <img src="../../media/p-dips-mayonnaise-dips.jpg" alt="Mayonnaise dips" loading="lazy"
+           decoding="async" width="800" height="533"></picture>
+      <span class="zoom__zeichen" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21M10.5 7.5v6M7.5 10.5h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </button></figure>
     <div class="prose rv"><p>Most dips are based on thick mayonnaise, and can be diluted by sour cream, creme fraiche or yogurt. This lowers the fat content and allows easy incorporation of herbs, spices, chopped vegetables, cheese and other ingredients to give different flavour profiles to complement the taste of blander foods.</p><p>Mayonnaise dips can also be used as sandwich fillers being a quick and easy way of introducing powerful flavours with a smooth creamy, but not fatty, mouthfeel.</p></div>
   </div>
 </section>
@@ -171,6 +174,13 @@
     </div>
   </div>
 </section>
+<div class="lb" id="lb" hidden>
+  <button class="lb__close" type="button" aria-label="Close">&times;</button>
+  <button class="lb__prev" type="button" aria-label="Previous">&#8249;</button>
+  <img src="" alt="">
+  <button class="lb__next" type="button" aria-label="Next">&#8250;</button>
+  <span class="lb__count"></span>
+</div>
 </main>
 <footer class="foot">
   <div class="wrap">
@@ -259,6 +269,6 @@
     </div>
   </div>
 </div>
-<script src="../../js/site.js?v=40" defer></script>
+<script src="../../js/site.js?v=42" defer></script>
 </body>
 </html>

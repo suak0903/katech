@@ -16,8 +16,10 @@ PRUEFUNGEN = [
     ("certifications/", "katech-ifs-2027.pdf", "Zertifikatsdokumente verlinkt"),
     ("docs/katech-rspo-2026.pdf", None, "PDF erreichbar"),
     ("soups/freshpasteurised/", "Soups and sauces", "Breadcrumb umgehaengt"),
-    ("case-studies/", "Company", "Case studies unter Company"),
     ("sitemap/", "sm__mk", "Sitemap-Marken"),
+    ("case-studies/", "Expertise", "Case studies unter Expertise"),
+    ("about-this-preview/", "all 201 are in this preview", "Abdeckung benannt"),
+    ("yogurt/drinking-yogurt/", "BreadcrumbList", "Breadcrumb-Markup"),
 ]
 
 for pfad, erwartet, was in PRUEFUNGEN:

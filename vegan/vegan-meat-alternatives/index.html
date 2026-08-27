@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="../../media/apple-touch-icon.png">
 <link rel="preload" href="../../font/Barlow-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../font/OpenSans-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../css/site.css?v=40">
+<link rel="stylesheet" href="../../css/site.css?v=42">
 <script type="application/ld+json">{
  "@context": "https://schema.org",
  "@type": "BreadcrumbList",
@@ -120,10 +120,13 @@
 </section>
 <section class="sec">
   <div class="wrap wrap--narrow">
-    <figure style="margin:0 0 30px">
+    <figure class="prodbild"><button type="button" class="zoom" data-lb
+      aria-label="Enlarge: Vegan meat alternatives">
       <picture><source srcset="../../media/p-vegan-vegan-meat-alternatives.webp" type="image/webp">
-      <img src="../../media/p-vegan-vegan-meat-alternatives.jpg" alt="Vegan meat alternatives" loading="lazy" decoding="async" width="800" height="533"></picture>
-    </figure>
+      <img src="../../media/p-vegan-vegan-meat-alternatives.jpg" alt="Vegan meat alternatives" loading="lazy"
+           decoding="async" width="800" height="533"></picture>
+      <span class="zoom__zeichen" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21M10.5 7.5v6M7.5 10.5h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </button></figure>
     <div class="prose rv"><p>The vegan and vegetarian markets offer a lot of products trying to match traditional meat products. Consumers are looking for convenient products that can help them keep their diet plant based, so they don't have to sacrifice on the products they like eating.</p><p>The consumer of today is more critical than before. A product that does not meet expectations will easily be dismissed. The food manufacturers therefore must focus on the eating pleasure and texture to get as close as possible to the traditional non-vegan product.</p><p>As KaTech has a wide range of experience in the different food areas, we have developed products that can achieve the same eating sensation like the traditional products but are based on plant ingredients. Our recipes range from vegan burger patties to cold cuts, paté or aspic, a traditionally gelatine based product which is popular in various European countries.</p></div>
   </div>
 </section>
@@ -186,6 +189,13 @@
     </div>
   </div>
 </section>
+<div class="lb" id="lb" hidden>
+  <button class="lb__close" type="button" aria-label="Close">&times;</button>
+  <button class="lb__prev" type="button" aria-label="Previous">&#8249;</button>
+  <img src="" alt="">
+  <button class="lb__next" type="button" aria-label="Next">&#8250;</button>
+  <span class="lb__count"></span>
+</div>
 </main>
 <footer class="foot">
   <div class="wrap">
@@ -274,6 +284,6 @@
     </div>
   </div>
 </div>
-<script src="../../js/site.js?v=40" defer></script>
+<script src="../../js/site.js?v=42" defer></script>
 </body>
 </html>

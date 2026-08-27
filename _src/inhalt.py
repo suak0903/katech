@@ -1449,11 +1449,19 @@ def _hinweise(schreibe, SEITEN, BAUM, NEWS):
           <a href="https://akyol.de/presentations/ki-arbeitsarchitektur/" target="_blank" rel="noopener">KI als Arbeitsarchitektur</a>
         </div>'''
         rk.append(f'''<div class="ref">
-      <img class="ref__shot" src="{root}media/refs/{key}.webp" alt="Start page of {L.esc(name)}"
-           width="640" height="400" loading="lazy" decoding="async">
+      <a class="ref__link" href="{url}" target="_blank" rel="noopener"
+         aria-label="Open {L.esc(name)} in a new tab">
+        <picture>
+          <source type="image/webp" srcset="{root}media/refs/{key}.webp">
+          <img class="ref__shot" src="{root}media/refs/{key}.jpg"
+               alt="Start page of {L.esc(name)}"
+               width="1280" height="800" loading="lazy" decoding="async">
+        </picture>
+      </a>
       <div class="ref__body">
-        <h4>{L.esc(name)}</h4><p>{L.esc(text)}</p>
-        <a href="{url}" target="_blank" rel="noopener">View live</a>
+        <h4><a href="{url}" target="_blank" rel="noopener">{L.esc(name)}</a></h4>
+        <p>{L.esc(text)}</p>
+        <a class="ref__cta" href="{url}" target="_blank" rel="noopener">View live</a>
         {zusatz}
       </div>
     </div>''')
@@ -1892,11 +1900,8 @@ def _team(schreibe, SEITEN, kurz):
 <section class="sec">
   <div class="wrap wrap--narrow">
     <div class="profil rv">
-      <picture>
-        <source srcset="{r}media/team-{p['slug']}.webp" type="image/webp">
-        <img src="{r}media/team-{p['slug']}.jpg" alt="{L.esc(p['name'])}"
-             width="440" height="440" loading="eager" decoding="async">
-      </picture>
+      {L.zoombild(r, "team-" + p["slug"], p["name"], klasse="zoom--portraet",
+                  breite=440, hoehe=440)}
       <div class="profil__daten">
         <h2>{L.esc(rolle_von(p))}</h2>
         <dl>

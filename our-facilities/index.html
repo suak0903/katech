@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="../media/apple-touch-icon.png">
 <link rel="preload" href="../font/Barlow-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../font/OpenSans-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../css/site.css?v=40">
+<link rel="stylesheet" href="../css/site.css?v=42">
 <script type="application/ld+json">{
  "@context": "https://schema.org",
  "@type": "BreadcrumbList",
@@ -166,25 +166,27 @@
 <section class="sec sec--sand">
   <div class="wrap">
     <div class="sec__head"><p class="eyebrow">Impressions</p><h2>Inside the sites.</h2></div>
-    <div class="gallery rv"><button type="button" aria-label="Enlarge: KaTech head office in Lübeck">
+    <div class="gallery rv"><button type="button" data-lb aria-label="Enlarge: KaTech head office in Lübeck">
       <picture><source srcset="../media/hq-luebeck.webp" type="image/webp">
       <img src="../media/hq-luebeck.jpg" alt="KaTech head office in Lübeck" loading="lazy" decoding="async" width="800" height="533"></picture>
-    </button><button type="button" aria-label="Enlarge: Blending tower at the production site">
+    </button><button type="button" data-lb aria-label="Enlarge: Blending tower at the production site">
       <picture><source srcset="../media/blending-tower.webp" type="image/webp">
       <img src="../media/blending-tower.jpg" alt="Blending tower at the production site" loading="lazy" decoding="async" width="800" height="533"></picture>
-    </button><button type="button" aria-label="Enlarge: Measurement in the development laboratory">
+    </button><button type="button" data-lb aria-label="Enlarge: Measurement in the development laboratory">
       <picture><source srcset="../media/lab-measurement.webp" type="image/webp">
       <img src="../media/lab-measurement.jpg" alt="Measurement in the development laboratory" loading="lazy" decoding="async" width="800" height="533"></picture>
-    </button><button type="button" aria-label="Enlarge: Sensory panel with product samples">
+    </button><button type="button" data-lb aria-label="Enlarge: Sensory panel with product samples">
       <picture><source srcset="../media/sensory-panel.webp" type="image/webp">
       <img src="../media/sensory-panel.jpg" alt="Sensory panel with product samples" loading="lazy" decoding="async" width="800" height="533"></picture>
-    </button><button type="button" aria-label="Enlarge: Temperature controlled warehouse">
+    </button><button type="button" data-lb aria-label="Enlarge: Temperature controlled warehouse">
       <picture><source srcset="../media/warehouse.webp" type="image/webp">
       <img src="../media/warehouse.jpg" alt="Temperature controlled warehouse" loading="lazy" decoding="async" width="800" height="533"></picture>
-    </button><button type="button" aria-label="Enlarge: Production site in northern Germany">
+    </button><button type="button" data-lb aria-label="Enlarge: Production site in northern Germany">
       <picture><source srcset="../media/plant-reinfeld.webp" type="image/webp">
       <img src="../media/plant-reinfeld.jpg" alt="Production site in northern Germany" loading="lazy" decoding="async" width="800" height="533"></picture>
     </button></div>
+  </div>
+</section>
 <div class="lb" id="lb" hidden>
   <button class="lb__close" type="button" aria-label="Close">&times;</button>
   <button class="lb__prev" type="button" aria-label="Previous">&#8249;</button>
@@ -192,8 +194,6 @@
   <button class="lb__next" type="button" aria-label="Next">&#8250;</button>
   <span class="lb__count"></span>
 </div>
-  </div>
-</section>
 </main>
 <footer class="foot">
   <div class="wrap">
@@ -282,6 +282,6 @@
     </div>
   </div>
 </div>
-<script src="../js/site.js?v=40" defer></script>
+<script src="../js/site.js?v=42" defer></script>
 </body>
 </html>

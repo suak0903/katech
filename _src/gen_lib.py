@@ -7,7 +7,7 @@ import html, json, os, re
 
 import gen_chrome as chrome
 
-VERSION = 40  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
+VERSION = 42  # Cache-Busting: bei jeder Aenderung an css/js erhoehen
 PAGES_URL = "https://suak0903.github.io/katech/"
 ORIGINAL = "https://katech-solutions.com/"
 ORT = "KaTech Ingredient Solutions"
@@ -92,6 +92,9 @@ def seite(zielpfad, titel, beschreibung, inhalt, *, aktiv="", solid=False,
     bloecke = []
     if jsonld:
         bloecke.append(jsonld)
+    # Die Grossansicht liegt auf jeder Seite, die vergroesserbare Bilder hat
+    if "data-lb" in inhalt and 'id="lb"' not in inhalt:
+        inhalt += "\n" + lightbox()
     krumen = brotkrumen(zielpfad, inhalt)
     if krumen:
         bloecke.append(krumen)
@@ -322,12 +325,39 @@ def schritte(eintraege):
 
 def galerie(root, bilder):
     knoepfe = "".join(
-        f'''<button type="button" aria-label="Enlarge: {esc(a)}">
+        f'''<button type="button" data-lb aria-label="Enlarge: {esc(a)}">
       <picture><source srcset="{root}media/{b}.webp" type="image/webp">
       <img src="{root}media/{b}.jpg" alt="{esc(a)}" loading="lazy" decoding="async" width="800" height="533"></picture>
     </button>''' for b, a in bilder)
-    return f'''<div class="gallery rv">{knoepfe}</div>
-<div class="lb" id="lb" hidden>
+    return f'<div class="gallery rv">{knoepfe}</div>'
+
+
+def zoombild(root, bild, alt_text, *, klasse="", breite=800, hoehe=533):
+    """Ein Bild, das sich auf Klick gross zeigt.
+
+    Fuer Bilder, die kein Verweisziel haben koennen, weil sie schon auf
+    ihrer eigenen Seite stehen: Produktbilder, Portraets, Standortbilder.
+    """
+    zusatz = f" {klasse}" if klasse else ""
+    return f'''<button type="button" class="zoom{zusatz}" data-lb
+      aria-label="Enlarge: {esc(alt_text)}">
+      <picture><source srcset="{root}media/{bild}.webp" type="image/webp">
+      <img src="{root}media/{bild}.jpg" alt="{esc(alt_text)}" loading="lazy"
+           decoding="async" width="{breite}" height="{hoehe}"></picture>
+      <span class="zoom__zeichen" aria-hidden="true">{LUPE}</span>
+    </button>'''
+
+
+LUPE = ('<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+        '<circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/>'
+        '<path d="M15.5 15.5 21 21M10.5 7.5v6M7.5 10.5h6" stroke="currentColor" '
+        'stroke-width="2" stroke-linecap="round"/></svg>')
+
+
+def lightbox():
+    """Die Grossansicht. Liegt auf jeder Seite, die vergroesserbare Bilder
+    traegt; vorher hing sie an der Galerie und war deshalb nur dort da."""
+    return '''<div class="lb" id="lb" hidden>
   <button class="lb__close" type="button" aria-label="Close">&times;</button>
   <button class="lb__prev" type="button" aria-label="Previous">&#8249;</button>
   <img src="" alt="">

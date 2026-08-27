@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="../../media/apple-touch-icon.png">
 <link rel="preload" href="../../font/Barlow-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../font/OpenSans-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../css/site.css?v=40">
+<link rel="stylesheet" href="../../css/site.css?v=42">
 <script type="application/ld+json">{
  "@context": "https://schema.org",
  "@type": "BreadcrumbList",
@@ -120,10 +120,13 @@
 </section>
 <section class="sec">
   <div class="wrap wrap--narrow">
-    <figure style="margin:0 0 30px">
+    <figure class="prodbild"><button type="button" class="zoom" data-lb
+      aria-label="Enlarge: Fromage frais">
       <picture><source srcset="../../media/p-cream-fromage-frais.webp" type="image/webp">
-      <img src="../../media/p-cream-fromage-frais.jpg" alt="Fromage frais" loading="lazy" decoding="async" width="800" height="533"></picture>
-    </figure>
+      <img src="../../media/p-cream-fromage-frais.jpg" alt="Fromage frais" loading="lazy"
+           decoding="async" width="800" height="533"></picture>
+      <span class="zoom__zeichen" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21M10.5 7.5v6M7.5 10.5h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </button></figure>
     <div class="prose rv"><p>On the existing site this page shows a product photograph and no text. The photograph is carried over here; nothing else was there to carry.</p></div>
   </div>
 </section>
@@ -176,6 +179,13 @@
     </div>
   </div>
 </section>
+<div class="lb" id="lb" hidden>
+  <button class="lb__close" type="button" aria-label="Close">&times;</button>
+  <button class="lb__prev" type="button" aria-label="Previous">&#8249;</button>
+  <img src="" alt="">
+  <button class="lb__next" type="button" aria-label="Next">&#8250;</button>
+  <span class="lb__count"></span>
+</div>
 </main>
 <footer class="foot">
   <div class="wrap">
@@ -264,6 +274,6 @@
     </div>
   </div>
 </div>
-<script src="../../js/site.js?v=40" defer></script>
+<script src="../../js/site.js?v=42" defer></script>
 </body>
 </html>

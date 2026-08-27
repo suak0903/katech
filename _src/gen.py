@@ -502,10 +502,8 @@ def produktseite(slug):
     bild_html = ""
     b = bild_von(slug)
     if b:
-        bild_html = f'''<figure style="margin:0 0 30px">
-      <picture><source srcset="{root}media/{b}.webp" type="image/webp">
-      <img src="{root}media/{b}.jpg" alt="{L.esc(kurztitel(slug))}" loading="lazy" decoding="async" width="800" height="533"></picture>
-    </figure>'''
+        bild_html = ('<figure class="prodbild">'
+                     + L.zoombild(root, b, kurztitel(slug)) + "</figure>")
 
     nachbarn = ""
     if geschwister:
