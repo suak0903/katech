@@ -173,40 +173,73 @@ ueber alle Personen.
 transparenten Bereich als Schwarz ein und die drei fallen in der Kachelreihe
 sofort auf.
 
-## 5d. OFFEN: Bereichszuordnung ist widerspruechlich (Suat 27.08.2026)
+## 5d. Die Informationsarchitektur liegt in struktur.py
 
-**Befund.** Drei Stellen sagen unabhaengig voneinander, zu welchem Bereich eine
-Seite gehoert, und sie widersprechen sich:
+**Eine Quelle, aus der sich alles ableitet.** Vorher legten vier Stellen
+unabhaengig voneinander fest, zu welchem Bereich eine Seite gehoert:
+Hub-Kachel, Menuemarkierung, Breadcrumb und Generator-Liste. Sie sind
+auseinandergedriftet (Suat 27.08.: Team unter Expertise verlinkt, aber Company
+markiert; Facilities markiert, aber Company im Pfad).
 
-| Seite | verlinkt im Hub | markierter Menuepunkt | Breadcrumb |
-|---|---|---|---|
-| `our-people` | Expertise | Company | Start / Company / Our people |
-| `case-studies` | Expertise | Company | Start / Company / Case studies |
-| `our-facilities` | Company | Facilities | Start / Company / Our facilities |
+Jetzt steht die Zuordnung in `struktur.py`. `gen.bereich_von()`,
+`gen.aktiv_von()` und `gen.crumbs_von()` lesen daraus; Hubs und Sitemap
+ebenfalls. **`check.py` prueft fuer jede Seite, ob markierter Menuepunkt und
+Breadcrumb uebereinstimmen** - Sollwert null Abweichungen.
 
-Wer im Expertise-Hub auf das Team klickt, landet also in Company. Wer im
-Company-Hub auf Facilities klickt, sieht oben Facilities und unten Company.
+**Bereichsschnitt:**
+- **Solutions** - die dreizehn Produktwelten und alles darunter.
+- **Expertise** - was das Unternehmen kann, einschliesslich Case studies.
+- **Company** - wer es ist, einschliesslich Our people und der 23 Profile.
+- **Facilities** - eigener Bereich seit 27.08.; der Company-Abschnitt
+  "Sites and production" ist vollstaendig dorthin gewandert, ebenso Find us
+  mit den vier Standortseiten.
+- **News** - Archiv und Einzelmeldungen.
 
-**Ursache.** In `inhalt.py` werden drei Dinge getrennt gesetzt: die Liste, in
-der eine Seite steht (`COMPANY_SEITEN` bzw. `EXPERTISE_SEITEN`), der Wert
-`aktiv` fuer die Menuemarkierung und `crumbs_extra` fuer den Pfad. Die
-Hub-Kacheln in `baue_hubs` sind davon voellig unabhaengig. Vier Quellen fuer
-eine Aussage, entsprechend driften sie.
+**Plant-based** hat vier Gruppen: Meat alternatives und Fish alternatives mit
+den vorhandenen Kopfseiten, Dairy alternatives und Savoury als reine
+Gruppenueberschriften, weil es dafuer im Bestand keine Kopfseite gibt. Es wird
+keine Seite erfunden.
 
-**Richtung fuer die Loesung.** Eine Seite bekommt **genau eine**
-Bereichszugehoerigkeit; Menuemarkierung, Breadcrumb und Hub-Zuordnung werden
-daraus abgeleitet statt einzeln gepflegt. Verlinken darf jeder Hub, wo es
-inhaltlich hilft; die Kennzeichnung der Seite bleibt davon unberuehrt.
+**Die verwaiste Suppenkategorie** (`soups` mit genau einer Seite neben
+`soups-and-sauces`) erscheint unter Soups and sauces. Die Adresse
+`/soups/freshpasteurised/` bleibt unveraendert.
 
-**Offene inhaltliche Frage (Suat).** Vorschlag: `our-people` und
-`case-studies` wandern unter Company in den Abschnitt "The business";
-der Expertise-Abschnitt "Ingredients and people" heisst dann nur noch
-"What goes in" und fuehrt Ingredients used und Ingredients list.
-Ebenfalls zu klaeren: ob `Facilities` ein eigener Hauptmenuepunkt bleibt
-(dann eigener Breadcrumb-Zweig) oder unter Company zurueckgeht
-(dann vier Menuepunkte: Solutions, Expertise, Company, News).
+**Offen:** Ob Case studies bei Expertise bleibt oder unter Company wandert,
+entscheidet Suat. Der Umzug ist eine Zeile in `struktur.py`.
 
-**Status: nur festgehalten, nicht umgesetzt.** Entscheidung steht bei Suat.
+## 5e. Seiten ohne Inhalt: drei Faelle, ehrlich benannt
+
+Ermittelt mit `leerpruefung.py`, das den kompletten Inhaltsbereich auf Text,
+Listen, Tabellen, Bilder, Downloads und eingebettete Inhalte prueft. Der erste
+Extraktor hatte nur Fliesstext gezaehlt und deshalb Bilder uebersehen.
+
+| Fall | Anzahl | Was auf der Seite steht |
+|---|---|---|
+| Im Original ohne jeden Inhalt | 21 | "This page has no content on the existing site." |
+| Im Original nur ein Produktbild | 10 | Das Bild, plus ein Satz dazu. Kein Mangel-Hinweis. |
+| Im Original vorhanden, hier nicht ausgebaut | wenige | "This page is not built out in this preview." |
+
+**Jeder dieser Hinweise verlinkt die Originalseite**, damit die Aussage
+nachpruefbar ist (Suat 27.08.). Der frueher einheitliche Text behauptete, die
+Vorschau sei unfertig - bei 21 Seiten war das schlicht falsch.
+
+**Nebenbefund:** `katech-solutions.com/purchasing/` traegt oeffentlich die
+interne Notiz "Steve Williams needs to put something here". **Bewusst nicht
+uebernommen**, weil sie einen Mitarbeiter namentlich vorfuehrt.
+
+## 5f. Grafische Sitemap
+
+`/sitemap/` zeigt die vollstaendige Hierarchie, jede Seite einzeln anklickbar,
+Seiten ohne Inhalt gekennzeichnet. Sie speist sich aus `struktur.py` und kann
+deshalb nicht von Menue und Breadcrumb abweichen. Verlinkt in der Demo-Leiste
+neben "What is different?" und "Original site".
+
+**Beschriftungen** stammen aus dem Adressbestandteil, nicht aus den
+Bestandstiteln - dort stehen Werbesaetze wie "Greek yogurt - the food of the
+gods", die als Navigationsbeschriftung nicht taugen. Deutsche Adressreste
+(`pflanzliche-burger-patties`, `wurstchen-alternativen`) und
+unverstaendliche Kuerzel bekommen in `inhalt.KURZTITEL` eine Beschriftung;
+die Adressen bleiben unveraendert.
 
 ## 6. Stolperfallen aus diesem Projekt
 
