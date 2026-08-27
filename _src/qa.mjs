@@ -51,9 +51,11 @@ const browser = await chromium.launch();
   const t = await page.locator('#heroBg').evaluate(el => el.style.transform);
   if (!t || t === 'none') notiz('Hero', 'Parallaxe setzt keine Transformation');
 
-  // Reveal-Elemente sind sichtbar geworden
+  // Reveal-Elemente sind sichtbar geworden. Das Einblenden laeuft ueber einen
+  // Beobachter und braucht einen Moment; ohne Abwarten misst man zu frueh.
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-  await page.waitForTimeout(900);
+  await page.waitForFunction(() => document.querySelectorAll('.rv:not(.in)').length === 0,
+                             null, { timeout: 6000 }).catch(() => {});
   const unsichtbar = await page.locator('.rv:not(.in)').count();
   if (unsichtbar > 0) notiz('Reveal', `${unsichtbar} Elemente bleiben unsichtbar`);
 
