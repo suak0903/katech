@@ -1865,11 +1865,12 @@ TEAM_AUSGEBLENDET = {"steve-williams"}
 # Bestandsprofil bleibt darunter unveraendert stehen.
 VITA_VORSPANN = {
     "cyril-carrat": [
-        "Cyril Carrat leads KaTech as Managing Director. When Ingredion acquired the "
-        "company, the separate managing director roles at the individual sites were "
-        "brought together into one group-wide function, which he has held since. He is "
-        "responsible for the business across Germany, the United Kingdom and Poland, from "
-        "product development through production to the commercial side.",
+        "Cyril Carrat has been Managing Director of KaTech since 2021. When Ingredion "
+        "acquired the company in April of that year, the separate managing director roles "
+        "at the individual sites were brought together into one group-wide function, which "
+        "he has held ever since. He is responsible for the business across Germany, the "
+        "United Kingdom and Poland, from product development through production to the "
+        "commercial side.",
     ],
 }
 
