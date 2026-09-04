@@ -1098,3 +1098,18 @@ body.ohne-demobar{padding-bottom:0}
   .weiter,.weiter__t::after{transition:none}
   .weiter:hover{transform:none}
 }
+
+/* ------------------------------------------------------- Sprachampel
+   Stand der Uebersetzungen je Seite: gruen uebernehmbar, gelb duenn oder
+   leer, rot nicht vorhanden. Erhoben aus den hreflang-Verweisen des
+   Bestands und der Textmenge der jeweiligen Seite. */
+.ampel{display:inline-flex;gap:3px;margin-left:8px;vertical-align:middle}
+.amp{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:19px;height:14px;border-radius:2px;font-style:normal;
+  font:700 8.5px/1 var(--font-display);letter-spacing:.04em;color:#fff;cursor:help;
+}
+.amp--gruen{background:#4f8a2e}
+.amp--gelb{background:#c9911a}
+.amp--rot{background:#b3402f}
+.amp span{opacity:.92}

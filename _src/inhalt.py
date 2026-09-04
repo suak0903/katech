@@ -750,6 +750,33 @@ def _laden(name):
 
 LEGAL_TEXTE = _laden("legal.json")
 
+# Stand der Uebersetzungen, erhoben mit sprachen.py aus den hreflang-Verweisen
+# des Bestands und der Textmenge der jeweiligen Seite.
+SPRACHSTAND = _laden("sprachen.json")
+
+AMPEL_FARBE = {"gut": "gruen", "duenn": "gelb", "leer": "gelb", "fehlt": "rot"}
+AMPEL_TEXT = {
+    "gut": "Uebersetzung vorhanden, eins zu eins uebernehmbar",
+    "duenn": "vorhanden, aber deutlich kuerzer als das Englische",
+    "leer": "Seite vorhanden, aber ohne Inhalt",
+    "fehlt": "keine Uebersetzung vorhanden",
+}
+
+
+def sprachampel(slug):
+    """Zwei Punkte je Eintrag: Deutsch und Polnisch."""
+    eintrag = SPRACHSTAND.get(slug)
+    if not eintrag:
+        return ""
+    punkte = []
+    for sprache in ("de", "pl"):
+        stand = eintrag.get(sprache, {}).get("stand", "fehlt")
+        punkte.append(
+            f'<i class="amp amp--{AMPEL_FARBE[stand]}" '
+            f'title="{sprache.upper()}: {AMPEL_TEXT[stand]}">'
+            f'<span>{sprache.upper()}</span></i>')
+    return f'<span class="ampel">{"".join(punkte)}</span>' 
+
 # Auffaelligkeiten in den Rechtstexten des Bestands. Sie werden NICHT still
 # korrigiert - der Text bleibt wortgetreu, der Befund steht als sichtbarer
 # Kommentar daneben (Suat 27.08.: beim Rechtszeug gewissenhafter, erst so
@@ -1252,7 +1279,8 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
             marke = ""
         original = original_pfeil(slug, name)
         return (f'<li class="sm__i sm__i--{tiefe}">'
-                f'<a href="{root}{slug}/">{L.esc(name)}</a>{marke}{original}</li>')
+                f'<a href="{root}{slug}/">{L.esc(name)}</a>{marke}{original}'
+                f'{sprachampel(slug)}</li>')
 
     bloecke = []
 
@@ -1352,7 +1380,13 @@ def _sitemap(schreibe, SEITEN, BAUM, NEWS, kurztitel):
                            "reachable at its original address. Entries marked empty carry no "
                            "content on the existing site either. The small arrow behind an "
                            "entry opens the same page on the original site, so anything stated "
-                           "here can be checked. Entries marked moved keep their address "
+                           "here can be checked. The two markers behind each entry show "
+                           "the state of the translations: green means the page exists in "
+                           "that language and carries comparable content, amber means it "
+                           "exists but is thin or empty, red means there is none. German: "
+                           "101 ready, 17 thin, 41 missing. "
+                           "Polish: 92 ready, 4 thin, 63 missing. "
+                           "Entries marked moved keep their address "
                            "from the existing site and lead to the page that now carries "
                            "their content. Only one entry has no arrow: bakery-old has "
                            "sub-pages on the existing site but no page of its own.")

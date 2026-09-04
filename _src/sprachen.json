@@ -1,0 +1,2244 @@
+{
+ "bakery": {
+  "en_zeichen": 3017,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "bakery-old/cleaner-label-cakes": {
+  "en_zeichen": 0,
+  "adressen": {
+   "de": "/de/backwaren-old/cleaner-label-kuchen/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 20
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "bakery-old/cleaner-label-muffins": {
+  "en_zeichen": 0,
+  "adressen": {
+   "de": "/de/backwaren-old/cleaner-label-muffin/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 20
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "bakery-old/cleaner-label-sponge": {
+  "en_zeichen": 0,
+  "adressen": {
+   "de": "/de/backwaren-old/cleaner-label-ruhrteig/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 22
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "bakery/bakery-fillings": {
+  "en_zeichen": 2918,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "bakery/cakes": {
+  "en_zeichen": 1501,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "bakery/choux-pastry": {
+  "en_zeichen": 706,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "bakery/katech-scratch-plus": {
+  "en_zeichen": 732,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "bakery/muffins": {
+  "en_zeichen": 866,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "bakery/snack-cakes": {
+  "en_zeichen": 1033,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "bakery/toppings": {
+  "en_zeichen": 2202,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "careers": {
+  "en_zeichen": 569,
+  "adressen": {
+   "de": "/de/karriere/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 886
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "case-studies": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "certifications": {
+  "en_zeichen": 1620,
+  "adressen": {
+   "de": "/de/zertifizierungen/",
+   "pl": "/pl/certyfikaty-polityka-jakosci/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 2558
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 2407
+  }
+ },
+ "certifications/rspo": {
+  "en_zeichen": 98,
+  "adressen": {
+   "de": "/de/zertifizierungen/rspo/",
+   "pl": "/pl/certyfikaty-polityka-jakosci/rspo/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 169
+  },
+  "pl": {
+   "stand": "leer",
+   "zeichen": 121
+  }
+ },
+ "cheese": {
+  "en_zeichen": 679,
+  "adressen": {
+   "de": "/de/kase/",
+   "pl": "/pl/sery-i-serki/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 794
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 806
+  }
+ },
+ "cheese/analogue-cheese": {
+  "en_zeichen": 794,
+  "adressen": {
+   "de": "/de/kase/analogkase/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 10
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "cheese/cottage-cheese": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "cheese/cottage-cheese-dressing": {
+  "en_zeichen": 632,
+  "adressen": {
+   "de": "/de/kase/huttenkase-aufgeschlagener-kase/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 896
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "cheese/cream-cheese": {
+  "en_zeichen": 483,
+  "adressen": {
+   "de": "/de/kase/frischkaseerzeugnisse/",
+   "pl": "/pl/sery-i-serki/serek-smietankowy/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 404
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 577
+  }
+ },
+ "cheese/processed-cheese": {
+  "en_zeichen": 759,
+  "adressen": {
+   "de": "/de/kase/schmelzkase-und-kasezubereitungen/",
+   "pl": "/pl/sery-i-serki/ser-topiony/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 929
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 818
+  }
+ },
+ "cheese/quarg": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "cheese/quarg-dessert": {
+  "en_zeichen": 660,
+  "adressen": {
+   "de": "/de/kase/quark-dessert/",
+   "pl": "/pl/sery-i-serki/deser-twarogowy/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 599
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 673
+  }
+ },
+ "cheese/spreadable-cheese": {
+  "en_zeichen": 0,
+  "adressen": {
+   "de": "/de/kase/streichkase/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 11
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "contact-us": {
+  "en_zeichen": 730,
+  "adressen": {
+   "de": "/de/kontakt/",
+   "pl": "/pl/kontakt/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 891
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 929
+  }
+ },
+ "cookie-policy-eu": {
+  "en_zeichen": 4006,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "cost-optimisation": {
+  "en_zeichen": 1041,
+  "adressen": {
+   "de": "/de/kostenoptimierung/",
+   "pl": "/pl/redukcja-kosztow/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 717
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1251
+  }
+ },
+ "cream": {
+  "en_zeichen": 726,
+  "adressen": {
+   "de": "/de/sahne/",
+   "pl": "/pl/smietanki-i-smietany/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 627
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1166
+  }
+ },
+ "cream/coffee-cream-and-whitener": {
+  "en_zeichen": 434,
+  "adressen": {
+   "de": "/de/sahne/kaffeesahne-kaffeeweiser/",
+   "pl": "/pl/smietanki-i-smietany/pl-coffee-cream-whitener/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 677
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 463
+  }
+ },
+ "cream/cooking-cream": {
+  "en_zeichen": 491,
+  "adressen": {
+   "de": "/de/sahne/kochsahne/",
+   "pl": "/pl/smietanki-i-smietany/smietanka-do-gotowania/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 483
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 706
+  }
+ },
+ "cream/cream-topping": {
+  "en_zeichen": 533,
+  "adressen": {
+   "de": "/de/sahne/sahnetopping/",
+   "pl": "/pl/smietanki-i-smietany/bita-smietanka-deserow/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 882
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 951
+  }
+ },
+ "cream/creme-fraiche": {
+  "en_zeichen": 459,
+  "adressen": {
+   "de": "/de/sahne/creme-fraiche/",
+   "pl": "/pl/smietanki-i-smietany/creme-fraiche/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 675
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 751
+  }
+ },
+ "cream/fromage-frais": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "cream/sour-cream": {
+  "en_zeichen": 387,
+  "adressen": {
+   "de": "/de/sahne/fermentierte-sahneprodukte/",
+   "pl": "/pl/smietanki-i-smietany/fermentowane-produkty-smietanowe/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 398
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 466
+  }
+ },
+ "cream/vegetable-non-dairy": {
+  "en_zeichen": 786,
+  "adressen": {
+   "de": "/de/sahne/sahne-aus-pflanzenfett-ohne-milchprodukte/",
+   "pl": "/pl/smietanki-i-smietany/vegetable-non-dairy/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 926
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 871
+  }
+ },
+ "cream/whipping-cream": {
+  "en_zeichen": 629,
+  "adressen": {
+   "de": "/de/sahne/schlagsahne/",
+   "pl": "/pl/smietanki-i-smietany/smietanka-do-ubijania/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 482
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 726
+  }
+ },
+ "customer-area": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "data-protection-information-for-applicants": {
+  "en_zeichen": 11098,
+  "adressen": {
+   "de": "/de/datenschutzinformation-fuer-bewerber/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 15571
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "desserts": {
+  "en_zeichen": 831,
+  "adressen": {
+   "de": "/de/desserts/",
+   "pl": "/pl/desery/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 597
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1592
+  }
+ },
+ "desserts/aerated-desserts": {
+  "en_zeichen": 468,
+  "adressen": {
+   "de": "/de/desserts/aufgeschlagene-desserts/",
+   "pl": "/pl/desery/deser-napowietrzany/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 870
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 723
+  }
+ },
+ "desserts/cheesecake": {
+  "en_zeichen": 591,
+  "adressen": {
+   "de": "/de/desserts/kasekuchen/",
+   "pl": "/pl/desery/sernik/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 857
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 897
+  }
+ },
+ "desserts/fruchtmousse": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "desserts/fruit-mousse": {
+  "en_zeichen": 531,
+  "adressen": {
+   "de": "/de/desserts/frucht-mousse/",
+   "pl": "/pl/desery/mus-owocowy/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 644
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 768
+  }
+ },
+ "desserts/jelly": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "desserts/meringue": {
+  "en_zeichen": 501,
+  "adressen": {
+   "de": "/de/desserts/baiser/",
+   "pl": "/pl/desery/beza/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 865
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 623
+  }
+ },
+ "desserts/set-dessert": {
+  "en_zeichen": 221,
+  "adressen": {
+   "de": "/de/desserts/gelierte-desserts/",
+   "pl": "/pl/desery/deser-zzelowany/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 616
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 686
+  }
+ },
+ "desserts/sweet-custard": {
+  "en_zeichen": 559,
+  "adressen": {
+   "de": "/de/desserts/pudding/",
+   "pl": "/pl/desery/pudding/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 688
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 576
+  }
+ },
+ "desserts/trifle-custard": {
+  "en_zeichen": 627,
+  "adressen": {
+   "de": "/de/desserts/pudding-kleinigkeit/",
+   "pl": "/pl/desery/sos-do-deserow/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 564
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 584
+  }
+ },
+ "desserts/triflejelly": {
+  "en_zeichen": 759,
+  "adressen": {
+   "de": "/de/desserts/kleinigkeit-gelee/",
+   "pl": "/pl/desery/galaretka-do-deserow/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1011
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1035
+  }
+ },
+ "dips": {
+  "en_zeichen": 521,
+  "adressen": {
+   "de": "/de/dip/",
+   "pl": "/pl/dipy/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 865
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 819
+  }
+ },
+ "dips/dips-with-dairy-products": {
+  "en_zeichen": 780,
+  "adressen": {
+   "de": "/de/dip/basierend-auf-milchprodukten/",
+   "pl": "/pl/dipy/dipy-na-bazie-produktow-mlecznych/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1104
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1167
+  }
+ },
+ "dips/dips-with-sour-cream": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "dips/mayonnaise-dips": {
+  "en_zeichen": 462,
+  "adressen": {
+   "de": "/de/dip/basierend-auf-mayonnaise/",
+   "pl": "/pl/dipy/dipy-na-bazie-majonezu/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 917
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 668
+  }
+ },
+ "dips/yogurtquarg-dips": {
+  "en_zeichen": 742,
+  "adressen": {
+   "de": "/de/dip/basierend-auf-joghurt-quark/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 686
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "dressings": {
+  "en_zeichen": 564,
+  "adressen": {
+   "de": "/de/salatdressings/",
+   "pl": "/pl/dressingi/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 658
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 895
+  }
+ },
+ "dressings/clear-dressing-with-herbs": {
+  "en_zeichen": 541,
+  "adressen": {
+   "de": "/de/salatdressings/klares-dressing/",
+   "pl": "/pl/dressingi/dressingi-klarowne/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 556
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 655
+  }
+ },
+ "dressings/dairy-based": {
+  "en_zeichen": 0,
+  "adressen": {
+   "de": "/de/salatdressings/milchbasierend/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 474
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "dressings/salad-cream": {
+  "en_zeichen": 603,
+  "adressen": {
+   "de": "/de/salatdressings/emulgierte/",
+   "pl": "/pl/dressingi/dressingi-emulgowane/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 773
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 692
+  }
+ },
+ "dressings/vinaigrette-dressing": {
+  "en_zeichen": 645,
+  "adressen": {
+   "de": "/de/salatdressings/vinaigrette/",
+   "pl": "/pl/dressingi/vinaigrette/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 720
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 844
+  }
+ },
+ "fat-reduction": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "find-us": {
+  "en_zeichen": 0,
+  "adressen": {
+   "de": "/de/wo-sie-uns-finden/",
+   "pl": "/pl/jak-nas-znalezc/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 156
+  },
+  "pl": {
+   "stand": "leer",
+   "zeichen": 146
+  }
+ },
+ "find-us/katech-head-office-germany": {
+  "en_zeichen": 159,
+  "adressen": {
+   "de": "/de/wo-sie-uns-finden/katech-hauptsitz-deutschland/",
+   "pl": "/pl/jak-nas-znalezc/katech-niemcy-siedziba-firmy/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 223
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 242
+  }
+ },
+ "find-us/katech-poland": {
+  "en_zeichen": 157,
+  "adressen": {
+   "de": "/de/wo-sie-uns-finden/katech-polen-2/",
+   "pl": "/pl/jak-nas-znalezc/katech-polska/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 197
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 245
+  }
+ },
+ "find-us/katech-production-germany": {
+  "en_zeichen": 177,
+  "adressen": {
+   "de": "/de/wo-sie-uns-finden/katech-produktion-deutschland/",
+   "pl": "/pl/jak-nas-znalezc/katech-niemcy-zaklad-produkcyjny/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 263
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 243
+  }
+ },
+ "find-us/katech-uk": {
+  "en_zeichen": 151,
+  "adressen": {
+   "de": "/de/wo-sie-uns-finden/katech-uk-de/",
+   "pl": "/pl/jak-nas-znalezc/katech-wielka-brytania/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 254
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 452
+  }
+ },
+ "fruit": {
+  "en_zeichen": 691,
+  "adressen": {
+   "de": "/de/fruchtprodukte/",
+   "pl": "/pl/produkty-z-owocow/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 640
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 897
+  }
+ },
+ "fruit/confectionery-fillings": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "fruit/fruit-compotes": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "fruit/fruit-fillings": {
+  "en_zeichen": 439,
+  "adressen": {
+   "de": "/de/fruchtprodukte/fruchtfullungen/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 67
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "fruit/fruit-jelly": {
+  "en_zeichen": 622,
+  "adressen": {
+   "de": "/de/fruchtprodukte/fruchtgele/",
+   "pl": "/pl/produkty-z-owocow/galaretki-owocowe/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 683
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 603
+  }
+ },
+ "fruit/fruit-preparations": {
+  "en_zeichen": 443,
+  "adressen": {
+   "de": "/de/fruchtprodukte/fruchtzubereitungen/",
+   "pl": "/pl/produkty-z-owocow/preparaty-owocowe/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 565
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 584
+  }
+ },
+ "fruit/glazes": {
+  "en_zeichen": 447,
+  "adressen": {
+   "de": "/de/fruchtprodukte/fruchtglasuren/",
+   "pl": "/pl/produkty-z-owocow/glazury-owocowe/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 577
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 547
+  }
+ },
+ "fruit/lemon-meringue-pie": {
+  "en_zeichen": 574,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "fruit/torte-fillings": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "gm-status": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "how-we-work": {
+  "en_zeichen": 1713,
+  "adressen": {
+   "de": "/de/wie-wir-arbeiten/",
+   "pl": "/pl/jak-dzialamy/"
+  },
+  "de": {
+   "stand": "duenn",
+   "zeichen": 908
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1257
+  }
+ },
+ "imprint": {
+  "en_zeichen": 4589,
+  "adressen": {
+   "de": "/de/impressum/",
+   "pl": "/pl/informacje-prawne/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 5345
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 7061
+  }
+ },
+ "mayonnaise": {
+  "en_zeichen": 948,
+  "adressen": {
+   "de": "/de/mayonnaise/",
+   "pl": "/pl/majonez/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 971
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1834
+  }
+ },
+ "mayonnaise/clean-label-mayonnaise": {
+  "en_zeichen": 684,
+  "adressen": {
+   "de": "/de/mayonnaise/clean-label/",
+   "pl": "/pl/majonez/majonez-z-czysta-etykieta/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1085
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1358
+  }
+ },
+ "mayonnaise/coleslaw-mayonnaise": {
+  "en_zeichen": 873,
+  "adressen": {
+   "de": "/de/mayonnaise/mayonnaise-fur-krautsalat/",
+   "pl": "/pl/majonez/majonez-salatki-coleslaw/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1549
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 888
+  }
+ },
+ "mayonnaise/egg-free-mayonnaise": {
+  "en_zeichen": 121,
+  "adressen": {
+   "de": "/de/mayonnaise/eifreie-mayonnaise/",
+   "pl": "/pl/majonez/majonez-bezjajeczny/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1034
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 770
+  }
+ },
+ "mayonnaise/jar-mayonnaise": {
+  "en_zeichen": 855,
+  "adressen": {
+   "de": "/de/mayonnaise/mayonnaise-glasware/",
+   "pl": "/pl/majonez/majonez-stolowy/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1166
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 959
+  }
+ },
+ "mayonnaise/reduced-fat-mayonnaise": {
+  "en_zeichen": 846,
+  "adressen": {
+   "pl": "/pl/majonez/majonez-niskotluszczowy/"
+  },
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1276
+  }
+ },
+ "mayonnaise/salad-mayonnaise": {
+  "en_zeichen": 634,
+  "adressen": {
+   "de": "/de/mayonnaise/salatmayonnaise/",
+   "pl": "/pl/majonez/majonez-salatkowy/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 847
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 729
+  }
+ },
+ "mayonnaise/sandwich-mayonnaise": {
+  "en_zeichen": 747,
+  "adressen": {
+   "de": "/de/mayonnaise/sandwichmayonnaise/",
+   "pl": "/pl/majonez/majonez-kanapkowy/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1083
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 997
+  }
+ },
+ "milk-drinks": {
+  "en_zeichen": 974,
+  "adressen": {
+   "de": "/de/milchgetranke/",
+   "pl": "/pl/napoje-mleczne/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1260
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1475
+  }
+ },
+ "milk-drinks/acidified-drinks": {
+  "en_zeichen": 558,
+  "adressen": {
+   "de": "/de/milchgetranke/gesauerte-milchgetranke/",
+   "pl": "/pl/napoje-mleczne/napoje-ukwaszone/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 873
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 779
+  }
+ },
+ "milk-drinks/buttermilk-drink-flavoured": {
+  "en_zeichen": 0,
+  "adressen": {
+   "de": "/de/milchgetranke/buttermilk-drink-flavoured/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 16
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "milk-drinks/dairy-alternatives": {
+  "en_zeichen": 446,
+  "adressen": {
+   "de": "/de/milchgetranke/milchfreie-getranke/",
+   "pl": "/pl/napoje-mleczne/napoje-bezmleczne/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 486
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 549
+  }
+ },
+ "milk-drinks/flavoured-milk-drinks": {
+  "en_zeichen": 598,
+  "adressen": {
+   "de": "/de/milchgetranke/milchmischgetranke/",
+   "pl": "/pl/napoje-mleczne/napoje-aromatyzowane/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 698
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 757
+  }
+ },
+ "milk-drinks/fruit-dairy-drinks": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "milk-drinks/shakes": {
+  "en_zeichen": 623,
+  "adressen": {
+   "de": "/de/milchgetranke/milchshakes/",
+   "pl": "/pl/napoje-mleczne/napoje-typu-shake/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 713
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 967
+  }
+ },
+ "milk-drinks/with-coffee": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "nasz-cel": {
+  "en_zeichen": 1343,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "new-products": {
+  "en_zeichen": 787,
+  "adressen": {
+   "de": "/de/neues-produkt-6/",
+   "pl": "/pl/nowe-produkty/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 950
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 883
+  }
+ },
+ "our-approach": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "our-facilities": {
+  "en_zeichen": 1057,
+  "adressen": {
+   "de": "/de/unsere-facilities-de/",
+   "pl": "/pl/nasze-oddzialy-2/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1387
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1681
+  }
+ },
+ "our-ingredients": {
+  "en_zeichen": 1569,
+  "adressen": {
+   "de": "/de/unsere-losungen/",
+   "pl": "/pl/gotowe-rozwiazania/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 4192
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 4512
+  }
+ },
+ "our-ingredients/ingredients-list": {
+  "en_zeichen": 4617,
+  "adressen": {
+   "de": "/de/unsere-losungen/zutatenliste/",
+   "pl": "/pl/gotowe-rozwiazania/katech-lista-surowcow/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 5302
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 4634
+  }
+ },
+ "our-people": {
+  "en_zeichen": 452,
+  "adressen": {
+   "de": "/de/das-team/",
+   "pl": "/pl/nasz-zespol/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 764
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 716
+  }
+ },
+ "our-people/development-team": {
+  "en_zeichen": 0,
+  "adressen": {
+   "de": "/de/das-team/entwicklung/",
+   "pl": "/pl/nasz-zespol/technologia/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 11
+  },
+  "pl": {
+   "stand": "leer",
+   "zeichen": 11
+  }
+ },
+ "our-people/sales-team": {
+  "en_zeichen": 0,
+  "adressen": {
+   "de": "/de/das-team/verkauf/",
+   "pl": "/pl/nasz-zespol/sprzedaz/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 7
+  },
+  "pl": {
+   "stand": "leer",
+   "zeichen": 8
+  }
+ },
+ "our-vision": {
+  "en_zeichen": 1160,
+  "adressen": {
+   "de": "/de/unsere-vision/",
+   "pl": "/pl/nasz-cel/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1434
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1356
+  }
+ },
+ "privacy-policy": {
+  "en_zeichen": 25973,
+  "adressen": {
+   "de": "/de/datenschutz/",
+   "pl": "/pl/polityka-prywatnosci/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 33031
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 30350
+  }
+ },
+ "production-facilities-germany": {
+  "en_zeichen": 1031,
+  "adressen": {
+   "de": "/de/produktion-facilities/",
+   "pl": "/pl/zaklad-produkcyjny-niemcy/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1308
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1281
+  }
+ },
+ "products": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "purchasing": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "raw-materials": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "replication": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "sales-office-poland": {
+  "en_zeichen": 393,
+  "adressen": {
+   "de": "/de/sales-office-poland/",
+   "pl": "/pl/biura-sprzedazy-polska/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 556
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 525
+  }
+ },
+ "sitemap": {
+  "en_zeichen": 926,
+  "adressen": {
+   "de": "/de/",
+   "pl": "/pl/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1314
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 641
+  }
+ },
+ "soups": {
+  "en_zeichen": 0,
+  "adressen": {
+   "de": "/de/suppen/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 6
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "soups-and-sauces": {
+  "en_zeichen": 745,
+  "adressen": {
+   "de": "/de/saucen-und-suppe/",
+   "pl": "/pl/sosy-i-zupy/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1095
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1470
+  }
+ },
+ "soups-and-sauces/chutney": {
+  "en_zeichen": 724,
+  "adressen": {
+   "de": "/de/saucen-und-suppe/chutney/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1109
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "soups-and-sauces/filling-aids": {
+  "en_zeichen": 846,
+  "adressen": {
+   "de": "/de/saucen-und-suppe/abfullhilfen/",
+   "pl": "/pl/sosy-i-zupy/systemy-stabilizujace-wspomagajace-napelnianie/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 944
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 932
+  }
+ },
+ "soups-and-sauces/fresh-pasteurised-sauces": {
+  "en_zeichen": 436,
+  "adressen": {
+   "de": "/de/saucen-und-suppe/frische-und-sterilisierte-saucen/",
+   "pl": "/pl/sosy-i-zupy/sosy-swieze-pasteryzowane-lub-sterylizowane/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 624
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 787
+  }
+ },
+ "soups-and-sauces/high-fat-sauces": {
+  "en_zeichen": 596,
+  "adressen": {
+   "de": "/de/saucen-und-suppe/saucen-mit-erhohtem-fettgehalt/",
+   "pl": "/pl/sosy-i-zupy/sosy-wysokotluszczowe/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 845
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 896
+  }
+ },
+ "soups-and-sauces/ketchup": {
+  "en_zeichen": 766,
+  "adressen": {
+   "de": "/de/saucen-und-suppe/ketchup/",
+   "pl": "/pl/sosy-i-zupy/ketchup/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 936
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1245
+  }
+ },
+ "soups-and-sauces/sterilised-sauces": {
+  "en_zeichen": 668,
+  "adressen": {
+   "pl": "/pl/sosy-i-zupy/sosy-sterylizowane/"
+  },
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 789
+  }
+ },
+ "soups-and-sauces/tomato-based-sauces": {
+  "en_zeichen": 636,
+  "adressen": {
+   "de": "/de/saucen-und-suppe/pasta-saucen/",
+   "pl": "/pl/sosy-i-zupy/sosy-z-pomidorow/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 717
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1000
+  }
+ },
+ "soups/freshpasteurised": {
+  "en_zeichen": 857,
+  "adressen": {
+   "de": "/de/suppen/frische-und-sterilisierte-suppen/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 32
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "sourcing-and-sustainability": {
+  "en_zeichen": 1565,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "specials": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "stephankoruma-cabinet": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "sugar-reduction": {
+  "en_zeichen": 0,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "technical-development-suite-germany": {
+  "en_zeichen": 1122,
+  "adressen": {
+   "de": "/de/technologie-center-deutschland/",
+   "pl": "/pl/centrum-technologiczne-niemcy/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1234
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1056
+  }
+ },
+ "technical-development-suite-uk": {
+  "en_zeichen": 1165,
+  "adressen": {
+   "de": "/de/technische-entwicklung-suite-uk/",
+   "pl": "/pl/centrum-technologiczne-wielka-brytania/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1346
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1212
+  }
+ },
+ "terms-of-use": {
+  "en_zeichen": 839,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "troubleshooting": {
+  "en_zeichen": 691,
+  "adressen": {
+   "de": "/de/fehlerbehebung/",
+   "pl": "/pl/rozwiazywanie-problemow/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 818
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 933
+  }
+ },
+ "vegan": {
+  "en_zeichen": 1531,
+  "adressen": {
+   "de": "/de/vegan/",
+   "pl": "/pl/produkty-dla-wegan/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1996
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1647
+  }
+ },
+ "vegan/pflanzliche-burger-patties": {
+  "en_zeichen": 328,
+  "adressen": {
+   "de": "/de/vegan/pflanzliche-burger-patties/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 489
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "vegan/plant-based-cold-cuts": {
+  "en_zeichen": 295,
+  "adressen": {
+   "de": "/de/vegan/pflanzlicher-aufschnitt/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 356
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "vegan/plant-based-fish-alternatives": {
+  "en_zeichen": 375,
+  "adressen": {
+   "de": "/de/vegan/fisch-alternativen/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 489
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "vegan/plant-based-fish-cakes": {
+  "en_zeichen": 222,
+  "adressen": {
+   "de": "/de/vegan/pflanzliche-fischfrikadellen/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 325
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "vegan/plant-based-fish-fingers": {
+  "en_zeichen": 389,
+  "adressen": {
+   "de": "/de/vegan/pflanzliche-fischstaebchen/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 499
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "vegan/plant-based-mince": {
+  "en_zeichen": 486,
+  "adressen": {
+   "de": "/de/vegan/hackfleisch-alternative/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 582
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "vegan/plant-based-nuggets": {
+  "en_zeichen": 349,
+  "adressen": {
+   "de": "/de/vegan/pflanzliche-nuggets/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 418
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "vegan/plant-based-pates": {
+  "en_zeichen": 237,
+  "adressen": {
+   "de": "/de/vegan/pflanzliche-streichwurst/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 333
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "vegan/vegan-cheese-alternatives": {
+  "en_zeichen": 701,
+  "adressen": {
+   "de": "/de/vegan/vegane-kaesealternativen/",
+   "pl": "/pl/produkty-dla-wegan/weganskie-zamienniki-sera/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 880
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1121
+  }
+ },
+ "vegan/vegan-cream-products": {
+  "en_zeichen": 635,
+  "adressen": {
+   "de": "/de/vegan/vegane-sahneprodukte/",
+   "pl": "/pl/produkty-dla-wegan/weganskie-smietanki/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 857
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1094
+  }
+ },
+ "vegan/vegan-desserts": {
+  "en_zeichen": 809,
+  "adressen": {
+   "de": "/de/vegan/vegane-desserts/",
+   "pl": "/pl/produkty-dla-wegan/weganskie-desery/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1067
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1329
+  }
+ },
+ "vegan/vegan-drinks": {
+  "en_zeichen": 512,
+  "adressen": {
+   "de": "/de/vegan/vegane-getraenke/",
+   "pl": "/pl/produkty-dla-wegan/weganskie-napoje/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1062
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1051
+  }
+ },
+ "vegan/vegan-mayonnaises-and-dressings": {
+  "en_zeichen": 655,
+  "adressen": {
+   "de": "/de/vegan/vegane-mayonnaise-und-dressings/",
+   "pl": "/pl/produkty-dla-wegan/weganskie-majonezy-i-dressingi/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 822
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 924
+  }
+ },
+ "vegan/vegan-meat-alternatives": {
+  "en_zeichen": 890,
+  "adressen": {
+   "de": "/de/vegan/vegane-fleischalternativen/",
+   "pl": "/pl/produkty-dla-wegan/weganskie-zamienniki-wyrobow-miesnych/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1060
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1276
+  }
+ },
+ "vegan/vegan-sauces": {
+  "en_zeichen": 951,
+  "adressen": {
+   "de": "/de/vegan/vegane-saucen/",
+   "pl": "/pl/produkty-dla-wegan/weganskie-sosy/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1014
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1110
+  }
+ },
+ "vegan/vegan-spreads": {
+  "en_zeichen": 568,
+  "adressen": {
+   "de": "/de/vegan/vegane-aufstriche/",
+   "pl": "/pl/produkty-dla-wegan/weganskie-smarowidla/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 689
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 768
+  }
+ },
+ "vegan/vegan-yogurt": {
+  "en_zeichen": 668,
+  "adressen": {
+   "de": "/de/vegan/veganer-joghurt/",
+   "pl": "/pl/produkty-dla-wegan/weganskie-jogurty/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 694
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 850
+  }
+ },
+ "vegan/wurstchen-alternativen": {
+  "en_zeichen": 377,
+  "adressen": {
+   "de": "/de/vegan/wurstchen-alternativen/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 513
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "venture-point": {
+  "en_zeichen": 1449,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "yogurt": {
+  "en_zeichen": 487,
+  "adressen": {
+   "de": "/de/joghurt/",
+   "pl": "/pl/jogurty/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 414
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1457
+  }
+ },
+ "yogurt/drinking-yogurt": {
+  "en_zeichen": 641,
+  "adressen": {
+   "de": "/de/joghurt/joghurtgetrank/",
+   "pl": "/pl/jogurty/jogurt-pitny/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 449
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 555
+  }
+ },
+ "yogurt/fruited-yogurt": {
+  "en_zeichen": 766,
+  "adressen": {
+   "de": "/de/joghurt/fruchtjoghurt/",
+   "pl": "/pl/jogurty/jogurt-owocowy/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 66
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1055
+  }
+ },
+ "yogurt/greek-style-yogurt": {
+  "en_zeichen": 575,
+  "adressen": {
+   "de": "/de/joghurt/griechischer-joghurt/",
+   "pl": "/pl/jogurty/jogurt-typu-greckiego/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 817
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 969
+  }
+ },
+ "yogurt/layered": {
+  "en_zeichen": 699,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "yogurt/natural-stirred-yogurt": {
+  "en_zeichen": 748,
+  "adressen": {
+   "de": "/de/joghurt/ruhrjoghurt/",
+   "pl": "/pl/jogurty/jogurt-naturalny-mieszany-metoda-zbiornikowa/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 1257
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 1475
+  }
+ },
+ "yogurt/set-yogurt": {
+  "en_zeichen": 508,
+  "adressen": {
+   "de": "/de/joghurt/stichfester-joghurt/",
+   "pl": "/pl/jogurty/jogurt-naturalny-zestalony-metoda-termostatowa/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 574
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 821
+  }
+ },
+ "yogurt/thermised-yogurt": {
+  "en_zeichen": 499,
+  "adressen": {
+   "de": "/de/joghurt/thermised-joghurt/",
+   "pl": "/pl/jogurty/jogurt-termizowany/"
+  },
+  "de": {
+   "stand": "leer",
+   "zeichen": 65
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 758
+  }
+ },
+ "yogurt/whipped": {
+  "en_zeichen": 525,
+  "adressen": {},
+  "de": {
+   "stand": "fehlt",
+   "zeichen": 0
+  },
+  "pl": {
+   "stand": "fehlt",
+   "zeichen": 0
+  }
+ },
+ "yogurt/yogurt-mousse": {
+  "en_zeichen": 369,
+  "adressen": {
+   "de": "/de/joghurt/joghurt-mousse/",
+   "pl": "/pl/jogurty/mus-jogurtowy/"
+  },
+  "de": {
+   "stand": "gut",
+   "zeichen": 535
+  },
+  "pl": {
+   "stand": "gut",
+   "zeichen": 589
+  }
+ }
+}
