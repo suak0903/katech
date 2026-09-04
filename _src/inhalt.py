@@ -1849,25 +1849,52 @@ GRUPPEN_REIHENFOLGE = ["Management", "Technical, Germany", "Technical, United Ki
 # Bestandsseite stammen aus 2014 bis 2018 und sind teilweise ueberholt;
 # hier wird korrigiert, ohne die Datenbasis anzufassen.
 # Schluessel ist der Seiten-Slug, Wert die anzuzeigende Rolle.
-ROLLEN_OVERRIDE = {}
+ROLLEN_OVERRIDE = {"cyril-carrat": "Managing Director"}
+
+# Dasselbe fuer die Team-Zuordnung. Sie steuert die Reihenfolge auf
+# /our-people/, die Kollegenliste des Profils und die Bereichsangabe.
+# Schluessel ist der Seiten-Slug, Wert eine Gruppe aus GRUPPEN_REIHENFOLGE.
+GRUPPEN_OVERRIDE = {"cyril-carrat": "Management"}
+
+# Personen, die nicht mehr im Team stehen sollen. Greift auf die Uebersicht,
+# die Kollegenlisten und die eigene Profilseite zugleich - sonst bliebe ein
+# Verweis ins Leere stehen. Schluessel sind Seiten-Slugs.
+TEAM_AUSGEBLENDET = {"steve-williams"}
+
+# Ein vorangestellter Absatz zur heutigen Funktion. Der Werdegang aus dem
+# Bestandsprofil bleibt darunter unveraendert stehen.
+VITA_VORSPANN = {
+    "cyril-carrat": [
+        "Cyril Carrat leads KaTech as Managing Director. When Ingredion acquired the "
+        "company, the separate managing director roles at the individual sites were "
+        "brought together into one group-wide function, which he has held since. He is "
+        "responsible for the business across Germany, the United Kingdom and Poland, from "
+        "product development through production to the commercial side.",
+    ],
+}
 
 
 def rolle_von(person):
     return ROLLEN_OVERRIDE.get(person["slug"], person["rolle"])
 
 
+def gruppe_von(person):
+    return GRUPPEN_OVERRIDE.get(person["slug"], person["gruppe"])
+
+
 def _team(schreibe, SEITEN, kurz):
     pfad = os.path.join(os.path.dirname(os.path.abspath(__file__)), "team.json")
     if not os.path.exists(pfad):
         return
-    leute = json.load(open(pfad, encoding="utf-8"))
+    leute = [p for p in json.load(open(pfad, encoding="utf-8"))
+             if p["slug"] not in TEAM_AUSGEBLENDET]
     root = "../"
     s = SEITEN.get("our-people", {})
     einleitung = s.get("absaetze", [])
 
     bloecke = []
     for gruppe in GRUPPEN_REIHENFOLGE:
-        mitglieder = [p for p in leute if p["gruppe"] == gruppe]
+        mitglieder = [p for p in leute if gruppe_von(p) == gruppe]
         if not mitglieder:
             continue
         karten = "".join(f'''<a class="person" href="{root}{p['slug']}/">
@@ -1923,7 +1950,8 @@ def _team(schreibe, SEITEN, kurz):
     # Einzelprofile
     for p in leute:
         r = "../"
-        kollegen = [k for k in leute if k["gruppe"] == p["gruppe"] and k["slug"] != p["slug"]][:3]
+        kollegen = [k for k in leute
+                    if gruppe_von(k) == gruppe_von(p) and k["slug"] != p["slug"]][:3]
         weitere = "".join(f'''<a class="person" href="{r}{k['slug']}/">
       <span class="person__foto"><picture>
         <source srcset="{r}media/team-{k['slug']}.webp" type="image/webp">
@@ -1935,10 +1963,11 @@ def _team(schreibe, SEITEN, kurz):
         <span class="person__rolle">{L.esc(rolle_von(k))}</span>
       </span>
     </a>''' for k in kollegen)
-        vita = "".join(f"<p>{L.esc(a)}</p>" for a in p["vita"]) or f"<p>{L.esc(PLATZHALTER)}</p>"
+        absaetze = VITA_VORSPANN.get(p["slug"], []) + p["vita"]
+        vita = "".join(f"<p>{L.esc(a)}</p>" for a in absaetze) or f"<p>{L.esc(PLATZHALTER)}</p>"
         inhalt = L.subhero(r, crumbs=[("Start", r + "index.html"), ("Company", r + "company/"),
                                       ("Our people", r + "our-people/"), (p["name"], None)],
-                           eyebrow=p["gruppe"], h1=L.esc(p["name"]),
+                           eyebrow=gruppe_von(p), h1=L.esc(p["name"]),
                            sub=rolle_von(p))
         inhalt += f'''
 <section class="sec">
@@ -1949,7 +1978,7 @@ def _team(schreibe, SEITEN, kurz):
       <div class="profil__daten">
         <h2>{L.esc(rolle_von(p))}</h2>
         <dl>
-          <dt>Team</dt><dd>{L.esc(p['gruppe'])}</dd>
+          <dt>Team</dt><dd>{L.esc(gruppe_von(p))}</dd>
           <dt>Based in</dt><dd>{L.esc(p['ort'])}</dd>
         </dl>
       </div>
@@ -1961,7 +1990,7 @@ def _team(schreibe, SEITEN, kurz):
             inhalt += f'''
 <section class="sec sec--sand">
   <div class="wrap">
-    {L.sec_kopf(eyebrow=p['gruppe'], h2="Colleagues in this team.")}
+    {L.sec_kopf(eyebrow=gruppe_von(p), h2="Colleagues in this team.")}
     <div class="grid grid--3 rv">{weitere}</div>
     <div class="btn-row btn-row--single rv" style="margin-top:30px">
       <a class="btn btn--outline" href="{r}our-people/">The whole team</a>
