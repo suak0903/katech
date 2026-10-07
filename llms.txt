@@ -1,0 +1,52 @@
+# KaTech Ingredient Solutions - design preview
+
+> This site is an independent, non-binding redesign concept for the website of
+> KaTech Ingredient Solutions GmbH (Lübeck, Germany), created by Dr.-Ing. Suat Akyol.
+> It is NOT the official website and it is excluded from indexing.
+> The official website is https://katech-solutions.com/
+
+## About the company shown here
+
+KaTech Ingredient Solutions GmbH develops and produces bespoke stabilising, emulsifying
+and texturising systems for food manufacturers. Founded in Lübeck in 2010, around 95
+employees, sites in Germany (Lübeck head office and development, Wesenberg production
+and warehouse), the United Kingdom (Ellesmere Port development suite) and Poland
+(Stęszew sales office). Part of Ingredion Incorporated since 2021.
+
+Contact of the real company: hello@katech-solutions.com, +49 451 4070 2-0,
+Aegidienstraße 22, 23552 Lübeck, Germany.
+
+## Application areas covered
+
+Dairy and dairy alternatives: yogurt, cream, cheese, desserts, milk drinks.
+Plant-based: meat and fish alternatives, plant-based dairy.
+Savoury: mayonnaise, dressings, dips, soups and sauces.
+Bakery and fruit: cakes, muffins, fillings, toppings, glazes, fruit preparations.
+
+## Certifications held by the company
+
+BRCGS Food Safety with AA rating, IFS Food, RSPO, Sedex membership, FoodChain ID
+non-GMO, organic, kosher and halal certification.
+
+## About this preview
+
+- Purpose: to show what a modern, fast, group-aligned website for KaTech could look like.
+- Built as static HTML, without WordPress, plugins or a database.
+- Colour and layout system derived from the Ingredion corporate design; the KaTech logo
+  already carries the exact Ingredion colour values.
+- All texts and photographs are taken from the publicly available existing website.
+- Author: Dr.-Ing. Suat Akyol, interim manager, https://www.akyol.de, contact@akyol.de
+- Questions and objections about this preview: contact@akyol.de
+
+## Key pages of this preview
+
+- Start: /
+- All product areas: /solutions/
+- Plant-based meat and fish alternatives: /vegan/
+- How we work: /how-we-work/
+- Company: /company/
+- Facilities: /our-facilities/
+- Certifications: /certifications/
+- News archive: /news/
+- Contact and enquiry: /contact-us/
+- About this preview: /about-this-preview/
